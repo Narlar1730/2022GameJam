@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://UI/Inventory.gd" type="Script" id=1]
+
+[node name="Inventory" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 1 )
+
+[node name="Background" type="Polygon2D" parent="."]
+pause_mode = 2
+z_index = 10
+color = Color( 0.486275, 0.486275, 0.486275, 0.705882 )
+polygon = PoolVector2Array( 16, 16, 304, 16, 304, 160, 16, 160 )
+
+[node name="Border1" type="Polygon2D" parent="."]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 14, 14, 306, 14, 306, 16, 14, 16 )
+
+[node name="Border2" type="Polygon2D" parent="."]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 14, 160, 306, 160, 306, 162, 14, 162 )
+
+[node name="Border3" type="Polygon2D" parent="."]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 14, 14, 16, 14, 16, 162, 14, 162 )
+
+[node name="Border4" type="Polygon2D" parent="."]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 304, 14, 306, 14, 306, 162, 304, 162 )
