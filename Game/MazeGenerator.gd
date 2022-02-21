@@ -94,14 +94,6 @@ func genMaze():
 	moves.push_front(mazeSize*mazeSize/2 + mazeSize/2 - mazeSize)
 	
 	print(moves)
-	#moves.push_front(30)
-	#moves.push_front(31)
-	#moves.push_front(32)
-	#moves.push_front(33)
-	#moves.push_front(33)
-	#moves.push_front(34)
-	#moves.push_front(29)
-	#moves.push_front(51)
 	
 	moves = genMazeHelper(moves, walls)
 
@@ -111,6 +103,9 @@ func genMaze():
 	var validExits = []
 	for i in mazeSize:
 		var curVal = i+total-2*mazeSize
+		if moves.has(curVal):
+			validExits.push_back(curVal)
+		curVal = i+mazeSize
 		if moves.has(curVal):
 			validExits.push_back(curVal)
 			
@@ -138,7 +133,10 @@ func genMaze():
 	var rng = RandomNumberGenerator.new()
 	rng.randomize()
 	var randNum = rng.randi_range(0, validExits.size()-1)
-	out[validExits[randNum]+mazeSize] = 3
+	if(validExits[randNum] > mazeSize*3):
+		out[validExits[randNum]+mazeSize] = 3
+	else:
+		out[validExits[randNum]-mazeSize] = 3
 			
 	return out
 
