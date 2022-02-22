@@ -13,6 +13,8 @@ var inventoryOpen : bool = false
 onready var player = get_node("/root/World/YFirst/Player")
 onready var paths  = get_node("/root/World/DirtPathTileMap")
 onready var cliffs = get_node("/root/World/DirtCliffTileMap")
+onready var water  = get_node("/root/World/WaterTileSet")
+onready var bridge = get_node("/root/World/BridgeTilemap")
 var maze     = preload("res://MazeGenerator.gd")
 var batEnemy = preload("res://Enemies/Bat.tscn")
 var spider   = preload("res://Enemies/Spider.tscn")
@@ -266,7 +268,7 @@ func drawChunk(x, y, tileNo, MazeSize):
 	var whichChunk = randomChunk.randi_range(0, 3)
 	
 	
-	if "u" in surrounding:
+	if "u" in surrounding and  whichChunk != 3:
 		for i in 2:
 			for j in 6:
 				var path = RandomNumberGenerator.new()
@@ -279,7 +281,7 @@ func drawChunk(x, y, tileNo, MazeSize):
 					curGrass.position.x = x*chunkX*tileSize+(9+i)*tileSize
 					curGrass.position.y = y*chunkY*tileSize+(j)*tileSize
 					get_tree().get_root().get_node("/root/World/YFirst/YGrass").add_child(curGrass)
-	if "d" in surrounding:
+	if "d" in surrounding and  whichChunk != 3:
 		for i in 2:
 			for j in 6:
 				var path = RandomNumberGenerator.new()
@@ -292,7 +294,7 @@ func drawChunk(x, y, tileNo, MazeSize):
 					curGrass.position.x = x*chunkX*tileSize+(9+i)*tileSize
 					curGrass.position.y = y*chunkY*tileSize+(6+j)*tileSize
 					get_tree().get_root().get_node("/root/World/YFirst/YGrass").add_child(curGrass)
-	if "l" in surrounding:
+	if "l" in surrounding and whichChunk != 3:
 		for i in 10:
 			for j in 2:
 				var path = RandomNumberGenerator.new()
@@ -305,7 +307,7 @@ func drawChunk(x, y, tileNo, MazeSize):
 					curGrass.position.x = x*chunkX*tileSize+(i)*tileSize
 					curGrass.position.y = y*chunkY*tileSize+(5+j)*tileSize
 					get_tree().get_root().get_node("/root/World/YFirst/YGrass").add_child(curGrass)
-	if "r" in surrounding:
+	if "r" in surrounding and whichChunk != 3:
 		for i in 10:
 			for j in 2:
 				var path = RandomNumberGenerator.new()
@@ -364,10 +366,18 @@ func drawChunk(x, y, tileNo, MazeSize):
 						curTree.position.x = x*chunkX*tileSize+i*tileSize
 						curTree.position.y = y*chunkY*tileSize+j*tileSize
 						get_tree().get_root().get_node("/root/World/YFirst/YBush").add_child(curTree)
-	## Dessert
+	# Water					
 	elif whichChunk == 3:
-		pass
-		
+		for i in 20:
+			for j in 12:
+				if (i == 9 or i == 10) or (j == 5 or j == 6):
+					#bridge.set_cell(x*chunkX+i, y*chunkY+j, 0)
+					bridge.set_cell(x*chunkX+i, y*chunkY+j, 0)
+				else:
+					water.set_cell(x*chunkX+i, y*chunkY+j, 0)
+				
+	bridge.update_bitmask_region(Vector2(x*chunkX-1, y*chunkY-1), Vector2(x*chunkX+chunkX, y*chunkY+chunkY))
+	water.update_bitmask_region(Vector2(x*chunkX-1, y*chunkY-1), Vector2(x*chunkX+chunkX, y*chunkY+chunkY))
 	paths.update_bitmask_region(Vector2(x*chunkX-1, y*chunkY-1), Vector2(x*chunkX+chunkX, y*chunkY+chunkY))
 	cliffs.update_bitmask_region(Vector2(x*chunkX/2-1, y*chunkY/2-1), Vector2(x*chunkX/2+chunkX/2, y*chunkY/2+chunkY/2))
 
