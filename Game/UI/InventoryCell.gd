@@ -13,6 +13,15 @@ var index = -1
 func _process(delta):
 	
 	pass
+	
+func setItems(itemName):
+	var curItem = item.instance()
+	curItem.setSprite(itemName)
+	curItem.position.x += 0
+	curItem.position.y += 0
+	curItem.z_index = 12
+	curItem.index = index
+	self.add_child(curItem)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -23,23 +32,32 @@ func _ready():
 	var curItems = curItemArr[0]
 	#var backup = curVal
 	#print(curArray)
-	if curItems == "sword":
-		var curItem = item.instance()
-		curItem.setSprite("sword")
-		curItem.position.x += 0
-		curItem.position.y += 0
-		curItem.z_index = 12
-		curItem.index = index
-		self.add_child(curItem)
-	elif curItems == "bow":
-		var curItem = item.instance()
-		curItem.setSprite("bow")
-		curItem.position.x += 0
-		curItem.position.y += 0
-		curItem.z_index = 12
-		curItem.index = index
-		self.add_child(curItem)
-	pass # Replace with function body.
+	if curItems != "":
+		setItems(curItems)
+	
+	#if curItems == "sword":
+	#	var curItem = item.instance()
+	#	curItem.setSprite("sword")
+	#	curItem.position.x += 0
+	#	curItem.position.y += 0
+	##	curItem.index = index
+	#	self.add_child(curItem)
+	#elif curItems == "bow":
+	#	var curItem = item.instance()
+	#	curItem.setSprite("bow")
+	#	curItem.position.x += 0
+	#	curItem.position.y += 0
+	#	curItem.z_index = 12
+	#	curItem.index = index
+	#	self.add_child(curItem)
+	#elif curItems == "IronHead":
+	#	var curItem = item.instance()
+	#	curItem.setSprite("IronHead")
+	##	curItem.position.y += 0
+	#	curItem.z_index = 12
+	#	curItem.index = index
+	#	self.add_child(curItem)
+	#pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

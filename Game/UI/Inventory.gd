@@ -21,7 +21,7 @@ func updateClocks():
 func _process(delta):
 	updateClocks()
 	if Input.is_action_pressed("MouseClick") and !player.mouseClicked:
-		print("Clicked!")
+		#print("Clicked!")
 		player.mouseClicked = true
 		#player.clickedCursor = player.curCursor
 		player.updateClickCursor(player.curCursor)
@@ -30,7 +30,7 @@ func _process(delta):
 		
 		#print(player.curCursor)
 	if Input.is_action_just_released("MouseClick"):
-		print("Released!")
+		#print("Released!")
 		#print("MouseReleased")
 		if player.clickedCursor != -1 and player.curCursor != -1:
 			player.swapInventory(player.clickedCursor, player.curCursor)
@@ -49,7 +49,19 @@ func _process(delta):
 
 
 # Called when the node enters the scene tree for the first time.
-func _ready():		
+func _ready():
+	## Set text
+	for i in 2:
+		for j in 6:
+			var cell1 = cell.instance()
+			cell1.position.x = 22*i+260
+			cell1.position.y = 22*j+24
+			cell1.z_index = 11
+			cell1.modulate = Color("DDDDDD")
+			cell1.index = 40 + i + j*2
+			self.add_child(cell1)
+	
+	get_node("HealthText").text = "Health"		
 	for i in 10:
 		for j in 4:
 			var cell1 = cell.instance()
@@ -58,7 +70,7 @@ func _ready():
 			cell1.z_index = 11
 			cell1.modulate = Color("DDDDDD")
 			cell1.index = i + j*10
-			allCells.push_back(cell1)
+			#allCells.push_back(cell1)
 			#print(cell1.index)
 			self.add_child(cell1)
 	pass # Replace with function body.

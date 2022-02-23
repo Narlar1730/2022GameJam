@@ -74,7 +74,8 @@ func insertInventory(item):
 	return out
 	
 func swapInventory(pos1, pos2):
-	print("SWIGGITY")
+	if pos1 == 40 or pos2 == 40:
+		pass
 	var cur1 = inventory[pos1]
 	var cur2 = inventory[pos2]
 	
@@ -88,8 +89,17 @@ func _ready():
 	self.set_collision_mask_bit(4, false)
 	self.set_collision_mask_bit(3, true)
 	self.set_collision_mask_bit(2, true)
-	for i in 40:
-		inventory.push_back("")
+	for i in 56:
+		if i == 40:
+			inventory.push_back("IronHead.blue.test")
+		elif i == 41:
+			inventory.push_back("sword.blue.test")
+		elif i == 42:
+			inventory.push_back("IronChest.blue.test")
+		elif i == 44:
+			inventory.push_back("IronBoots.blue.test")
+		else:
+			inventory.push_back("")
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
 	
