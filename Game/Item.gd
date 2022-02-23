@@ -35,9 +35,8 @@ func _process(delta):
 
 
 func setSprite(sprite):
-	if sprite == "bow":
-		$Sprite.texture = load("res://items/Bow.png")
-	elif sprite == "sword":
+	print(sprite)
+	if sprite == "sword":
 		$Sprite.texture = load("res://items/Sword.png")
 	elif sprite == "IronHead":
 		$Sprite.texture = load("res://items/Armour/IronHead.png")
@@ -45,6 +44,14 @@ func setSprite(sprite):
 		$Sprite.texture = load("res://items/Armour/IronChest.png")
 	elif sprite == "IronBoots":
 		$Sprite.texture = load("res://items/Armour/IronBoots.png")
+	elif sprite == "GoldHead":
+		$Sprite.texture = load("res://items/Armour/GoldHead.png")
+	elif sprite == "GoldChest":
+		$Sprite.texture = load("res://items/Armour/GoldChest.png")
+	elif sprite == "GoldBoots":
+		$Sprite.texture = load("res://items/Armour/GoldBoots.png")
+	elif sprite == "bow":
+		$Sprite.texture = load("res://items/Bow.png")
 # Called when the node enters the scene tree for the first time.
 
 func _ready():

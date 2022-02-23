@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://UI/InventoryCell.gd" type="Script" id=1]
+[ext_resource path="res://UI/FontTest.tres" type="DynamicFont" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -19,6 +20,48 @@ shape = SubResource( 1 )
 z_index = 14
 color = Color( 0.498039, 0.498039, 0.498039, 1 )
 polygon = PoolVector2Array( 1, 1, 1, 19, 19, 19, 19, 1 )
+
+[node name="StatsBox" type="Polygon2D" parent="."]
+z_index = 30
+color = Color( 0.219608, 0.219608, 0.219608, 0.705882 )
+invert_border = 1.0
+polygon = PoolVector2Array( 0, 0, 40, 0, 40, 40, 0, 40 )
+
+[node name="Border" type="Polygon2D" parent="StatsBox"]
+z_index = 30
+color = Color( 0, 0, 0, 1 )
+invert_enable = true
+invert_border = 1.0
+polygon = PoolVector2Array( 0, 0, 40, 0, 40, 40, 0, 40 )
+
+[node name="Label" type="Label" parent="StatsBox"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 2 )
+text = "Test1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="StatsBox"]
+margin_top = 13.0
+margin_right = 40.0
+margin_bottom = 27.0
+custom_fonts/font = ExtResource( 2 )
+text = "Test2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="StatsBox"]
+margin_top = 26.0
+margin_right = 40.0
+margin_bottom = 40.0
+custom_fonts/font = ExtResource( 2 )
+text = "Test3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
 [connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]

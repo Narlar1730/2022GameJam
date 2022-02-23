@@ -87,19 +87,19 @@ func swapInventory(pos1, pos2):
 			curType = getItemType(inventory[pos1])
 		else:
 			curType = getItemType(inventory[pos2])
-		if curType == "head" or curType == "empty":
+		if curType == "head":
 			var cur1 = inventory[pos1]
 			var cur2 = inventory[pos2]
 	
 			inventory[pos1] = cur2
-			inventory[pos2] = cur1	
+			inventory[pos2] = cur1
 	elif pos1 == 42 or pos2 == 42:
 		var curType = ""
 		if pos1 != 42:
 			curType = getItemType(inventory[pos1])
 		else:
 			curType = getItemType(inventory[pos2])
-		if curType == "chest" or curType == "empty":
+		if curType == "chest":
 			var cur1 = inventory[pos1]
 			var cur2 = inventory[pos2]
 	
@@ -111,7 +111,7 @@ func swapInventory(pos1, pos2):
 			curType = getItemType(inventory[pos1])
 		else:
 			curType = getItemType(inventory[pos2])
-		if curType == "boots" or curType == "empty":
+		if curType == "boots":
 			var cur1 = inventory[pos1]
 			var cur2 = inventory[pos2]
 	
@@ -123,7 +123,7 @@ func swapInventory(pos1, pos2):
 			curType = getItemType(inventory[pos1])
 		else:
 			curType = getItemType(inventory[pos2])
-		if curType == "primary" or curType == "empty":
+		if curType == "primary":
 			var cur1 = inventory[pos1]
 			var cur2 = inventory[pos2]
 	
@@ -144,8 +144,16 @@ func _ready():
 	self.set_collision_mask_bit(3, true)
 	self.set_collision_mask_bit(2, true)
 	for i in 56:
-		if i == 40:
+		if i == 4:
+			inventory.push_back("bow.blue.primary")
+		elif i == 5:
 			inventory.push_back("IronHead.blue.head")
+		elif i == 6:
+			inventory.push_back("GoldHead.blue.head")		
+		elif i == 7:
+			inventory.push_back("GoldChest.blue.chest")	
+		elif i == 8:
+			inventory.push_back("GoldBoots.blue.boots")
 		elif i == 41:
 			inventory.push_back("sword.blue.primary")
 		elif i == 42:
