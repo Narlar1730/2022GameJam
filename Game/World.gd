@@ -419,6 +419,7 @@ func _ready():
 		curHalf.index = i
 		self.add_child(curHalf)
 		self.add_child(curFull)
+		
 
 
 
