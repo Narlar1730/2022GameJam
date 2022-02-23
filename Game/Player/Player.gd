@@ -72,15 +72,69 @@ func insertInventory(item):
 		counter += 1
 		
 	return out
+
+func getItemType(itemToType):
+	var all = itemToType.split(".")
+	var curItem = "empty"
+	if all.size() > 1:
+		curItem = all[2]
+	return curItem	
 	
 func swapInventory(pos1, pos2):
 	if pos1 == 40 or pos2 == 40:
-		pass
-	var cur1 = inventory[pos1]
-	var cur2 = inventory[pos2]
+		var curType = ""
+		if pos1 != 40:
+			curType = getItemType(inventory[pos1])
+		else:
+			curType = getItemType(inventory[pos2])
+		if curType == "head" or curType == "empty":
+			var cur1 = inventory[pos1]
+			var cur2 = inventory[pos2]
 	
-	inventory[pos1] = cur2
-	inventory[pos2] = cur1
+			inventory[pos1] = cur2
+			inventory[pos2] = cur1	
+	elif pos1 == 42 or pos2 == 42:
+		var curType = ""
+		if pos1 != 42:
+			curType = getItemType(inventory[pos1])
+		else:
+			curType = getItemType(inventory[pos2])
+		if curType == "chest" or curType == "empty":
+			var cur1 = inventory[pos1]
+			var cur2 = inventory[pos2]
+	
+			inventory[pos1] = cur2
+			inventory[pos2] = cur1	
+	elif pos1 == 44 or pos2 == 44:
+		var curType = ""
+		if pos1 != 44:
+			curType = getItemType(inventory[pos1])
+		else:
+			curType = getItemType(inventory[pos2])
+		if curType == "boots" or curType == "empty":
+			var cur1 = inventory[pos1]
+			var cur2 = inventory[pos2]
+	
+			inventory[pos1] = cur2
+			inventory[pos2] = cur1
+	elif pos1 == 46 or pos2 == 46:
+		var curType = ""
+		if pos1 != 46:
+			curType = getItemType(inventory[pos1])
+		else:
+			curType = getItemType(inventory[pos2])
+		if curType == "primary" or curType == "empty":
+			var cur1 = inventory[pos1]
+			var cur2 = inventory[pos2]
+	
+			inventory[pos1] = cur2
+			inventory[pos2] = cur1	
+	else:
+		var cur1 = inventory[pos1]
+		var cur2 = inventory[pos2]
+	
+		inventory[pos1] = cur2
+		inventory[pos2] = cur1
 	world.reloadInventory()
 
 func _ready():
@@ -91,13 +145,13 @@ func _ready():
 	self.set_collision_mask_bit(2, true)
 	for i in 56:
 		if i == 40:
-			inventory.push_back("IronHead.blue.test")
+			inventory.push_back("IronHead.blue.head")
 		elif i == 41:
-			inventory.push_back("sword.blue.test")
+			inventory.push_back("sword.blue.primary")
 		elif i == 42:
-			inventory.push_back("IronChest.blue.test")
+			inventory.push_back("IronChest.blue.chest")
 		elif i == 44:
-			inventory.push_back("IronBoots.blue.test")
+			inventory.push_back("IronBoots.blue.boots")
 		else:
 			inventory.push_back("")
 	animationTree.active = true
