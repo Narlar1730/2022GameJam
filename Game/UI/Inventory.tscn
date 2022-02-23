@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://UI/Inventory.gd" type="Script" id=1]
+[ext_resource path="res://UI/FontTest.tres" type="DynamicFont" id=2]
 
 [node name="Inventory" type="CanvasLayer"]
 pause_mode = 2
@@ -28,15 +29,12 @@ polygon = PoolVector2Array( 14, 14, 16, 14, 16, 162, 14, 162 )
 color = Color( 0, 0, 0, 1 )
 polygon = PoolVector2Array( 304, 14, 306, 14, 306, 162, 304, 162 )
 
-[node name="HealthText" type="RichTextLabel" parent="."]
-margin_left = 18.0
-margin_top = 18.0
-margin_right = 61.0
+[node name="HealthText" type="Label" parent="."]
+margin_left = 19.0
+margin_top = 19.0
+margin_right = 68.0
 margin_bottom = 33.0
-meta_underlined = false
-tab_size = 1
-fit_content_height = true
-scroll_active = false
+custom_fonts/font = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

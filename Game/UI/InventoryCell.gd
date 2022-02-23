@@ -13,11 +13,43 @@ var drawStats = false
 var firstDraw = true
 var hoverTimer = 0
 
+func rarToColour(rar):
+	var out = "FFFFFF"
+	if rar == "red":
+		out = "FFAAA8"
+	elif rar == "orange":
+		out = "FF9933"
+	elif rar == "yellow":
+		out = "FFFFBF"
+	elif rar == "green":
+		out = "98FB98"
+	elif rar == "blue":
+		out = "03A9F4"
+	elif rar == "indigo":
+		out = "9892B1"
+	elif rar == "violet":
+		out = "CC99FF"
+	elif rar == "rainbow":
+		pass
+		#$Blur.modulate = Color("0000FF")	
+		
+	return out
 
 func drawStatsFun(val):
-	self.get_node("StatsBox/Label").modulate = Color("0000FF")
-	self.get_node("StatsBox/Label2").modulate = Color("00FF00")
-	self.get_node("StatsBox/Label3").modulate = Color("FF0000")
+	"IronChest.violet.chest.Iron Chest.1.N/A"
+	var curItem = player.inventory[index]
+	var splits = curItem.split(".")
+	var rarity = splits[1]
+	var colour = rarToColour(rarity)
+	
+	self.get_node("StatsBox/Label").modulate = Color(colour)
+	self.get_node("StatsBox/Label").text = splits[3]
+	self.get_node("StatsBox/Label2").modulate = Color(colour)
+	self.get_node("StatsBox/Label2").text = "Dam: " + splits[4]
+	self.get_node("StatsBox/Label3").modulate = Color(colour)
+	self.get_node("StatsBox/Label3").text = "Mag: " + splits[5]
+	self.get_node("StatsBox/Label4").modulate = Color(colour)
+	
 	if firstDraw:
 		if index < 40 and index % 10 < 5:
 			var curX = self.get_node("StatsBox").position.x

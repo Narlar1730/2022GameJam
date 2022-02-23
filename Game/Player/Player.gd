@@ -5,14 +5,15 @@ var item = preload("res://items/Item.tscn")
 onready var world  = get_node("/root/World/")
 
 export var ACCELERATION = 500
-export var MAX_SPEED = 80
-export var ROLL_SPEED = 120
-export var FRICTION = 500
-var hitTimer : float = 0
-var health = 6
-var enemies = 0
-var immunity : float = 60
-var damage = 4
+export var MAX_SPEED    = 80
+export var ROLL_SPEED   = 120
+export var FRICTION     = 500
+var hitTimer : float    = 0
+var health              = 6
+var maxHealth           = 6
+var enemies             = 0
+var immunity : float    = 60
+var damage              = 4
 
 #Handle Iventory
 var inventory = []
@@ -145,21 +146,21 @@ func _ready():
 	self.set_collision_mask_bit(2, true)
 	for i in 56:
 		if i == 4:
-			inventory.push_back("bow.blue.primary")
-		elif i == 5:
-			inventory.push_back("IronHead.blue.head")
+			inventory.push_back("bow.red.primary.Bad bow.1.N/A")
+		elif i == 40:
+			inventory.push_back("IronHead.orange.head.Iron Head.1.N/A")
 		elif i == 6:
-			inventory.push_back("GoldHead.blue.head")		
+			inventory.push_back("GoldHead.yellow.head.Gold Head.2.N/A")		
 		elif i == 7:
-			inventory.push_back("GoldChest.blue.chest")	
+			inventory.push_back("GoldChest.green.chest.Gold Chest.2.N/A")	
 		elif i == 8:
-			inventory.push_back("GoldBoots.blue.boots")
-		elif i == 41:
-			inventory.push_back("sword.blue.primary")
+			inventory.push_back("GoldBoots.blue.boots.Gold Boots.2.N/A")
+		elif i == 46:
+			inventory.push_back("sword.indigo.primary.Bad Sword.1.N/A")
 		elif i == 42:
-			inventory.push_back("IronChest.blue.chest")
+			inventory.push_back("IronChest.violet.chest.Iron Chest.1.N/A")
 		elif i == 44:
-			inventory.push_back("IronBoots.blue.boots")
+			inventory.push_back("IronBoots.blue.boots.Iron Boots.1.N/A")
 		else:
 			inventory.push_back("")
 	animationTree.active = true

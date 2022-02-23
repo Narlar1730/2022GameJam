@@ -61,7 +61,9 @@ func _ready():
 			cell1.index = 40 + i + j*2
 			self.add_child(cell1)
 	
-	get_node("HealthText").text = "Health"		
+	var healthTxt = "Health: " + str(player.health) + "/" + str(player.maxHealth)
+	
+	get_node("HealthText").text = healthTxt
 	for i in 10:
 		for j in 4:
 			var cell1 = cell.instance()
