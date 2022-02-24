@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://UI/TeenyTinyPixls-o2zo.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://Menu.gd" type="Script" id=2]
+
+[sub_resource type="DynamicFont" id=1]
+font_data = ExtResource( 1 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 49, 24.5 )
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color( 0, 0, 0, 1 )
+polygon = PoolVector2Array( 0, 0, 200, 0, 200, 200, 0, 200 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 11.0
+margin_top = 7.0
+margin_right = 191.0
+margin_bottom = 27.0
+custom_fonts/font = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="Polygon2D2" type="Polygon2D" parent="Area2D"]
+color = Color( 0.419608, 0.419608, 0.419608, 1 )
+polygon = PoolVector2Array( 50, 50, 150, 50, 150, 100, 50, 100 )
+
+[node name="Label" type="Label" parent="Area2D/Polygon2D2"]
+margin_left = 57.0
+margin_top = 56.0
+margin_right = 145.0
+margin_bottom = 95.0
+text = "Play Game"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 100, 74.5 )
+shape = SubResource( 2 )
+
+[connection signal="mouse_entered" from="Area2D" to="." method="_on_Area2D_mouse_entered"]
+[connection signal="mouse_exited" from="Area2D" to="." method="_on_Area2D_mouse_exited"]
