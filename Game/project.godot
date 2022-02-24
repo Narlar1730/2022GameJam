@@ -14,6 +14,10 @@ config/name="It Is Not Real"
 run/main_scene="res://World.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+ChunkDraw="*res://ChunkDraw.gd"
+
 [display]
 
 window/size/width=320

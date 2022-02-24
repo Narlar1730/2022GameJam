@@ -15,6 +15,7 @@ onready var paths  = get_node("/root/World/DirtPathTileMap")
 onready var cliffs = get_node("/root/World/DirtCliffTileMap")
 onready var water  = get_node("/root/World/WaterTileSet")
 onready var bridge = get_node("/root/World/BridgeTilemap")
+#var chunk    = preload("res://ChunkDraw.gd")
 var maze     = preload("res://MazeGenerator.gd")
 var batEnemy = preload("res://Enemies/Bat.tscn")
 var spider   = preload("res://Enemies/Spider.tscn")
@@ -26,8 +27,9 @@ var heartH   = preload("res://UI/HalfHeart.tscn")
 var invent   = preload("res://UI/Inventory.tscn")
 var item     = preload("res://WorldItems/WorldItem.tscn")
 var coin     = preload("res://WorldItems/Coin.tscn")
+var treeMan  = preload("res://Enemies/Tree Elemental.tscn")
 
-
+var chunk = load("res://ChunkDraw.gd").new()
 var current = []
 
 
@@ -201,64 +203,8 @@ func drawDeadEnd(x, y):
 				
 		paths.update_bitmask_region(Vector2(x*chunkX-1, y*chunkY-1), Vector2(x*chunkX+chunkX, y*chunkY+chunkY))	
 
-func drawURChunk(x, y):
-	pass
-	
-func drawULChunk(x, y):
-	pass
-	
-func drawDRChunk(x, y):
-	pass
-	
-func drawDLChunk(x, y):
-	pass
-	
-func drawLRChunk(x, y):
-	pass
-	
-func drawUDChunk(x, y):
-	pass
 
-func drawChunk0(x, y):
-	##Add the paths
-	for i in 20:
-		for j in 2:
-			paths.set_cell(x*chunkX+i, y*chunkY+j+5, 0)
-			
-	for i in 12:
-		for j in 2:
-			paths.set_cell(x*chunkX+j+9, y*chunkY+i, 0)
 	
-	
-	##Add a bat
-	var curBat = batEnemy.instance()
-	curBat.position.x = x*chunkX*tileSize+10*tileSize
-	curBat.position.y = y*chunkY*tileSize+6*tileSize
-	self.add_child(curBat)
-	
-	##Add a cliff
-	for i in 3:
-		for j in 2:
-			cliffs.set_cell(x*chunkX/2+i, y*chunkY/2+j, 0)
-	
-	##Add a tree
-	var curTree = bush.instance()
-	curTree.position.x = x*chunkX*tileSize+15*tileSize
-	curTree.position.y = y*chunkY*tileSize+9*tileSize
-	get_tree().get_root().get_node("/root/World/YFirst/YBush").add_child(curTree)
-	
-	
-	##add grass
-	for i in 2:
-		for j in 2:
-			var curGrass = grass.instance()
-			curGrass.position.x = x*chunkX*tileSize+(3+i)*tileSize
-			curGrass.position.y = y*chunkY*tileSize+(9+j)*tileSize
-			get_tree().get_root().get_node("/root/World/YFirst/YGrass").add_child(curGrass)
-	
-	paths.update_bitmask_region(Vector2(x*chunkX-1, y*chunkY-1), Vector2(x*chunkX+chunkX, y*chunkY+chunkY))
-	cliffs.update_bitmask_region(Vector2(x*chunkX/2-1, y*chunkY/2-1), Vector2(x*chunkX/2+chunkX/2, y*chunkY/2+chunkY/2))
-
 
 func getSurrounding(tileNo, MazeSize):
 	var out = ""
@@ -278,125 +224,109 @@ func getSurrounding(tileNo, MazeSize):
 	#print(out)
 	
 	return out
+	
+func drawWorldString(string, x, y):
+	for i in 20:
+		for j in 12:
+		#Terrain
+		# e = empty
+		# c = cliff
+		# x = dead tile for cliff
+		# p = path
+		# b = bridge
+		# t = tree
+		# w = water
+		# g = grass
+		# r = rock
+		# R = rock on path
+			var curTile = string[i+j*20]
+			var curEnem = string[i+j*20+240]
+			if curTile == "c":
+				cliffs.set_cell(x*chunkX/2+i/2, y*chunkY/2+j/2, 0)
+			elif curTile == "p":
+				paths.set_cell(x*chunkX+i, y*chunkY+j, 0)
+			elif curTile == "b":
+				bridge.set_cell(x*chunkX+i, y*chunkY+j, 0)
+			elif curTile == "t":
+				var curTree = bush.instance()
+				curTree.position.x = x*chunkX*tileSize+i*tileSize
+				curTree.position.y = y*chunkY*tileSize+j*tileSize
+				get_tree().get_root().get_node("/root/World/YFirst/YBush").add_child(curTree)
+			elif curTile == "w":
+				water.set_cell(x*chunkX+i, y*chunkY+j, 0)
+			elif curTile == "g":
+				var curGrass = grass.instance()
+				curGrass.position.x = x*chunkX*tileSize+(i)*tileSize
+				curGrass.position.y = y*chunkY*tileSize+(j)*tileSize
+				get_tree().get_root().get_node("/root/World/YFirst/YGrass").add_child(curGrass)
+			elif curTile == "r":
+				var curRock = rock.instance()
+				curRock.position.x = x*chunkX*tileSize+i*tileSize+8
+				curRock.position.y = y*chunkY*tileSize+j*tileSize+8
+				get_tree().get_root().get_node("/root/World/YFirst/YRock").add_child(curRock)
+			elif curTile == "R":
+				var curRock = rock.instance()
+				curRock.position.x = x*chunkX*tileSize+i*tileSize+8
+				curRock.position.y = y*chunkY*tileSize+j*tileSize+8
+				get_tree().get_root().get_node("/root/World/YFirst/YRock").add_child(curRock)
+				paths.set_cell(x*chunkX+i, y*chunkY+j, 0)
+			# s = spider
+			# t = tree
+			# b = bat
+			if curEnem == "b":
+				var curBat = batEnemy.instance()
+				curBat.position.x = x*chunkX*tileSize + i*tileSize+8
+				curBat.position.y = y*chunkY*tileSize + j*tileSize+8
+				self.add_child(curBat)
+			elif curEnem == "t":
+				var curTree = treeMan.instance()
+				curTree.position.x = x*chunkX*tileSize + i*tileSize+8
+				curTree.position.y = y*chunkY*tileSize + j*tileSize+8
+				self.add_child(curTree)
+			elif curEnem == "s":
+				var curSpider = spider.instance()
+				curSpider.position.x = x*chunkX*tileSize + i*tileSize+8
+				curSpider.position.y = y*chunkY*tileSize + j*tileSize+8
+				self.add_child(curSpider)
+	pass
 
 func drawChunk(x, y, tileNo, MazeSize):
 	var surrounding = []
 	surrounding = getSurrounding(tileNo, MazeSize)
 	
+	print(surrounding)
 	
-	var randomChunk = RandomNumberGenerator.new()
-	randomChunk.randomize()
-	var whichChunk = randomChunk.randi_range(0, 3)
+	var worldString = ""
 	
+	if surrounding == "ud":
+		chunk.drawUDChunk(x, y)
+	elif surrounding == "ul":
+		chunk.drawULChunk(x, y)
+	elif surrounding == "ur":
+		worldString = chunk.drawURChunk()
+	elif surrounding == "dl":
+		chunk.drawDLChunk(x, y)
+	elif surrounding == "dr":
+		chunk.drawDRChunk(x, y)
+	elif surrounding == "lr":
+		chunk.drawLRChunk(x, y)
+	elif surrounding == "udl":
+		chunk.drawUDLChunk(x, y)
+	elif surrounding == "udr":
+		chunk.drawUDRChunk(x, y)
+	elif surrounding == "ulr":
+		chunk.drawULRChunk(x, y)
+	elif surrounding == "dlr":
+		chunk.drawDRLChunk(x, y)
+	elif surrounding == "udlr":
+		chunk.drawUDLRChunk(x, y)
+		
+	if worldString == "":
+		pass
+		
+	else:
+		drawWorldString(worldString, x, y)
 	
-	if "u" in surrounding and  whichChunk != 3:
-		for i in 2:
-			for j in 6:
-				var path = RandomNumberGenerator.new()
-				path.randomize()
-				var pathVar = path.randi_range(0, 10)
-				if pathVar < 9:
-					paths.set_cell(x*chunkX+9+i, y*chunkY+j, 0)
-				if pathVar == 9:
-					var curGrass = grass.instance()
-					curGrass.position.x = x*chunkX*tileSize+(9+i)*tileSize
-					curGrass.position.y = y*chunkY*tileSize+(j)*tileSize
-					get_tree().get_root().get_node("/root/World/YFirst/YGrass").add_child(curGrass)
-	if "d" in surrounding and  whichChunk != 3:
-		for i in 2:
-			for j in 6:
-				var path = RandomNumberGenerator.new()
-				path.randomize()
-				var pathVar = path.randi_range(0, 10)
-				if pathVar < 9:
-					paths.set_cell(x*chunkX+9+i, y*chunkY+j+6, 0)
-				if pathVar == 9:
-					var curGrass = grass.instance()
-					curGrass.position.x = x*chunkX*tileSize+(9+i)*tileSize
-					curGrass.position.y = y*chunkY*tileSize+(6+j)*tileSize
-					get_tree().get_root().get_node("/root/World/YFirst/YGrass").add_child(curGrass)
-	if "l" in surrounding and whichChunk != 3:
-		for i in 10:
-			for j in 2:
-				var path = RandomNumberGenerator.new()
-				path.randomize()
-				var pathVar = path.randi_range(0, 10)
-				if pathVar < 9:
-					paths.set_cell(x*chunkX+i, y*chunkY+j+5, 0)
-				if pathVar == 9:
-					var curGrass = grass.instance()
-					curGrass.position.x = x*chunkX*tileSize+(i)*tileSize
-					curGrass.position.y = y*chunkY*tileSize+(5+j)*tileSize
-					get_tree().get_root().get_node("/root/World/YFirst/YGrass").add_child(curGrass)
-	if "r" in surrounding and whichChunk != 3:
-		for i in 10:
-			for j in 2:
-				var path = RandomNumberGenerator.new()
-				path.randomize()
-				var pathVar = path.randi_range(0, 10)
-				if pathVar < 9:
-					paths.set_cell(x*chunkX+9+i, y*chunkY+5+j, 0)
-				if pathVar == 9:
-					var curGrass = grass.instance()
-					curGrass.position.x = x*chunkX*tileSize+(9+i)*tileSize
-					curGrass.position.y = y*chunkY*tileSize+(5+j)*tileSize
-					get_tree().get_root().get_node("/root/World/YFirst/YGrass").add_child(curGrass)
-	
-	## Grassy = 0
-	if whichChunk == 0:
-		for i in 20:
-			for j in 12:
-				if $DirtPathTileMap.get_cell(x*chunkX+i, y*chunkY+j) == $DirtPathTileMap.INVALID_CELL:
-					var grassRNG = RandomNumberGenerator.new()
-					grassRNG.randomize()
-					var grassVar = grassRNG.randi_range(0, 10)
-					if grassVar < 7:
-						var curGrass = grass.instance()
-						curGrass.position.x = x*chunkX*tileSize+i*tileSize
-						curGrass.position.y = y*chunkY*tileSize+j*tileSize
-						get_tree().get_root().get_node("/root/World/YFirst/YGrass").add_child(curGrass)
-
-	## Mid = 1
-	elif whichChunk == 1:
-		for i in 20:
-			for j in 12:
-				if $DirtPathTileMap.get_cell(x*chunkX+i, y*chunkY+j) == $DirtPathTileMap.INVALID_CELL:
-					var grassRNG = RandomNumberGenerator.new()
-					grassRNG.randomize()
-					var grassVar = grassRNG.randi_range(0, 10)
-					if grassVar < 5:
-						var curGrass = grass.instance()
-						curGrass.position.x = x*chunkX*tileSize+i*tileSize
-						curGrass.position.y = y*chunkY*tileSize+j*tileSize
-						get_tree().get_root().get_node("/root/World/YFirst/YGrass").add_child(curGrass)
-					elif grassVar < 7:
-						var curTree = bush.instance()
-						curTree.position.x = x*chunkX*tileSize+i*tileSize
-						curTree.position.y = y*chunkY*tileSize+j*tileSize
-						get_tree().get_root().get_node("/root/World/YFirst/YBush").add_child(curTree)
-	## Forest = 2
-	elif whichChunk == 2:
-		for i in 20:
-			for j in 12:
-				if $DirtPathTileMap.get_cell(x*chunkX+i, y*chunkY+j) == $DirtPathTileMap.INVALID_CELL:
-					var grassRNG = RandomNumberGenerator.new()
-					grassRNG.randomize()
-					var grassVar = grassRNG.randi_range(0, 10)
-					if grassVar < 3:
-						var curTree = bush.instance()
-						curTree.position.x = x*chunkX*tileSize+i*tileSize
-						curTree.position.y = y*chunkY*tileSize+j*tileSize
-						get_tree().get_root().get_node("/root/World/YFirst/YBush").add_child(curTree)
-	# Water					
-	elif whichChunk == 3:
-		for i in 20:
-			for j in 12:
-				if (i == 9 or i == 10) or (j == 5 or j == 6):
-					#bridge.set_cell(x*chunkX+i, y*chunkY+j, 0)
-					bridge.set_cell(x*chunkX+i, y*chunkY+j, 0)
-				else:
-					water.set_cell(x*chunkX+i, y*chunkY+j, 0)
-				
 	bridge.update_bitmask_region(Vector2(x*chunkX-1, y*chunkY-1), Vector2(x*chunkX+chunkX, y*chunkY+chunkY))
 	water.update_bitmask_region(Vector2(x*chunkX-1, y*chunkY-1), Vector2(x*chunkX+chunkX, y*chunkY+chunkY))
 	paths.update_bitmask_region(Vector2(x*chunkX-1, y*chunkY-1), Vector2(x*chunkX+chunkX, y*chunkY+chunkY))
