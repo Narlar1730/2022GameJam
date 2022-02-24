@@ -198,6 +198,24 @@ func drawDeadEnd(x, y):
 				
 		paths.update_bitmask_region(Vector2(x*chunkX-1, y*chunkY-1), Vector2(x*chunkX+chunkX, y*chunkY+chunkY))	
 
+func drawURChunk(x, y):
+	pass
+	
+func drawULChunk(x, y):
+	pass
+	
+func drawDRChunk(x, y):
+	pass
+	
+func drawDLChunk(x, y):
+	pass
+	
+func drawLRChunk(x, y):
+	pass
+	
+func drawUDChunk(x, y):
+	pass
+
 func drawChunk0(x, y):
 	##Add the paths
 	for i in 20:

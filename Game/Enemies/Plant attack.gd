@@ -7,12 +7,14 @@ var speed  : int     = 60
 var damage : int     = 1
 var prevX  : float
 var prevY  : float
+var life   : int     = 2000
 
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
 
 func _process(delta):
+	life = life - 1
 	prevX = self.position.x
 	prevY = self.position.y
 	var motion = self.dir * self.speed
@@ -21,9 +23,8 @@ func _process(delta):
 	#print(prevY)
 	#print(self.position.x)
 	#print(self.position.y)
-	if self.position.x == prevX or self.position.y == prevY:
+	if self.position.x == prevX or self.position.y == prevY or life <= 0:
 		self.queue_free()
-		print("dying")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -44,6 +45,6 @@ func _ready():
 
 
 func _on_Area2D_area_entered(area):
-	if area.is_in_group("Enemy"):
-		pass
+	if area.is_in_group("Weapon"):
+		life = 0
 	pass # Replace with function body.

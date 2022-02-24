@@ -265,7 +265,7 @@ func roll_state(delta):
 	
 	
 func attack_state(delta):
-	velocity = velocity.move_toward(Vector2.ZERO, FRICTION/2 * delta)
+	#velocity = velocity.move_toward(Vector2.ZERO, FRICTION/2 * delta)
 	velocity = move_and_slide(velocity)
 	animationState.travel("Attack")
 	#move()
