@@ -61,13 +61,16 @@ func spawnLoot(x, y):
 		var itemType = ""
 		var colour = ""
 		if int1 == 0:
+			
 			itemType = "sword"
 		else:
 			itemType = "bow"
+		
 		var int2 = rng.randi_range(0, 6)
 		colour = wort.rarSwitch(int2)
 		var stats = str(itemType, ".", colour)
-		wort.stats = stats
+		var statsString = itemType + ".red.primary.some " + itemType + ".1.N/A"
+		wort.stats = statsString
 		self.add_child(wort)
 	elif spawn < 4:
 		var curCoin = coin.instance()
