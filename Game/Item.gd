@@ -35,7 +35,7 @@ func _process(delta):
 
 
 func setSprite(sprite):
-	print(sprite)
+	#print(sprite)
 	if sprite == "sword":
 		$Sprite.texture = load("res://items/Sword.png")
 	elif sprite == "IronHead":

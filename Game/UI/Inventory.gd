@@ -25,8 +25,8 @@ func _process(delta):
 		player.mouseClicked = true
 		#player.clickedCursor = player.curCursor
 		player.updateClickCursor(player.curCursor)
-		print(player.curCursor)
-		print(player.clickedCursor)
+		#print(player.curCursor)
+		#print(player.clickedCursor)
 		
 		#print(player.curCursor)
 	if Input.is_action_just_released("MouseClick"):

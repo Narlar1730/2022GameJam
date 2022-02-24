@@ -93,7 +93,7 @@ func genMaze():
 	moves.push_front(mazeSize*mazeSize/2 + mazeSize/2 + mazeSize)
 	moves.push_front(mazeSize*mazeSize/2 + mazeSize/2 - mazeSize)
 	
-	print(moves)
+	#print(moves)
 	
 	moves = genMazeHelper(moves, walls)
 
