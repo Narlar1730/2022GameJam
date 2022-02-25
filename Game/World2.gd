@@ -19,7 +19,7 @@ onready var bridge = get_node("/root/World/BridgeTilemap")
 var maze     = preload("res://MazeGenerator.gd")
 var batEnemy = preload("res://Enemies/Bat.tscn")
 var spider   = preload("res://Enemies/Spider.tscn")
-var grass    = preload("res://World/Grass.tscn")
+var grass    = preload("res://World/GrassW2.tscn")
 var rock     = preload("res://World/Rock.tscn")
 var bush     = preload("res://World/TreeW2.tscn")
 var heartF   = preload("res://UI/FullHeart.tscn")
@@ -251,6 +251,7 @@ func drawWorldString(string, x, y):
 		# R = rock on path
 			var curTile = string[i+j*20]
 			var curEnem = string[i+j*20+240]
+
 			if curTile == "c":
 				cliffs.set_cell(x*chunkX/2+i/2, y*chunkY/2+j/2, 0)
 			elif curTile == "p":

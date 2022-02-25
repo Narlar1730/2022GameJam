@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/TreeW2.png-cea705a2db51e84706fd5f1bee6b9c83.stex"
+path="res://.import/GrassBackgroundW2.png-f67dbdd02e08fc62a557effe7458a72c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://World/TreeW2.png"
-dest_files=[ "res://.import/TreeW2.png-cea705a2db51e84706fd5f1bee6b9c83.stex" ]
+source_file="res://World/GrassBackgroundW2.png"
+dest_files=[ "res://.import/GrassBackgroundW2.png-f67dbdd02e08fc62a557effe7458a72c.stex" ]
 
 [params]
 
@@ -19,7 +19,7 @@ compress/lossy_quality=0.7
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
+flags/repeat=1
 flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false

@@ -1,11 +1,10 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=63 format=2]
 
-[ext_resource path="res://World/Bush.tscn" type="PackedScene" id=1]
+[ext_resource path="res://World/GrassW2.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://World/GrassBackground.png" type="Texture" id=3]
+[ext_resource path="res://World/GrassBackgroundW2.png" type="Texture" id=3]
 [ext_resource path="res://World/DirtTileset.png" type="Texture" id=4]
 [ext_resource path="res://World/CliffTileset.png" type="Texture" id=5]
-[ext_resource path="res://World/Grass.tscn" type="PackedScene" id=6]
 [ext_resource path="res://World/WaterTileSet.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Player/playerCamera.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World2.gd" type="Script" id=9]
@@ -561,63 +560,27 @@ position = Vector2( 169, 102 )
 [node name="YBush" type="YSort" parent="YFirst"]
 
 [node name="TreeW2" parent="YFirst/YBush" instance=ExtResource( 11 )]
-position = Vector2( 194, 86 )
+position = Vector2( 248, 107 )
 
-[node name="Bush" parent="YFirst/YBush" instance=ExtResource( 1 )]
-position = Vector2( 168, 144 )
+[node name="TreeW3" parent="YFirst/YBush" instance=ExtResource( 11 )]
+position = Vector2( 165, 155 )
 
-[node name="Bush2" parent="YFirst/YBush" instance=ExtResource( 1 )]
-position = Vector2( 97, 32 )
-
-[node name="Bush3" parent="YFirst/YBush" instance=ExtResource( 1 )]
-position = Vector2( 224, 56 )
+[node name="TreeW4" parent="YFirst/YBush" instance=ExtResource( 11 )]
+position = Vector2( 111, 41 )
 
 [node name="YGrass" type="YSort" parent="YFirst"]
 
-[node name="Grass" parent="YFirst/YGrass" instance=ExtResource( 6 )]
-position = Vector2( 32, 112 )
+[node name="Grass16" parent="YFirst/YGrass" instance=ExtResource( 1 )]
+position = Vector2( 41, 34 )
 
-[node name="Grass4" parent="YFirst/YGrass" instance=ExtResource( 6 )]
-position = Vector2( 16, 112 )
+[node name="Grass17" parent="YFirst/YGrass" instance=ExtResource( 1 )]
+position = Vector2( 4, 111 )
 
-[node name="Grass5" parent="YFirst/YGrass" instance=ExtResource( 6 )]
-position = Vector2( 48, 32 )
+[node name="Grass18" parent="YFirst/YGrass" instance=ExtResource( 1 )]
+position = Vector2( 22, 111 )
 
-[node name="Grass6" parent="YFirst/YGrass" instance=ExtResource( 6 )]
-position = Vector2( 48, 48 )
-
-[node name="Grass7" parent="YFirst/YGrass" instance=ExtResource( 6 )]
-position = Vector2( 32, 48 )
-
-[node name="Grass8" parent="YFirst/YGrass" instance=ExtResource( 6 )]
-position = Vector2( 240, 112 )
-
-[node name="Grass9" parent="YFirst/YGrass" instance=ExtResource( 6 )]
-position = Vector2( 224, 112 )
-
-[node name="Grass10" parent="YFirst/YGrass" instance=ExtResource( 6 )]
-position = Vector2( 208, 112 )
-
-[node name="Grass11" parent="YFirst/YGrass" instance=ExtResource( 6 )]
-position = Vector2( 208, 128 )
-
-[node name="Grass12" parent="YFirst/YGrass" instance=ExtResource( 6 )]
-position = Vector2( 128, 112 )
-
-[node name="Grass13" parent="YFirst/YGrass" instance=ExtResource( 6 )]
-position = Vector2( 128, 128 )
-
-[node name="Grass2" parent="YFirst/YGrass" instance=ExtResource( 6 )]
-position = Vector2( 32, 32 )
-
-[node name="Grass3" parent="YFirst/YGrass" instance=ExtResource( 6 )]
-position = Vector2( 48, 112 )
-
-[node name="Grass14" parent="YFirst/YGrass" instance=ExtResource( 6 )]
-position = Vector2( 8, 152 )
-
-[node name="Grass15" parent="YFirst/YGrass" instance=ExtResource( 6 )]
-position = Vector2( 24, 152 )
+[node name="Grass19" parent="YFirst/YGrass" instance=ExtResource( 1 )]
+position = Vector2( 41, 50 )
 
 [node name="YWater" type="YSort" parent="YFirst"]
 
