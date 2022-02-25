@@ -1,11 +1,10 @@
 extends Polygon2D
 
-onready var player = get_node("/root/World/YFirst/Player")
 
-var minimapCell = preload("res://UI/Minimap/MinimapCell.tscn")
+onready var player = get_node("/root/World/YFirst/Player")
+var miniCell = preload("res://UI/Minimap/BigMiniCell.tscn")
 
 var vis = true
-
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -13,23 +12,26 @@ func _process(delta):
 	
 	#### index = 3 
 
-	self.position.x = player.position.x + 6*16+10
-	self.position.y = player.position.y - 5*16 - 6
+	self.position.x = player.position.x - 75
+	self.position.y = player.position.y - 75
 	
 	if vis:
 		self.visible = true
 	else:
 		self.visible = false
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	for i in 7:
-		for j in 7:
-			var curMini = minimapCell.instance()
-			curMini.index = i + j*7
-			curMini.z_index = 12
-			self.add_child(curMini)
-			curMini.reloadCell()
+	self.z_index = 15
+	for i in 10:
+		for j in 10:
+			var curMiniCell = miniCell.instance()
+			curMiniCell.index = j*10+i
+			curMiniCell.position.x = j*15
+			curMiniCell.position.y = i*15
+			self.add_child(curMiniCell)
+			
 	pass # Replace with function body.
 
 

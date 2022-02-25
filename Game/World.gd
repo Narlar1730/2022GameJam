@@ -34,12 +34,18 @@ var minimap  = preload("res://UI/Minimap/Minimap.tscn")
 var chunk = load("res://ChunkDraw.gd").new()
 var current = []
 
+#miniMapStuff
+var miniInc = 0
+var miniCounter = 0
 
 #Clocks
 var pauseTimer = 0
 var fullScreenTimer = 0
 
 func updateClocks():
+	#miniCounter
+	if miniCounter > 0:
+		miniCounter -= 1
 	#FullScreenClock
 	if fullScreenTimer > 0:
 		fullScreenTimer -= 1
@@ -145,6 +151,25 @@ func _process(delta):
 	elif fullScreenTimer == 0 and Input.is_action_pressed("fullscreen"):
 		OS.window_fullscreen = false
 		fullScreenTimer = 40
+		
+	#Handle Minimap
+	if Input.is_action_pressed("openMinimap") and miniCounter == 0:
+		var curMini = miniInc % 3
+		if curMini == 0:
+			$Minimap.vis = false
+			$BigMini.vis= true
+		elif curMini == 1:
+			$Minimap.vis = false
+			$BigMini.vis = false
+			pass
+		elif curMini == 2:
+			$Minimap.vis = true
+			$BigMini.vis = false
+			pass
+		miniCounter = 30
+		miniInc += 1
+		
+
 	
 	updateClocks()
 		
@@ -383,11 +408,8 @@ func _ready():
 		curHalf.index = i
 		self.add_child(curHalf)
 		self.add_child(curFull)
-		
-	var curMiniMap = minimap.instance()
-	curMiniMap.z_index = 10
-	self.add_child(curMiniMap)
-		
+	
+	$BigMini.vis = false
 
 
 

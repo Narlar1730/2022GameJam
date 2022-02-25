@@ -22,9 +22,13 @@ var clickedCursor = -1
 var mouseClicked = false
 var updateFrame = false
 
+#Handle Minimap
+var visitedCells = []
+var clock        = 0
+var curCell      = Vector2()
+
 #GIMME DAT SHMONEY $$$
 var money = 0
-
 
 enum {
 	MOVE,
@@ -40,6 +44,16 @@ onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
 onready var swordHitbox = $HitboxPivot/SwordHitbox
+
+func updateVistedCells():
+	var pos : Vector2 = Vector2()
+	pos.x = floor(((self.position.x)/16)/20)
+	pos.y = floor(((self.position.y)/16)/12)
+	curCell = pos
+	if !visitedCells.has(pos):
+		visitedCells.push_back(pos)
+	
+	#print(visitedCells)
 
 func updateClickCursor(val):
 	while clickedCursor != val:
@@ -196,6 +210,14 @@ func _physics_process(delta):
 	
 	## Do hit timer
 	handleHits()
+	
+	#Handle Clock and update cells visited
+	clock += 1
+	if clock % 50 == 0:
+		updateVistedCells()
+		
+	if clock == 1000:
+		clock = 0
 	
 	#Handle Death
 	if health == 0:

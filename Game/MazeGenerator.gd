@@ -171,12 +171,12 @@ func printMaze():
 	#print(maze)
 	#print("here")
 	#drawMaze(maze)
-	#var curString = ""
-	#for i in mazeSize:
-	#	curString = ""
-	#	for j in mazeSize:
-	#		curString = str(curString, maze[i*mazeSize + j])
-	#	print(curString)
+	var curString = ""
+	for i in mazeSize:
+		curString = ""
+		for j in mazeSize:
+			curString = str(curString, maze[i*mazeSize + j])
+		print(curString)
 
 func _ready():
 	maze = genMaze()
