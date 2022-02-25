@@ -35,8 +35,12 @@ var current = []
 
 #Clocks
 var pauseTimer = 0
+var fullScreenTimer = 0
 
 func updateClocks():
+	#FullScreenClock
+	if fullScreenTimer > 0:
+		fullScreenTimer -= 1
 	#Pause clock
 	if pauseTimer < 0:
 		pauseTimer = 0
@@ -133,7 +137,12 @@ func _process(delta):
 		#print("here")
 		open_inventory()
 	
-	
+	if Input.is_action_pressed("fullscreen") and !OS.window_fullscreen and fullScreenTimer == 0:
+		OS.window_fullscreen = true
+		fullScreenTimer = 40
+	elif fullScreenTimer == 0 and Input.is_action_pressed("fullscreen"):
+		OS.window_fullscreen = false
+		fullScreenTimer = 40
 	
 	updateClocks()
 		
