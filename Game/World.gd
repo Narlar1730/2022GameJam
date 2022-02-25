@@ -29,6 +29,7 @@ var invent   = preload("res://UI/Inventory.tscn")
 var item     = preload("res://WorldItems/WorldItem.tscn")
 var coin     = preload("res://WorldItems/Coin.tscn")
 var treeMan  = preload("res://Enemies/Tree Elemental.tscn")
+var minimap  = preload("res://UI/Minimap/Minimap.tscn")
 
 var chunk = load("res://ChunkDraw.gd").new()
 var current = []
@@ -382,6 +383,10 @@ func _ready():
 		curHalf.index = i
 		self.add_child(curHalf)
 		self.add_child(curFull)
+		
+	var curMiniMap = minimap.instance()
+	curMiniMap.z_index = 10
+	self.add_child(curMiniMap)
 		
 
 
