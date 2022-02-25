@@ -294,32 +294,30 @@ func drawChunk(x, y, tileNo, MazeSize):
 	var surrounding = []
 	surrounding = getSurrounding(tileNo, MazeSize)
 	
-	print(surrounding)
-	
 	var worldString = ""
 	
 	if surrounding == "ud":
-		chunk.drawUDChunk(x, y)
+		worldString = chunk.drawUDChunk()
 	elif surrounding == "ul":
-		chunk.drawULChunk(x, y)
+		worldString = chunk.drawULChunk()
 	elif surrounding == "ur":
 		worldString = chunk.drawURChunk()
 	elif surrounding == "dl":
-		chunk.drawDLChunk(x, y)
+		worldString = chunk.drawDLChunk()
 	elif surrounding == "dr":
-		chunk.drawDRChunk(x, y)
+		worldString = chunk.drawDRChunk()
 	elif surrounding == "lr":
-		chunk.drawLRChunk(x, y)
+		worldString = chunk.drawLRChunk()
 	elif surrounding == "udl":
-		chunk.drawUDLChunk(x, y)
+		worldString = chunk.drawUDLChunk()
 	elif surrounding == "udr":
-		chunk.drawUDRChunk(x, y)
+		worldString = chunk.drawUDRChunk()
 	elif surrounding == "ulr":
-		chunk.drawULRChunk(x, y)
+		worldString = chunk.drawULRChunk()
 	elif surrounding == "dlr":
-		chunk.drawDRLChunk(x, y)
+		worldString = chunk.drawDRLChunk()
 	elif surrounding == "udlr":
-		chunk.drawUDLRChunk(x, y)
+		worldString = chunk.drawUDLRChunk()
 		
 	if worldString == "":
 		pass
