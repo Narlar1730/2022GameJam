@@ -758,6 +758,56 @@ func drawUDChunk():
 	var randomChunk = RandomNumberGenerator.new()
 	randomChunk.randomize()
 	var whichChunk = randomChunk.randi_range(0, 3)
+	if whichChunk == 0:
+				#Terrain
+		# e = empty
+		# c = cliff
+		# x = dead tile for cliff
+		# p = path
+		# b = bridge
+		# t = tree
+		# w = water
+		# g = grass
+		# r = rock
+		# R = rock on path
+
+#		#                   MM
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+#		#half               MM
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+
+			#Enemies
+			# s = spider
+			# b = bat
+			# t = tree
+#		#                   MM
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+#		#half               MM
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+	elif whichChunk == 1:
+		pass
+	elif whichChunk == 2:
+		pass
 	return output
 	
 	
