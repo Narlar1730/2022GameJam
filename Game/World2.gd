@@ -251,7 +251,6 @@ func drawWorldString(string, x, y):
 		# R = rock on path
 			var curTile = string[i+j*20]
 			var curEnem = string[i+j*20+240]
-			var curEnem = "f"
 			if curTile == "c":
 				cliffs.set_cell(x*chunkX/2+i/2, y*chunkY/2+j/2, 0)
 			elif curTile == "p":
