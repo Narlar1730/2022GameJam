@@ -24,6 +24,7 @@ var rock     = preload("res://World/Rock.tscn")
 var bush     = preload("res://World/Bush.tscn")
 var heartF   = preload("res://UI/FullHeart.tscn")
 var heartH   = preload("res://UI/HalfHeart.tscn")
+var heartB   = preload("res://UI/blankheart.tscn")
 var invent   = preload("res://UI/Inventory.tscn")
 var item     = preload("res://WorldItems/WorldItem.tscn")
 var coin     = preload("res://WorldItems/Coin.tscn")
@@ -370,6 +371,10 @@ func _ready():
 			#cliffs.set_cell(10+i, 10+j, 0)
 			
 	#Add health
+	for i in player.maxHealth/2:
+		var curBlank = heartB.instance()
+		curBlank.index = i
+		self.add_child(curBlank)
 	for i in player.health/2:
 		var curFull = heartF.instance()
 		var curHalf = heartH.instance()
