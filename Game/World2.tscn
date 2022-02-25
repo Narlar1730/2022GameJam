@@ -5,10 +5,10 @@
 [ext_resource path="res://World/GrassBackgroundW2.png" type="Texture" id=3]
 [ext_resource path="res://World/DirtTileset.png" type="Texture" id=4]
 [ext_resource path="res://World/CliffTileset.png" type="Texture" id=5]
-[ext_resource path="res://World/WaterTileSet.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/WaterTileSetW2.tscn" type="PackedScene" id=6]
+[ext_resource path="res://World/RockW2.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Player/playerCamera.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World2.gd" type="Script" id=9]
-[ext_resource path="res://World/Rock.tscn" type="PackedScene" id=10]
 [ext_resource path="res://World/TreeW2.tscn" type="PackedScene" id=11]
 [ext_resource path="res://World/BridgeTileSet.png" type="Texture" id=12]
 [ext_resource path="res://Enemies/Tree Elemental.tscn" type="PackedScene" id=13]
@@ -525,7 +525,7 @@ region_rect = Rect2( 0, 0, 6400, 6400 )
 tile_set = SubResource( 1 )
 cell_size = Vector2( 16, 16 )
 format = 1
-tile_data = PoolIntArray( 9, 0, 0, 10, 0, 1, 11, 0, 2, 65545, 0, 65536, 65546, 0, 65537, 65547, 0, 65538, 131081, 0, 131072, 131082, 0, 65542, 131083, 0, 65538, 196618, 0, 65536, 196619, 0, 65538, 262154, 0, 65536, 262155, 0, 131077, 262156, 0, 1, 262157, 0, 1, 262158, 0, 1, 262159, 0, 1, 262160, 0, 1, 262161, 0, 2, 327690, 0, 131072, 327691, 0, 65542, 327692, 0, 65541, 327693, 0, 131073, 327694, 0, 131073, 327695, 0, 131073, 327696, 0, 65542, 327697, 0, 131077, 327698, 0, 1, 327699, 0, 2, 393222, 0, 0, 393223, 0, 2, 393227, 0, 65536, 393228, 0, 65538, 393232, 0, 131072, 393233, 0, 131073, 393234, 0, 131073, 393235, 0, 131074, 458758, 0, 65536, 458759, 0, 65538, 458763, 0, 65536, 458764, 0, 65538, 524294, 0, 65536, 524295, 0, 65538, 524299, 0, 65536, 524300, 0, 65538, 589830, 0, 65536, 589831, 0, 65538, 589835, 0, 65536, 589836, 0, 65538, 655366, 0, 131072, 655367, 0, 9, 655368, 0, 1, 655369, 0, 1, 655370, 0, 1, 655371, 0, 131078, 655372, 0, 131077, 655373, 0, 1, 655374, 0, 1, 655375, 0, 1, 655376, 0, 5, 655377, 0, 196610, 720903, 0, 131072, 720904, 0, 131073, 720905, 0, 131073, 720906, 0, 131073, 720907, 0, 131073, 720908, 0, 131073, 720909, 0, 131073, 720910, 0, 131073, 720911, 0, 131073, 720912, 0, 131074, 720914, 0, 196611 )
+tile_data = PoolIntArray( 9, 0, 0, 10, 0, 2, 65545, 0, 65536, 65546, 0, 65538, 131081, 0, 65536, 131082, 0, 65538, 196617, 0, 65536, 196618, 0, 65538, 262153, 0, 65536, 262154, 0, 65538, 327686, 0, 0, 327687, 0, 1, 327688, 0, 1, 327689, 0, 131078, 327690, 0, 131077, 327691, 0, 1, 327692, 0, 1, 327693, 0, 1, 327694, 0, 1, 327695, 0, 1, 327696, 0, 1, 327697, 0, 1, 327698, 0, 1, 327699, 0, 2, 393222, 0, 131072, 393223, 0, 131073, 393224, 0, 131073, 393225, 0, 131073, 393226, 0, 131073, 393227, 0, 65542, 393228, 0, 65541, 393229, 0, 131073, 393230, 0, 131073, 393231, 0, 131073, 393232, 0, 131073, 393233, 0, 131073, 393234, 0, 131073, 393235, 0, 131074, 458763, 0, 65536, 458764, 0, 65538, 524299, 0, 65536, 524300, 0, 65538, 589835, 0, 65536, 589836, 0, 65538, 655371, 0, 65536, 655372, 0, 65538, 720907, 0, 131072, 720908, 0, 131074, 720914, 0, 196611 )
 
 [node name="BridgeTilemap" type="TileMap" parent="."]
 tile_set = SubResource( 50 )
@@ -538,10 +538,10 @@ tile_set = SubResource( 2 )
 cell_size = Vector2( 32, 32 )
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 0, 0, 4, 1, 0, 196609, 2, 0, 6, 3, 0, 2, 6, 0, 196608, 7, 0, 196609, 8, 0, 6, 9, 0, 2, 65536, 0, 131075, 65538, 0, 131072, 65539, 0, 131074, 65544, 0, 131072, 65545, 0, 131074, 262144, 0, 0, 262145, 0, 1, 262146, 0, 2, 262151, 0, 196608, 262152, 0, 196609, 262153, 0, 7, 327680, 0, 131072, 327681, 0, 131073, 327682, 0, 131074, 327689, 0, 131075 )
+tile_data = PoolIntArray( 0, 0, 3, 3, 0, 3, 7, 0, 196608, 8, 0, 6, 9, 0, 2, 65536, 0, 65539, 65539, 0, 131075, 65544, 0, 131072, 65545, 0, 131074, 131072, 0, 196612, 131073, 0, 196610, 262148, 0, 3, 262151, 0, 0, 262152, 0, 2, 327684, 0, 131075, 327687, 0, 131072, 327688, 0, 131074 )
 
-[node name="WaterTileSet" parent="." instance=ExtResource( 7 )]
-tile_data = PoolIntArray( 65553, 0, 0, 65554, 0, 2, 131089, 0, 131072, 131090, 0, 131074, 262148, 0, 196608, 262149, 0, 196609, 262150, 0, 7, 327686, 0, 131075, 524299, 0, 196611 )
+[node name="WaterTileSetW2" parent="." instance=ExtResource( 6 )]
+tile_data = PoolIntArray( 458766, 0, 196608, 458767, 0, 196609, 458768, 0, 196609, 458769, 0, 196609, 458770, 0, 6, 458771, 0, 2, 524306, 0, 65536, 524307, 0, 65538, 589842, 0, 65536, 589843, 0, 65538, 655378, 0, 65536, 655379, 0, 65538, 720914, 0, 131072, 720915, 0, 131074 )
 
 [node name="YFirst" type="YSort" parent="."]
 
@@ -554,33 +554,36 @@ collision_mask = 5
 
 [node name="YRock" type="YSort" parent="YFirst"]
 
-[node name="Rock" parent="YFirst/YRock" instance=ExtResource( 10 )]
-position = Vector2( 169, 102 )
+[node name="Rock2" parent="YFirst/YRock" instance=ExtResource( 7 )]
+position = Vector2( 187, 69 )
+
+[node name="Rock3" parent="YFirst/YRock" instance=ExtResource( 7 )]
+position = Vector2( 216, 164 )
 
 [node name="YBush" type="YSort" parent="YFirst"]
 
 [node name="TreeW2" parent="YFirst/YBush" instance=ExtResource( 11 )]
-position = Vector2( 248, 107 )
+position = Vector2( 195, 76 )
 
 [node name="TreeW3" parent="YFirst/YBush" instance=ExtResource( 11 )]
-position = Vector2( 165, 155 )
+position = Vector2( 88, 111 )
 
 [node name="TreeW4" parent="YFirst/YBush" instance=ExtResource( 11 )]
-position = Vector2( 111, 41 )
+position = Vector2( 110, 161 )
 
 [node name="YGrass" type="YSort" parent="YFirst"]
 
 [node name="Grass16" parent="YFirst/YGrass" instance=ExtResource( 1 )]
-position = Vector2( 41, 34 )
+position = Vector2( 110, 165 )
 
 [node name="Grass17" parent="YFirst/YGrass" instance=ExtResource( 1 )]
-position = Vector2( 4, 111 )
+position = Vector2( 78, 165 )
 
 [node name="Grass18" parent="YFirst/YGrass" instance=ExtResource( 1 )]
-position = Vector2( 22, 111 )
+position = Vector2( 94, 165 )
 
 [node name="Grass19" parent="YFirst/YGrass" instance=ExtResource( 1 )]
-position = Vector2( 41, 50 )
+position = Vector2( 62, 164 )
 
 [node name="YWater" type="YSort" parent="YFirst"]
 
