@@ -1488,6 +1488,145 @@ func drawUDLRChunk():
 	var randomChunk = RandomNumberGenerator.new()
 	randomChunk.randomize()
 	var whichChunk = randomChunk.randi_range(0, 2)
+	if whichChunk == 0:
+		#Terrain
+		# e = empty
+		# c = cliff
+		# x = dead tile for cliff
+		# p = path
+		# b = bridge
+		# t = tree
+		# w = water
+		# g = grass
+		# r = rock
+		# R = rock on path
+
+#		#                   MM
+		output += "wwwwwwpppbbpppwwwwww"
+		output += "wwwwwwwwpbbpwwwwwwww"
+		output += "wwwwwwwwwbbwwwwwwwww"
+		output += "pwwwwwwwwbbwwwwwwwwp"
+		output += "ppwwwppppppppppwwwwp"
+		output += "bbbbbbppeeggeppbbbbb"
+#		#half               MM
+		output += "bbbbbbeegggeeepbbbbb"
+		output += "ppwwwpeeeggeeppwwwwp"
+		output += "pwwwwwpppbbpppwwwwwp"
+		output += "pwwwwwwwwbbwwwwwwwww"
+		output += "wwwwwwwwpbbpwwwwwwww"
+		output += "wwwwwwpppbbppppwwwww"
+
+			#Enemies
+			# s = spider
+			# b = bat
+			# t = tree
+#		#                   MM
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeteeeeeeeeee"
+		#half               MM
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		
+	elif whichChunk == 1:
+		#Terrain
+		# e = empty
+		# c = cliff
+		# x = dead tile for cliff
+		# p = path
+		# b = bridge
+		# t = tree
+		# w = water
+		# g = grass
+		# r = rock
+		# R = rock on path
+
+#		#                   MM
+		output += "eeewweeeeppeeeeeeeee"
+		output += "eewwwwweepppppeeeeee"
+		output += "eebbbbbeeeeppppecxee"
+		output += "eewwwwweeeeeepppxxee"
+		output += "eeewwereeeeteepppeee"
+		output += "pppeeeeeeeeeeeeppeee"
+#		#half               MM
+		output += "pppppeeggeeggeeppppp"
+		output += "eeppppeeggggeeppeeee"
+		output += "eeeeppeeeeeeeeppeeee"
+		output += "eeeepppeeeeeepppeeee"
+		output += "eeeeeppeeeeeppeeeeee"
+		output += "eeeeepppppppppeeeeee"
+
+			#Enemies
+			# s = spider
+			# b = bat
+			# t = tree
+#		#                   MM
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+#		#half               MM
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+	elif whichChunk == 2:
+		#Terrain
+		# e = empty
+		# c = cliff
+		# x = dead tile for cliff
+		# p = path
+		# b = bridge
+		# t = tree
+		# w = water
+		# g = grass
+		# r = rock
+		# R = rock on path
+
+#		#                   MM
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeggeeeeeeeeeeeee"
+		output += "eewweeggeeeeeecxcxee"
+		output += "eeeweegeeeeeeexxxxee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "pppppppppppppppppppp"
+#		#half               MM
+		output += "pppppppppppppppppppp"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "ewwwweeeeeeeeReeeeee"
+		output += "eewwwwweeeeeeeereeee"
+		output += "ewwwwweeeeereeeereee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+
+			#Enemies
+			# s = spider
+			# b = bat
+			# t = tree
+#		#                   MM
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eebeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+#		#half               MM
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeesee"
+		output += "eeeeeeeeeeeeeeeeeeee"
+		output += "eeeeeeeeeeeeeeeeeeee"
 	return output
 
 # Called when the node enters the scene tree for the first time.
