@@ -5,7 +5,7 @@
 [ext_resource path="res://World/GrassBackgroundW2.png" type="Texture" id=3]
 [ext_resource path="res://World/DirtTileset.png" type="Texture" id=4]
 [ext_resource path="res://World/CliffTileset.png" type="Texture" id=5]
-[ext_resource path="res://World/WaterTileSet.tscn" type="PackedScene" id=7]
+[ext_resource path="res://World/WaterTileSetW2.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Player/playerCamera.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World2.gd" type="Script" id=9]
 [ext_resource path="res://World/Rock.tscn" type="PackedScene" id=10]
@@ -540,8 +540,8 @@ collision_mask = 0
 format = 1
 tile_data = PoolIntArray( 0, 0, 4, 1, 0, 196609, 2, 0, 6, 3, 0, 2, 6, 0, 196608, 7, 0, 196609, 8, 0, 6, 9, 0, 2, 65536, 0, 131075, 65538, 0, 131072, 65539, 0, 131074, 65544, 0, 131072, 65545, 0, 131074, 262144, 0, 0, 262145, 0, 1, 262146, 0, 2, 262151, 0, 196608, 262152, 0, 196609, 262153, 0, 7, 327680, 0, 131072, 327681, 0, 131073, 327682, 0, 131074, 327689, 0, 131075 )
 
-[node name="WaterTileSet" parent="." instance=ExtResource( 7 )]
-tile_data = PoolIntArray( 65553, 0, 0, 65554, 0, 2, 131089, 0, 131072, 131090, 0, 131074, 262148, 0, 196608, 262149, 0, 196609, 262150, 0, 7, 327686, 0, 131075, 524299, 0, 196611 )
+[node name="WaterTileSetW2" parent="." instance=ExtResource( 6 )]
+tile_data = PoolIntArray( 65553, 0, 0, 65554, 0, 2, 131089, 0, 131072, 131090, 0, 131074, 262148, 0, 196608, 262149, 0, 196609, 262150, 0, 7, 262152, -1073741824, 196611, 327686, 0, 131075, 524299, 0, 196611 )
 
 [node name="YFirst" type="YSort" parent="."]
 
