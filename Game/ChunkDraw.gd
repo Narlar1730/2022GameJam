@@ -278,7 +278,7 @@ func drawULChunk():
 
 #		#                   MM
 		output += "eeeeteeeeppeeeeeeeee"
-		output += "eeggeeeeeppeeeeeeee"
+		output += "eeggeeeeeppeeeeeeeee"
 		output += "eeeetgeeeeepppppeeee"
 		output += "eeeeeteeeeeeeeeepppe"
 		output += "eeeetgteetetgeeeeepp"
@@ -463,7 +463,6 @@ func drawDLChunk():
 	var randomChunk = RandomNumberGenerator.new()
 	randomChunk.randomize()
 	var whichChunk = randomChunk.randi_range(0, 3)
-	whichChunk = 4
 	if whichChunk == 0:
 		#Terrain
 		# e = empty
