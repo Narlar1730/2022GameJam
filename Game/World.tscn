@@ -14,6 +14,7 @@
 [ext_resource path="res://World/BridgeTileSet.png" type="Texture" id=12]
 [ext_resource path="res://UI/Minimap/BigMini.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Music and Sounds/Wistful_Woods_Version_01_LOOP.ogg" type="AudioStream" id=14]
+[ext_resource path="res://Enemies/bossesW1/Treeant.tscn" type="PackedScene" id=14]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -619,6 +620,9 @@ position = Vector2( 24, 152 )
 [node name="Minimap" parent="." instance=ExtResource( 11 )]
 
 [node name="BigMini" parent="." instance=ExtResource( 13 )]
+
+[node name="Treeant" parent="." instance=ExtResource( 14 )]
+position = Vector2( 166, -114 )
 
 [node name="playerCamera" parent="." instance=ExtResource( 8 )]
 current = true
