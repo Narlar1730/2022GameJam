@@ -1,10 +1,10 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://Enemies/bossesW1/Treeant.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/bossesW1/Treeant.gd" type="Script" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-height = 12.0
+height = 0.0
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
@@ -120,27 +120,33 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[node name="Treeant" type="KinematicBody2D"]
+[sub_resource type="CapsuleShape2D" id=27]
+height = 13.3333
+
+[node name="Treeant" type="KinematicBody2D" groups=["Enemy"]]
 scale = Vector2( 3, 3 )
 collision_layer = 31
 collision_mask = 31
 script = ExtResource( 2 )
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2( 0, 4 )
 shape = SubResource( 1 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 1.33333, -5 )
 frames = SubResource( 26 )
 animation = "Walking"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8
 collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource( 1 )
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 0, -3 )
+shape = SubResource( 27 )
 
 [node name="HealthBox" type="Polygon2D" parent="."]
 position = Vector2( 7.44186, -1.66667 )
@@ -155,5 +161,7 @@ polygon = PoolVector2Array( 0, 0, 40, 0, 40, 3, 0, 3 )
 position = Vector2( -28.4188, 16.9762 )
 color = Color( 1, 0, 0, 1 )
 polygon = PoolVector2Array( -9.53674e-07, 0, 40, 0, 40, 3, 0, 3 )
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]
