@@ -30,6 +30,7 @@ var item     = preload("res://WorldItems/WorldItem.tscn")
 var coin     = preload("res://WorldItems/Coin.tscn")
 var treeMan  = preload("res://Enemies/Tree Elemental.tscn")
 var minimap  = preload("res://UI/Minimap/Minimap.tscn")
+var treeant  = preload("res://Enemies/bossesW1/Treeant.tscn")
 
 var chunk = load("res://ChunkDraw.gd").new()
 var current = []
@@ -367,7 +368,11 @@ func drawChunk(x, y, tileNo, MazeSize):
 	cliffs.update_bitmask_region(Vector2(x*chunkX/2-1, y*chunkY/2-1), Vector2(x*chunkX/2+chunkX/2+1, y*chunkY/2+chunkY/2+1))
 
 	
-
+func drawBossBattle(x, y):
+	var boss = treeant.instance()
+	boss.position.x = x*chunkX*tileSize + 8*tileSize+8
+	boss.position.y = y*chunkY*tileSize + 4*tileSize+8
+	self.add_child(boss)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -387,6 +392,8 @@ func _ready():
 				drawChunk(i-5, j-5, curIndex, mazeSize)
 			elif(curTile == 2):
 				drawDeadEnd(i-5, j-5)
+			elif(curTile == 3):
+				drawBossBattle(i-5, j-5)
 			curIndex = curIndex + 1
 			
 	## Draw chunks

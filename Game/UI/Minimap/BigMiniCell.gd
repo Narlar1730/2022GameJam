@@ -23,11 +23,11 @@ func _process(delta):
 	for i in allCells:
 		var curX = i.x+6
 		var curY = i.y+6
-		if index == curX*10 + curY:
+		if index == curX*10 + curY-11:
 			draw = 2
 			#self.visible = true
 			
-	if index == adjX*10 + adjY:
+	if index == adjX*10 + adjY-11:
 		draw = 1
 			
 	if draw == 1:
