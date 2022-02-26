@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Wistful_Woods_Version_01_LOOP.ogg-88ddfc5f4970f08998a8175611bfac9b.oggstr"
+
+[deps]
+
+source_file="res://Music and Sounds/Wistful_Woods_Version_01_LOOP.ogg"
+dest_files=[ "res://.import/Wistful_Woods_Version_01_LOOP.ogg-88ddfc5f4970f08998a8175611bfac9b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

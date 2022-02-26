@@ -13,7 +13,7 @@
 [ext_resource path="res://UI/Minimap/Minimap.tscn" type="PackedScene" id=11]
 [ext_resource path="res://World/BridgeTileSet.png" type="Texture" id=12]
 [ext_resource path="res://UI/Minimap/BigMini.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Music and Sounds/Wistful_Woods_Version_01_LOOP.wav" type="AudioStream" id=14]
+[ext_resource path="res://Music and Sounds/Wistful_Woods_Version_01_LOOP.ogg" type="AudioStream" id=14]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
