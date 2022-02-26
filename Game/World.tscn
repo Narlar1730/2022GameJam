@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=64 format=2]
 
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -13,7 +13,6 @@
 [ext_resource path="res://UI/Minimap/Minimap.tscn" type="PackedScene" id=11]
 [ext_resource path="res://World/BridgeTileSet.png" type="Texture" id=12]
 [ext_resource path="res://UI/Minimap/BigMini.tscn" type="PackedScene" id=13]
-[ext_resource path="res://Enemies/bossesW1/Treeant.tscn" type="PackedScene" id=14]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -518,7 +517,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 script = ExtResource( 9 )
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 137, 52 )
+position = Vector2( 129, 49 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 6400, 6400 )
@@ -622,6 +621,3 @@ position = Vector2( 24, 152 )
 
 [node name="playerCamera" parent="." instance=ExtResource( 8 )]
 current = true
-
-[node name="Treeant" parent="." instance=ExtResource( 14 )]
-position = Vector2( 168, -63 )

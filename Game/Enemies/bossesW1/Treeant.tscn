@@ -132,6 +132,7 @@ shape = SubResource( 1 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 26 )
 animation = "Walking"
+frame = 2
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -140,5 +141,19 @@ collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource( 1 )
+
+[node name="HealthBox" type="Polygon2D" parent="."]
+position = Vector2( 7.44186, -1.66667 )
+scale = Vector2( 0.906977, 1.21739 )
+color = Color( 0, 0, 0, 1 )
+offset = Vector2( -28.5, 17 )
+invert_enable = true
+invert_border = 1.0
+polygon = PoolVector2Array( 0, 0, 40, 0, 40, 3, 0, 3 )
+
+[node name="HealthBar" type="Polygon2D" parent="HealthBox"]
+position = Vector2( -28.4188, 16.9762 )
+color = Color( 1, 0, 0, 1 )
+polygon = PoolVector2Array( -9.53674e-07, 0, 40, 0, 40, 3, 0, 3 )
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

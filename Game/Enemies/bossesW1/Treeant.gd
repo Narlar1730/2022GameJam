@@ -3,9 +3,10 @@ extends KinematicBody2D
 onready var player = get_node("/root/World/YFirst/Player")
 onready var world  = get_node("/root/World")
 
-var health     = 60
-var hitCounter = 0
-var moveTimer  = 0
+var startHealth = 60
+var health      = 60
+var hitCounter  = 0
+var moveTimer   = 0
 var lifeClock : int = 0
 
 
@@ -30,17 +31,36 @@ func _process(delta):
 	var playerCell = player.curCell
 	if curCell == playerCell and !battleMode:
 		battleMode = true
+		#get_child("He")
+		#$HealthBox.
+		#$HealthBox.position.x = player.position.x - 65
+		#$HealthBox.position.y = player.position.y + 30
+		$HealthBox.visible = true
+		
 		#print("Entered")
-		$AnimatedSprite.animation = "Attack2"
+		#$AnimatedSprite.animation = "Attack2"
 	if curCell != playerCell:
+		$HealthBox.visible = false
 		battleMode = false
 		#print("Exited")
+	
+	if battleMode:
+		var healthWidth = int(40.0 * (float(health)/startHealth))
+		print(healthWidth)
+
+		#$HealthBox.position.x = player.position.x/3 - 95
+		#$HealthBox.position.y = player.position.y/3 + 45
+		$HealthBox/HealthBar.polygon = [Vector2(0, 0), Vector2(healthWidth, 0), Vector2(healthWidth, 3), Vector2(0, 3)]
+		#$HealthBox.position.x = player.position.x# - 65
+		#$HealthBox.position.y = player.position.y# + 30
+	
 	if health <= 0:
 		self.queue_free()
 	
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$HealthBox.visible = false
 	pass # Replace with function body.
 
 
