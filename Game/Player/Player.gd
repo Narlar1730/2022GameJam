@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
+
 var item = preload("res://items/Item.tscn")
 
 onready var world  = get_node("/root/World/")
@@ -66,6 +68,8 @@ func updateCursor(val):
 func doDamage(dam):
 	health = health - dam
 	hitTimer = immunity
+	var playerHurtSound = PlayerHurtSound.instance()
+	get_tree().current_scene.add_child(playerHurtSound)
 
 func handleHits():
 	if hitTimer < 0:
