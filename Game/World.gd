@@ -398,7 +398,7 @@ func drawBossBattle(x, y):
 			if i == 2 or 3 == 6:
 				pass
 			else:
-				castle.set_cell(x*chunkX/2+10, y*chunkY/2+i, 0)
+				castle.set_cell(x*chunkX/2+9, y*chunkY/2+i, 0)
 			castle.set_cell(x*chunkX/2+i/2, y*chunkY/2+i, 0)
 
 		else:
@@ -407,7 +407,7 @@ func drawBossBattle(x, y):
 				pass
 			else:
 				castle.set_cell(x*chunkX/2, y*chunkY/2+i, 0)
-			castle.set_cell(x*chunkX/2+10, y*chunkY/2+i, 0)
+			castle.set_cell(x*chunkX/2+9, y*chunkY/2+i, 0)
 
 			
 	castle.update_bitmask_region(Vector2(x*chunkX/2-1, y*chunkY/2-1), Vector2(x*chunkX/2+chunkX/2+1, y*chunkY/2+chunkY/2+1))
