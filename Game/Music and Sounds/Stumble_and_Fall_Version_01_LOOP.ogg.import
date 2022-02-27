@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Stumble_and_Fall_Version_01_LOOP.ogg-031fee5e74fe00f9d64ac31f92e60587.oggstr"
+
+[deps]
+
+source_file="res://Music and Sounds/Stumble_and_Fall_Version_01_LOOP.ogg"
+dest_files=[ "res://.import/Stumble_and_Fall_Version_01_LOOP.ogg-031fee5e74fe00f9d64ac31f92e60587.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
