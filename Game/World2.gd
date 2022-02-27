@@ -151,6 +151,8 @@ func open_inventory():
 
 
 func _process(delta):
+	if Input.is_action_just_pressed("quitKey"):
+		self.queue_free()
 	if inventoryOpen and Input.is_action_pressed("OpenInventory") and pauseTimer == 0: 
 		pauseTimer = 20
 		inventoryOpen = false
