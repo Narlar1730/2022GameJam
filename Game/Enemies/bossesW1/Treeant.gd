@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 var attack         = preload("res://Enemies/Plant attack.tscn")
 const EnemyHitSound = preload("res://Enemies/EnemyHitSound.tscn")
+var apple          = preload("res://Enemies/bossesW1/AppleAttack.tscn")
 
 onready var player = get_node("/root/World/YFirst/Player")
 onready var world  = get_node("/root/World")
@@ -103,6 +104,18 @@ func _process(delta):
 			print(printString)
 			
 		elif whichAttack == 2:
+			if attackTimer % 80 == 0:
+				var apple1 = apple.instance()
+				apple1.position.x = self.position.x
+				apple1.position.y = self.position.y
+				var areWeSpawning = RandomNumberGenerator.new()
+				areWeSpawning.randomize()
+				var x1 = areWeSpawning.randi_range(-50, 50)
+				var y1 = areWeSpawning.randi_range(-50, 50)
+
+				apple1.xp1.x = x1
+				apple1.xp1.y = y1
+				get_tree().get_root().get_node("/root/World/YFirst").add_child(apple1)
 			$AnimatedSprite.animation = "Attack2"
 		var healthWidth = int(40.0 * (float(health)/startHealth))
 		print(healthWidth)
