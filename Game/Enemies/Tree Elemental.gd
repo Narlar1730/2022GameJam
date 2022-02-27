@@ -1,5 +1,6 @@
 extends KinematicBody2D
 
+const EnemyHitSound = preload("res://Enemies/EnemyHitSound.tscn")
 onready var player = get_node("/root/World/YFirst/Player")
 onready var world  = get_node("/root/World")
 
@@ -80,4 +81,6 @@ func _on_Area2D_area_entered(area):
 		print("Here")
 		health -= player.getDamage()
 		hitCounter = immunity
+		var enemyHitSound = EnemyHitSound.instance()
+		get_tree().current_scene.add_child(enemyHitSound)
 	pass # Replace with function body.

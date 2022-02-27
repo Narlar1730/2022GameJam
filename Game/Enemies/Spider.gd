@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
+const EnemyHitSound = preload("res://Enemies/EnemyHitSound.tscn")
 onready var player = get_node("/root/World/YFirst/Player")
 onready var world  = get_node("/root/World")
 # Declare member variables here. Examples:
@@ -98,3 +99,5 @@ func _on_Hurtbox_area_entered(area):
 	if area.is_in_group("Weapon"):
 		health = health - player.getDamage()
 		hitCounter = 18
+		var enemyHitSound = EnemyHitSound.instance()
+		get_tree().current_scene.add_child(enemyHitSound)

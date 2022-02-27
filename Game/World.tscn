@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 [gd_scene load_steps=64 format=2]
+=======
+[gd_scene load_steps=66 format=2]
+>>>>>>> 31c2b79d603af8cd0473bf1c7522876940c89c6f
 
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -13,6 +17,11 @@
 [ext_resource path="res://UI/Minimap/Minimap.tscn" type="PackedScene" id=11]
 [ext_resource path="res://World/BridgeTileSet.png" type="Texture" id=12]
 [ext_resource path="res://UI/Minimap/BigMini.tscn" type="PackedScene" id=13]
+<<<<<<< HEAD
+=======
+[ext_resource path="res://Music and Sounds/Wistful_Woods_Version_01_LOOP.ogg" type="AudioStream" id=14]
+[ext_resource path="res://Enemies/bossesW1/Treeant.tscn" type="PackedScene" id=15]
+>>>>>>> 31c2b79d603af8cd0473bf1c7522876940c89c6f
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -517,7 +526,11 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 script = ExtResource( 9 )
 
 [node name="Background" type="Sprite" parent="."]
+<<<<<<< HEAD
 position = Vector2( 71, 146 )
+=======
+position = Vector2( 128, 49 )
+>>>>>>> 31c2b79d603af8cd0473bf1c7522876940c89c6f
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 6400, 6400 )
@@ -619,6 +632,12 @@ position = Vector2( 24, 152 )
 
 [node name="BigMini" parent="." instance=ExtResource( 13 )]
 
+<<<<<<< HEAD
+=======
+[node name="Treeant" parent="." instance=ExtResource( 15 )]
+position = Vector2( 166, -114 )
+
+>>>>>>> 31c2b79d603af8cd0473bf1c7522876940c89c6f
 [node name="playerCamera" parent="." instance=ExtResource( 8 )]
 current = true
 
