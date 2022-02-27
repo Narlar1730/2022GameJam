@@ -66,26 +66,47 @@ func spawnLoot(x, y):
 	var areWeSpawning = RandomNumberGenerator.new()
 	areWeSpawning.randomize()
 	var spawn = areWeSpawning.randi_range(0, 10)
-	if spawn == 0:
+	if 0 == 0:
 		var wort = item.instance()
 		wort.position.x = x
 		wort.position.y = y
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
-		var int1 = rng.randi_range(0, 1)
+		var int1 = rng.randi_range(0, 6)
 		var itemType = ""
 		#var itemString = ""
+		var statsString = ""
 		var colour = ""
 		if int1 == 0:
-			
-			itemType = "sword"
+			itemType = "BattleAxe"
+			statsString = itemType + ".red.primary." + itemType + ".5.N/A"
+			#itemType = "sword"
+		elif int1 == 1:
+			itemType = "Bow"
+			statsString = itemType + ".red.primary.some " + itemType + ".2.N/A"
+		elif int1 == 2:
+			itemType = "FlamingSword"
+			statsString = itemType + ".red.primary." + itemType + ".6.N/A"
+		elif int1 == 3:
+			itemType = "GoldAxe"
+			statsString = itemType + ".red.primary." + itemType + ".4.N/A"
+		elif int1 == 4:
+			itemType = "GoldDagger"
+			statsString = itemType + ".red.primary." + itemType + ".2.N/A"
+		elif int1 == 5:
+			itemType = "GoldHammer"
+			statsString = itemType + ".red.primary." + itemType + ".6.N/A"
+		elif int1 == 6:
+			itemType = "HolySword"
+			statsString = itemType + ".red.primary." + itemType + ".8.N/A"
 		else:
-			itemType = "bow"
+			itemType = "Mace"
+			statsString = itemType + ".red.primary." + itemType + ".6.N/A"
+			#itemType = "bow"
 		
 		var int2 = rng.randi_range(0, 6)
 		colour = wort.rarSwitch(int2)
 		var stats = str(itemType, ".", colour)
-		var statsString = itemType + ".red.primary.some " + itemType + ".3.N/A"
 		wort.stats = statsString
 		self.add_child(wort)
 	elif spawn < 4:

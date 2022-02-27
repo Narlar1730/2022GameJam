@@ -44,10 +44,34 @@ func getItem():
 	return out
 		
 func setSprite(sprite):
-	if sprite == "bow":
-		$Item.texture = load("res://items/Bow.png")
-	elif sprite == "sword":
+	if sprite == "sword":
 		$Item.texture = load("res://items/Sword.png")
+	elif sprite == "IronHead":
+		$Item.texture = load("res://items/Armour/IronHead.png")
+	elif sprite == "IronChest":
+		$Item.texture = load("res://items/Armour/IronChest.png")
+	elif sprite == "IronBoots":
+		$Item.texture = load("res://items/Armour/IronBoots.png")
+	elif sprite == "GoldHead":
+		$Item.texture = load("res://items/Armour/GoldHead.png")
+	elif sprite == "GoldChest":
+		$Item.texture = load("res://items/Armour/GoldChest.png")
+	elif sprite == "GoldBoots":
+		$Item.texture = load("res://items/Armour/GoldBoots.png")
+	elif sprite == "bow":
+		$Item.texture = load("res://items/Bow.png")
+	elif sprite == "Mace":
+		$Item.texture = load("res://items/Mace.png")
+	elif sprite == "FlamingSword":
+		$Item.texture = load("res://items/FlamingSword.png")
+	elif sprite == "GoldAxe":
+		$Item.texture = load("res://items/GoldAxe.png")
+	elif sprite == "GoldDagger":
+		$Item.texture = load("res://items/GoldDagger.png")
+	elif sprite == "GoldHammer":
+		$Item.texture = load("res://items/GoldHammer.png")
+	elif sprite == "HolySword":
+		$Item.texture = load("res://items/HolySword.png")
 
 func rarSwitch(inc):
 	var out = ""

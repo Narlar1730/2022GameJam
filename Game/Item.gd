@@ -52,6 +52,18 @@ func setSprite(sprite):
 		$Sprite.texture = load("res://items/Armour/GoldBoots.png")
 	elif sprite == "bow":
 		$Sprite.texture = load("res://items/Bow.png")
+	elif sprite == "Mace":
+		$Sprite.texture = load("res://items/Mace.png")
+	elif sprite == "FlamingSword":
+		$Sprite.texture = load("res://items/FlamingSword.png")
+	elif sprite == "GoldAxe":
+		$Sprite.texture = load("res://items/GoldAxe.png")
+	elif sprite == "GoldDagger":
+		$Sprite.texture = load("res://items/GoldDagger.png")
+	elif sprite == "GoldHammer":
+		$Sprite.texture = load("res://items/GoldHammer.png")
+	elif sprite == "HolySword":
+		$Sprite.texture = load("res://items/HolySword.png")
 # Called when the node enters the scene tree for the first time.
 
 func _ready():
