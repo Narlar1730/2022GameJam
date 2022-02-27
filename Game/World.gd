@@ -66,7 +66,7 @@ func spawnLoot(x, y):
 	var areWeSpawning = RandomNumberGenerator.new()
 	areWeSpawning.randomize()
 	var spawn = areWeSpawning.randi_range(0, 10)
-	if 0 == 0:
+	if spawn == 0:
 		var wort = item.instance()
 		wort.position.x = x
 		wort.position.y = y
