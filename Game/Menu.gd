@@ -9,7 +9,8 @@ var inside = false
 
 func _process(delta):
 	if Input.is_action_just_released("MouseClick") and inside:
-		print("Clicked right!")		
+		get_tree().change_scene("res://World.tscn")
+
 	
 # Called when the node enters the scene tree for the first time.
 
