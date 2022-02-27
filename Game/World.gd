@@ -15,6 +15,7 @@ onready var paths  = get_node("/root/World/DirtPathTileMap")
 onready var cliffs = get_node("/root/World/DirtCliffTileMap")
 onready var water  = get_node("/root/World/WaterTileSet")
 onready var bridge = get_node("/root/World/BridgeTilemap")
+onready var castle = get_node("/root/World/CastleTileMap")
 #var chunk    = preload("res://ChunkDraw.gd")
 var maze     = preload("res://MazeGenerator.gd")
 var batEnemy = preload("res://Enemies/Bat.tscn")
@@ -391,6 +392,25 @@ func drawChunk(x, y, tileNo, MazeSize):
 
 	
 func drawBossBattle(x, y):
+	for i in 6:
+		if x < 0:
+			print("HERE!")
+			if i == 2 or 3 == 6:
+				pass
+			else:
+				castle.set_cell(x*chunkX/2+10, y*chunkY/2+i, 0)
+			castle.set_cell(x*chunkX/2+i/2, y*chunkY/2+i, 0)
+
+		else:
+			print("HERE2!")
+			if i == 2 or 3 == 6:
+				pass
+			else:
+				castle.set_cell(x*chunkX/2, y*chunkY/2+i, 0)
+			castle.set_cell(x*chunkX/2+10, y*chunkY/2+i, 0)
+
+			
+	castle.update_bitmask_region(Vector2(x*chunkX/2-1, y*chunkY/2-1), Vector2(x*chunkX/2+chunkX/2+1, y*chunkY/2+chunkY/2+1))
 	var boss = treeant.instance()
 	boss.position.x = x*chunkX*tileSize + 8*tileSize+8
 	boss.position.y = y*chunkY*tileSize + 4*tileSize+8
