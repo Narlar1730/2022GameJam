@@ -399,7 +399,7 @@ func drawBossBattle(x, y):
 				pass
 			else:
 				castle.set_cell(x*chunkX/2+9, y*chunkY/2+i, 0)
-			castle.set_cell(x*chunkX/2+i/2, y*chunkY/2+i, 0)
+			castle.set_cell(x*chunkX/2, y*chunkY/2+i, 0)
 
 		else:
 			print("HERE2!")

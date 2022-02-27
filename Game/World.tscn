@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -15,7 +15,6 @@
 [ext_resource path="res://UI/Minimap/BigMini.tscn" type="PackedScene" id=13]
 [ext_resource path="res://World/CastleTileMap.tscn" type="PackedScene" id=14]
 [ext_resource path="res://WorldItems/Chest.tscn" type="PackedScene" id=15]
-[ext_resource path="res://Enemies/bossesW1/Treeant.tscn" type="PackedScene" id=16]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -630,9 +629,6 @@ current = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 autoplay = true
-
-[node name="Treeant" parent="." instance=ExtResource( 16 )]
-position = Vector2( 172, -89 )
 
 [node name="Chest" parent="." instance=ExtResource( 15 )]
 position = Vector2( 235, 81 )
