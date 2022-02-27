@@ -18,7 +18,7 @@ func _process(delta):
 	if Input.is_action_just_released("MouseClick") and inside:
 		get_tree().change_scene("res://World.tscn")
 	if Input.is_action_just_pressed("quitKey"):
-		self.queue_free()
+		get_tree().quit()
 	if Input.is_action_pressed("fullscreen") and !OS.window_fullscreen and fullScreenTimer == 0:
 		OS.window_fullscreen = true
 		fullScreenTimer = 40

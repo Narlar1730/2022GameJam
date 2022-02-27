@@ -11,7 +11,6 @@ var health = 1
 
 func _process(delta):
 	if health < 0:
-		print("OHNO")
 		var howMany = RandomNumberGenerator.new()
 		howMany.randomize()
 		var num = howMany.randi_range(1, 3)
