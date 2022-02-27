@@ -130,7 +130,7 @@ func _ready():
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Weapon"):
 		#print("HIT")
-		health = health - player.damage
+		health = health - player.getDamage()
 		
 		hitCounter = 18
 	pass # Replace with function body.

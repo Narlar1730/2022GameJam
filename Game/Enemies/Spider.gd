@@ -96,5 +96,5 @@ func _process(delta):
 
 func _on_Hurtbox_area_entered(area):
 	if area.is_in_group("Weapon"):
-		health = health - player.damage
+		health = health - player.getDamage()
 		hitCounter = 18

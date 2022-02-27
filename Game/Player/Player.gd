@@ -16,6 +16,8 @@ var maxHealth           = 10
 var enemies             = 0
 var immunity : float    = 60
 var damage              = 4
+var luck                = 0
+var resistance          = 0
 
 #Handle Iventory
 var inventory = []
@@ -56,6 +58,16 @@ func updateVistedCells():
 		visitedCells.push_back(pos)
 	
 	#print(visitedCells)
+
+func getDamage():
+	var out = 0
+	var cur = inventory[46].split(".")
+	#print(cur)
+	var wepDam = int(cur[4])
+	print(wepDam)
+	out = damage + wepDam
+	
+	return out
 
 func updateClickCursor(val):
 	while clickedCursor != val:
@@ -198,8 +210,6 @@ func getInventory():
 	
 	return out
 
-func getDamage():
-	return damage
 
 func _physics_process(delta):
 	match state:

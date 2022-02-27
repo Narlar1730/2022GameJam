@@ -78,6 +78,6 @@ func _ready():
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Weapon"):
 		print("Here")
-		health -= player.damage
+		health -= player.getDamage()
 		hitCounter = immunity
 	pass # Replace with function body.

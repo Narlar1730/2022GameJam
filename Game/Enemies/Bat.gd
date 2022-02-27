@@ -44,7 +44,7 @@ func _physics_process(delta):
 
 func _on_Hurtbox_area_entered(area):
 	if area.is_in_group("Weapon"):
-		stats.health -= player.damage
+		stats.health -= player.getDamage()
 		hitCounter = 12
 
 

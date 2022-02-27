@@ -74,6 +74,7 @@ func spawnLoot(x, y):
 		rng.randomize()
 		var int1 = rng.randi_range(0, 1)
 		var itemType = ""
+		#var itemString = ""
 		var colour = ""
 		if int1 == 0:
 			
@@ -84,7 +85,7 @@ func spawnLoot(x, y):
 		var int2 = rng.randi_range(0, 6)
 		colour = wort.rarSwitch(int2)
 		var stats = str(itemType, ".", colour)
-		var statsString = itemType + ".red.primary.some " + itemType + ".1.N/A"
+		var statsString = itemType + ".red.primary.some " + itemType + ".3.N/A"
 		wort.stats = statsString
 		self.add_child(wort)
 	elif spawn < 4:

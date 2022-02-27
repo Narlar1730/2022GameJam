@@ -44,6 +44,10 @@ func _process(delta):
 			#allCells[player.curCursor] = t1
 		player.clickedCursor = -1
 		player.mouseClicked = false
+		
+	if Input.is_action_just_released("MouseClick"):
+		var healthTxt = "Health: " + str(player.health) + "/" + str(player.maxHealth)
+		var damageTxt = "Damage: " + str(player.getDamage())
 	#print(pauseTimer)
 	pass
 
@@ -62,8 +66,14 @@ func _ready():
 			self.add_child(cell1)
 	
 	var healthTxt = "Health: " + str(player.health) + "/" + str(player.maxHealth)
+	var damageTxt = "Damage: " + str(player.getDamage())
+	var luckTxt   = "Luck: "   + str(player.luck)
+	var speedTxt  = "Speed: "  + str(player.ACCELERATION/100)
 	
 	get_node("HealthText").text = healthTxt
+	get_node("HealthText2").text = damageTxt
+	get_node("HealthText3").text = luckTxt
+	get_node("HealthText4").text = speedTxt
 	for i in 10:
 		for j in 4:
 			var cell1 = cell.instance()
