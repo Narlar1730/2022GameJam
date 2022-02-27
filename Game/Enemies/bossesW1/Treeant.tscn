@@ -137,7 +137,7 @@ shape = SubResource( 1 )
 position = Vector2( 1.33333, -5 )
 frames = SubResource( 26 )
 animation = "Walking"
-frame = 2
+frame = 3
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]

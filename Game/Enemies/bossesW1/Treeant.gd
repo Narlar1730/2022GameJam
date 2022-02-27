@@ -9,7 +9,7 @@ onready var player = get_node("/root/World/YFirst/Player")
 onready var world  = get_node("/root/World")
 
 var startHealth = 150
-var health      = 10
+var health      = 150
 var hitCounter  = 0
 var moveTimer   = 0
 var lifeClock : int = 0
