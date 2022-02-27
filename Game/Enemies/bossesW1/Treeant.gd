@@ -4,12 +4,13 @@ var attack         = preload("res://Enemies/Plant attack.tscn")
 const EnemyHitSound = preload("res://Enemies/EnemyHitSound.tscn")
 var apple          = preload("res://Enemies/bossesW1/AppleAttack.tscn")
 var chest          = preload("res://WorldItems/Chest.tscn")
+var stairs         = preload("res://WorldItems/Stairs.tscn")
 
 onready var player = get_node("/root/World/YFirst/Player")
 onready var world  = get_node("/root/World")
 
 var startHealth = 150
-var health      = 150
+var health      = 10
 var hitCounter  = 0
 var moveTimer   = 0
 var lifeClock : int = 0
@@ -128,6 +129,12 @@ func _process(delta):
 		#$HealthBox.position.y = player.position.y# + 30
 	
 	if health <= 0:
+		var star   = stairs.instance()
+		star.position.x = self.position.x
+		star.position.y = self.position.y - 10
+		star.scale.x = 0.33
+		star.scale.y = 0.33
+		world.add_child(star)
 		var chest1 = chest.instance()
 		chest1.position.x = self.position.x
 		chest1.position.y = self.position.y

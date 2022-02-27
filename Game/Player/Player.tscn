@@ -712,7 +712,7 @@ script = ExtResource( 4 )
 shape = SubResource( 36 )
 disabled = true
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." groups=["Player"]]
 collision_layer = 9
 collision_mask = 13
 

@@ -30,6 +30,8 @@ var coin     = preload("res://WorldItems/Coin.tscn")
 var treeMan  = preload("res://Enemies/Tree Elemental.tscn")
 
 
+
+
 var chunk = load("res://ChunkDraw.gd").new()
 var current = []
 
@@ -49,6 +51,15 @@ func updateClocks():
 		#print(pauseTimer)
 		pauseTimer -= 1
 
+func getPlayer():
+	return $Player
+	
+func setPlayer(play1):
+	#var curx = player.position.x
+	#var cury = player.position.y
+	player = play1
+	#player.position.x = curx
+	#player.position.y = cury
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -346,6 +357,7 @@ func drawChunk(x, y, tileNo, MazeSize):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	player.inventory = get_tree().get_root().get_node("Global").getPlayer()
 	#print("here!")
 	var curMaze = maze.new()
 	curMaze.printMaze()
