@@ -418,6 +418,7 @@ func drawBossBattle(x, y):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	player.inventory = get_tree().get_root().get_node("Global").getPlayer()
 	#print("here!")
 	var curMaze = maze.new()
 	curMaze.printMaze()

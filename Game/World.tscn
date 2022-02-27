@@ -520,7 +520,7 @@ position = Vector2( -89, 89 )
 script = ExtResource( 9 )
 
 [node name="Background" type="Sprite" parent="."]
-position = Vector2( 71, 146 )
+position = Vector2( 44, 130 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 6400, 6400 )

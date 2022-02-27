@@ -175,16 +175,8 @@ func _ready():
 	self.set_collision_mask_bit(3, true)
 	self.set_collision_mask_bit(2, true)
 	for i in 56:
-		if i == 4:
-			inventory.push_back("bow.red.primary.Bad bow.1.N/A")
-		elif i == 40:
+		if i == 40:
 			inventory.push_back("IronHead.orange.head.Iron Head.1.N/A")
-		elif i == 6:
-			inventory.push_back("GoldHead.yellow.head.Gold Head.2.N/A")		
-		elif i == 7:
-			inventory.push_back("GoldChest.green.chest.Gold Chest.2.N/A")	
-		elif i == 8:
-			inventory.push_back("GoldBoots.blue.boots.Gold Boots.2.N/A")
 		elif i == 46:
 			inventory.push_back("sword.indigo.primary.Bad Sword.1.N/A")
 		elif i == 42:
