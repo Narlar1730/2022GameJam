@@ -15,6 +15,7 @@ onready var paths  = get_node("/root/World/DirtPathTileMap")
 onready var cliffs = get_node("/root/World/DirtCliffTileMap")
 onready var water  = get_node("/root/World/WaterTileSetW2")
 onready var bridge = get_node("/root/World/BridgeTilemap")
+onready var castle = get_node("/root/World/CastleTileMap")
 #var chunk    = preload("res://ChunkDraw.gd")
 var maze     = preload("res://MazeGenerator.gd")
 var batEnemy = preload("res://Enemies/Bat.tscn")
@@ -24,23 +25,29 @@ var rock     = preload("res://World/RockW2.tscn")
 var bush     = preload("res://World/TreeW2.tscn")
 var heartF   = preload("res://UI/FullHeart.tscn")
 var heartH   = preload("res://UI/HalfHeart.tscn")
+var heartB   = preload("res://UI/blankheart.tscn")
 var invent   = preload("res://UI/Inventory.tscn")
 var item     = preload("res://WorldItems/WorldItem.tscn")
 var coin     = preload("res://WorldItems/Coin.tscn")
 var treeMan  = preload("res://Enemies/Tree Elemental.tscn")
-
-
-
+var minimap  = preload("res://UI/Minimap/Minimap.tscn")
+var treeant  = preload("res://Enemies/bossesW2/Deathcrab.tscn")
 
 var chunk = load("res://ChunkDraw.gd").new()
 var current = []
 
+#miniMapStuff
+var miniInc = 0
+var miniCounter = 0
 
 #Clocks
 var pauseTimer = 0
 var fullScreenTimer = 0
 
 func updateClocks():
+	#miniCounter
+	if miniCounter > 0:
+		miniCounter -= 1
 	#FullScreenClock
 	if fullScreenTimer > 0:
 		fullScreenTimer -= 1
@@ -51,15 +58,6 @@ func updateClocks():
 		#print(pauseTimer)
 		pauseTimer -= 1
 
-func getPlayer():
-	return $Player
-	
-func setPlayer(play1):
-	#var curx = player.position.x
-	#var cury = player.position.y
-	player = play1
-	#player.position.x = curx
-	#player.position.y = cury
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -75,19 +73,41 @@ func spawnLoot(x, y):
 		wort.position.y = y
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
-		var int1 = rng.randi_range(0, 1)
+		var int1 = rng.randi_range(0, 6)
 		var itemType = ""
+		#var itemString = ""
+		var statsString = ""
 		var colour = ""
 		if int1 == 0:
-			
-			itemType = "sword"
+			itemType = "BattleAxe"
+			statsString = itemType + ".red.primary." + itemType + ".5.N/A"
+			#itemType = "sword"
+		elif int1 == 1:
+			itemType = "Bow"
+			statsString = itemType + ".red.primary.some " + itemType + ".2.N/A"
+		elif int1 == 2:
+			itemType = "FlamingSword"
+			statsString = itemType + ".red.primary." + itemType + ".6.N/A"
+		elif int1 == 3:
+			itemType = "GoldAxe"
+			statsString = itemType + ".red.primary." + itemType + ".4.N/A"
+		elif int1 == 4:
+			itemType = "GoldDagger"
+			statsString = itemType + ".red.primary." + itemType + ".2.N/A"
+		elif int1 == 5:
+			itemType = "GoldHammer"
+			statsString = itemType + ".red.primary." + itemType + ".6.N/A"
+		elif int1 == 6:
+			itemType = "HolySword"
+			statsString = itemType + ".red.primary." + itemType + ".8.N/A"
 		else:
-			itemType = "bow"
+			itemType = "Mace"
+			statsString = itemType + ".red.primary." + itemType + ".6.N/A"
+			#itemType = "bow"
 		
 		var int2 = rng.randi_range(0, 6)
 		colour = wort.rarSwitch(int2)
 		var stats = str(itemType, ".", colour)
-		var statsString = itemType + ".red.primary.some " + itemType + ".1.N/A"
 		wort.stats = statsString
 		self.add_child(wort)
 	elif spawn < 4:
@@ -155,6 +175,25 @@ func _process(delta):
 	elif fullScreenTimer == 0 and Input.is_action_pressed("fullscreen"):
 		OS.window_fullscreen = false
 		fullScreenTimer = 40
+		
+	#Handle Minimap
+	if Input.is_action_pressed("openMinimap") and miniCounter == 0:
+		var curMini = miniInc % 3
+		if curMini == 0:
+			$Minimap.vis = false
+			$BigMini.vis= true
+		elif curMini == 1:
+			$Minimap.vis = false
+			$BigMini.vis = false
+			pass
+		elif curMini == 2:
+			$Minimap.vis = true
+			$BigMini.vis = false
+			pass
+		miniCounter = 30
+		miniInc += 1
+		
+
 	
 	updateClocks()
 		
@@ -262,7 +301,6 @@ func drawWorldString(string, x, y):
 		# R = rock on path
 			var curTile = string[i+j*20]
 			var curEnem = string[i+j*20+240]
-
 			if curTile == "c":
 				cliffs.set_cell(x*chunkX/2+i/2, y*chunkY/2+j/2, 0)
 			elif curTile == "p":
@@ -350,14 +388,36 @@ func drawChunk(x, y, tileNo, MazeSize):
 	bridge.update_bitmask_region(Vector2(x*chunkX-1, y*chunkY-1), Vector2(x*chunkX+chunkX, y*chunkY+chunkY))
 	water.update_bitmask_region(Vector2(x*chunkX-1, y*chunkY-1), Vector2(x*chunkX+chunkX, y*chunkY+chunkY))
 	paths.update_bitmask_region(Vector2(x*chunkX-1, y*chunkY-1), Vector2(x*chunkX+chunkX, y*chunkY+chunkY))
-	cliffs.update_bitmask_region(Vector2(x*chunkX/2-1, y*chunkY/2-1), Vector2(x*chunkX/2+chunkX/2, y*chunkY/2+chunkY/2))
+	cliffs.update_bitmask_region(Vector2(x*chunkX/2-1, y*chunkY/2-1), Vector2(x*chunkX/2+chunkX/2+1, y*chunkY/2+chunkY/2+1))
 
 	
+func drawBossBattle(x, y):
+	for i in 6:
+		if x < 0:
+			print("HERE!")
+			if i == 2 or 3 == 6:
+				pass
+			else:
+				castle.set_cell(x*chunkX/2+9, y*chunkY/2+i, 0)
+			castle.set_cell(x*chunkX/2, y*chunkY/2+i, 0)
 
+		else:
+			print("HERE2!")
+			if i == 2 or 3 == 6:
+				pass
+			else:
+				castle.set_cell(x*chunkX/2, y*chunkY/2+i, 0)
+			castle.set_cell(x*chunkX/2+9, y*chunkY/2+i, 0)
+
+			
+	castle.update_bitmask_region(Vector2(x*chunkX/2-1, y*chunkY/2-1), Vector2(x*chunkX/2+chunkX/2+1, y*chunkY/2+chunkY/2+1))
+	var boss = treeant.instance()
+	boss.position.x = x*chunkX*tileSize + 8*tileSize+8
+	boss.position.y = y*chunkY*tileSize + 4*tileSize+8
+	self.add_child(boss)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	player.inventory = get_tree().get_root().get_node("Global").getPlayer()
 	#print("here!")
 	var curMaze = maze.new()
 	curMaze.printMaze()
@@ -374,6 +434,8 @@ func _ready():
 				drawChunk(i-5, j-5, curIndex, mazeSize)
 			elif(curTile == 2):
 				drawDeadEnd(i-5, j-5)
+			elif(curTile == 3):
+				drawBossBattle(i-5, j-5)
 			curIndex = curIndex + 1
 			
 	## Draw chunks
@@ -384,6 +446,10 @@ func _ready():
 			#cliffs.set_cell(10+i, 10+j, 0)
 			
 	#Add health
+	for i in player.maxHealth/2:
+		var curBlank = heartB.instance()
+		curBlank.index = i
+		self.add_child(curBlank)
 	for i in player.health/2:
 		var curFull = heartF.instance()
 		var curHalf = heartH.instance()
@@ -391,7 +457,8 @@ func _ready():
 		curHalf.index = i
 		self.add_child(curHalf)
 		self.add_child(curFull)
-		
+	
+	$BigMini.vis = false
 
 
 
