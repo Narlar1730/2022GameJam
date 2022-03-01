@@ -27,29 +27,29 @@ func _process(delta):
 			var colour = ""
 			if int1 == 0:
 				itemType = "BattleAxe"
-				statsString = itemType + ".red.primary." + itemType + ".5.N/A"
+				statsString = itemType + ".red.primary." + itemType + ".5.N/A.axe"
 			#itemType = "sword"
 			elif int1 == 1:
 				itemType = "Bow"
-				statsString = itemType + ".red.primary.some " + itemType + ".2.N/A"
+				statsString = itemType + ".red.primary.some " + itemType + ".2.N/A.bow"
 			elif int1 == 2:
 				itemType = "FlamingSword"
-				statsString = itemType + ".red.primary." + itemType + ".6.N/A"
+				statsString = itemType + ".red.primary." + itemType + ".6.N/A.sword"
 			elif int1 == 3:
 				itemType = "GoldAxe"
-				statsString = itemType + ".red.primary." + itemType + ".4.N/A"
+				statsString = itemType + ".red.primary." + itemType + ".4.N/A.axe"
 			elif int1 == 4:
 				itemType = "GoldDagger"
-				statsString = itemType + ".red.primary." + itemType + ".2.N/A"
+				statsString = itemType + ".red.primary." + itemType + ".2.N/A.sword"
 			elif int1 == 5:
 				itemType = "GoldHammer"
-				statsString = itemType + ".red.primary." + itemType + ".6.N/A"
+				statsString = itemType + ".red.primary." + itemType + ".6.N/A.hammer"
 			elif int1 == 6:
 				itemType = "HolySword"
-				statsString = itemType + ".red.primary." + itemType + ".8.N/A"
+				statsString = itemType + ".red.primary." + itemType + ".8.N/A.sword"
 			else:
 				itemType = "Mace"
-				statsString = itemType + ".red.primary." + itemType + ".6.N/A"
+				statsString = itemType + ".red.primary." + itemType + ".6.N/A.hammer"
 				#itemType = "bow"
 		
 			var int2 = rng.randi_range(0, 6)

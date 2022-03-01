@@ -37,7 +37,8 @@ var money = 0
 enum {
 	MOVE,
 	ROLL,
-	ATTACK
+	ATTACK,
+	BOWATTACK
 }
 
 var state = MOVE
@@ -59,12 +60,21 @@ func updateVistedCells():
 	
 	#print(visitedCells)
 
+func getCurrentEquippedWeapon():
+	var curWeapon = inventory[46]
+	#print(curWeapon)
+	var splitList = curWeapon.split(".")
+
+	var curType = splitList[6]
+	return curType
+	
+
 func getDamage():
 	var out = 0
 	var cur = inventory[46].split(".")
 	#print(cur)
 	var wepDam = int(cur[4])
-	print(wepDam)
+	#print(wepDam)
 	out = damage + wepDam
 	
 	return out
@@ -175,14 +185,16 @@ func _ready():
 	self.set_collision_mask_bit(3, true)
 	self.set_collision_mask_bit(2, true)
 	for i in 56:
-		if i == 40:
-			inventory.push_back("IronHead.orange.head.Iron Head.1.N/A")
+		if i == 0:
+			inventory.push_back("bow.red.primary.Bad Bow.1.N/A.bow")
+		elif i == 40:
+			inventory.push_back("IronHead.orange.head.Iron Head.1.N/A.iron")
 		elif i == 46:
-			inventory.push_back("sword.indigo.primary.Bad Sword.1.N/A")
+			inventory.push_back("sword.indigo.primary.Bad Sword.1.N/A.sword")
 		elif i == 42:
-			inventory.push_back("IronChest.violet.chest.Iron Chest.1.N/A")
+			inventory.push_back("IronChest.violet.chest.Iron Chest.1.N/A.iron")
 		elif i == 44:
-			inventory.push_back("IronBoots.blue.boots.Iron Boots.1.N/A")
+			inventory.push_back("IronBoots.blue.boots.Iron Boots.1.N/A.iron")
 		else:
 			inventory.push_back("")
 	animationTree.active = true
@@ -213,6 +225,9 @@ func _physics_process(delta):
 			
 		ATTACK:
 			attack_state(delta)
+		BOWATTACK:
+			#print("Firing!")
+			bow_attack_state(delta)
 	
 	## Do hit timer
 	handleHits()
@@ -257,26 +272,42 @@ func move_state(delta):
 		input_vector.x = 0
 		input_vector.y = 1
 		input_vector = input_vector.normalized()
-		animationTree.set("parameters/Attack/blend_position", input_vector)
-		state = ATTACK
+		if getCurrentEquippedWeapon() == "bow":
+			animationTree.set("parameters/BowAttack/blend_position", input_vector)
+			state = BOWATTACK
+		else:
+			animationTree.set("parameters/Attack/blend_position", input_vector)
+			state = ATTACK
 	elif Input.is_action_just_pressed("AttackUp"):
 		input_vector.x = 0
 		input_vector.y = -1
 		input_vector = input_vector.normalized()
-		animationTree.set("parameters/Attack/blend_position", input_vector)
-		state = ATTACK
+		if getCurrentEquippedWeapon() == "bow":
+			animationTree.set("parameters/BowAttack/blend_position", input_vector)
+			state = BOWATTACK
+		else:
+			animationTree.set("parameters/Attack/blend_position", input_vector)
+			state = ATTACK
 	elif Input.is_action_just_pressed("AttackRight"):
 		input_vector.x = 1
 		input_vector.y = 0
 		input_vector = input_vector.normalized()
-		animationTree.set("parameters/Attack/blend_position", input_vector)
-		state = ATTACK
+		if getCurrentEquippedWeapon() == "bow":
+			animationTree.set("parameters/BowAttack/blend_position", input_vector)
+			state = BOWATTACK
+		else:
+			animationTree.set("parameters/Attack/blend_position", input_vector)
+			state = ATTACK
 	elif Input.is_action_just_pressed("AttackLeft"):
 		input_vector.x = -1
 		input_vector.y = 0
 		input_vector = input_vector.normalized()
-		animationTree.set("parameters/Attack/blend_position", input_vector)
-		state = ATTACK
+		if getCurrentEquippedWeapon() == "bow":
+			animationTree.set("parameters/BowAttack/blend_position", input_vector)
+			state = BOWATTACK
+		else:
+			animationTree.set("parameters/Attack/blend_position", input_vector)
+			state = ATTACK
 	
 	if Input.is_action_just_pressed("roll"):
 		state = ROLL
@@ -291,7 +322,10 @@ func roll_state(delta):
 	animationState.travel("Roll")
 	move()
 	
-	
+func bow_attack_state(delta):
+	velocity = move_and_slide(velocity)
+	animationState.travel("BowAttack")
+
 func attack_state(delta):
 	#velocity = velocity.move_toward(Vector2.ZERO, FRICTION/2 * delta)
 	velocity = move_and_slide(velocity)
