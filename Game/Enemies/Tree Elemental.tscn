@@ -7,22 +7,6 @@
 radius = 4.5
 height = 5.0
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 1 )
-region = Rect2( 0, 112, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 1 )
-region = Rect2( 16, 112, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 1 )
-region = Rect2( 32, 112, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 1 )
-region = Rect2( 48, 112, 16, 16 )
-
 [sub_resource type="AtlasTexture" id=14]
 atlas = ExtResource( 1 )
 region = Rect2( 256, 240, 16, 16 )
@@ -87,13 +71,24 @@ region = Rect2( 160, 240, 16, 16 )
 atlas = ExtResource( 1 )
 region = Rect2( 176, 240, 16, 16 )
 
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 112, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 1 )
+region = Rect2( 16, 112, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 112, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 112, 16, 16 )
+
 [sub_resource type="SpriteFrames" id=22]
 animations = [ {
-"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
-"loop": true,
-"name": "Idle",
-"speed": 8.0
-}, {
 "frames": [ SubResource( 14 ), SubResource( 15 ), SubResource( 16 ), SubResource( 17 ) ],
 "loop": true,
 "name": "Dead",
@@ -113,6 +108,11 @@ animations = [ {
 "loop": true,
 "name": "Attack",
 "speed": 8.0
+}, {
+"frames": [ SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "Idle",
+"speed": 8.0
 } ]
 
 [node name="Tree Elemental" type="KinematicBody2D"]
@@ -126,7 +126,6 @@ shape = SubResource( 1 )
 position = Vector2( 0.5, -0.5 )
 frames = SubResource( 22 )
 animation = "Idle"
-frame = 1
 playing = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]

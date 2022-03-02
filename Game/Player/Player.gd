@@ -2,10 +2,15 @@ extends KinematicBody2D
 
 const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
 
-var item = preload("res://items/Item.tscn")
+var item  = preload("res://items/Item.tscn")
+var arrow = preload("res://Effects/Arrow.tscn") 
 
 onready var world  = get_node("/root/World/")
 
+#Global Variables
+var intMax = 9223372036854775807
+var intMin = -9223372036854775808
+#Player Declarations
 export var ACCELERATION = 500
 export var MAX_SPEED    = 80
 export var ROLL_SPEED   = 120
@@ -18,6 +23,8 @@ var immunity : float    = 60
 var damage              = 4
 var luck                = 0
 var resistance          = 0
+var shotSpeed           = 5
+var shotcounter         = 0
 
 #Handle Iventory
 var inventory = []
@@ -222,6 +229,9 @@ func getInventory():
 
 
 func _physics_process(delta):
+	if shotcounter > 0:
+		shotcounter -= 1
+	
 	if Input.is_action_just_pressed("AttackDown"):
 		if !pressedAttacks.has("s"):
 			pressedAttacks.push_back("s")
@@ -489,16 +499,78 @@ func roll_animation_finished():
 	self.set_collision_mask_bit(4, true)
 	self.set_collision_mask_bit(3, true)
 	self.set_collision_mask_bit(2, true)
+
+func shoot(xBul, yBul):
+	if shotcounter == 0:
+		shotcounter = 4
+		var b = arrow.instance()
+
+		var vel = Vector2.ZERO
+		vel.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+		vel.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+		vel = vel.normalized()
+		
+
+		var tempX : float = xBul*shotSpeed
+		var tempY : float = yBul*shotSpeed
+		var theta : float = 0
+		
+		if tempX != 0 and tempY != 0:
+			tempX = tempX / sqrt(2)
+			tempY = tempY / sqrt(2)
+			
+		tempX = tempX + vel.x
+		tempY = tempY + vel.y
+		
+		if tempX != 0:
+			if tempX > 0:
+				theta = atan(tempY/tempX)
+			else:
+				theta = PI + atan(tempY/tempX)
+		elif tempY > 0:
+			theta = atan(intMax)
+		elif tempY < 0:
+			theta = atan(-intMax)
+			
+		#theta = (theta*PI/180)
+		
+		#print(theta)
+		b.rotate(theta)
+			
+		b.xVel = tempX*30
+		b.yVel = tempY*30
+		b.position.x = self.position.x
+		b.position.y = self.position.y-5
+		owner.add_child(b)
 	
+	#shootTimer = firerate
+
 func attack_animation_finished():
 	if attackButtonDown:
 		if getCurrentEquippedWeapon() == "bow":
-			#animationTree.set("parameters/BowAttack/blend_position", input_vector)
-			#state = BOWATTACK
+			var shooting : bool = false
+			var xBul : int = 0
+			var yBul : int = 0
+	
+			if pressedAttacks.has("s"):
+				shooting = true
+				yBul += 1
+			if pressedAttacks.has("w"):
+				shooting = true
+				yBul -= 1
+			if pressedAttacks.has("a"):
+				shooting = true
+				xBul -= 1
+			if pressedAttacks.has("d"):
+				xBul += 1
+				shooting = true
+	
+			if shooting:
+				shoot(xBul, yBul)
+
 			pass
 		else:
-			#animationTree.set("parameters/Attack/blend_position", input_vector)
-			#state = ATTACK
+
 			pass
 	state = MOVE
 

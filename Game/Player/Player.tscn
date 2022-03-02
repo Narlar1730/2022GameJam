@@ -1444,8 +1444,7 @@ shape = SubResource( 36 )
 disabled = true
 
 [node name="Area2D" type="Area2D" parent="." groups=["Player"]]
-collision_layer = 9
-collision_mask = 13
+collision_mask = 5
 
 [node name="HitBox" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 0, -6 )

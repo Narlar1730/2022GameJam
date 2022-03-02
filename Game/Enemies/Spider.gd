@@ -101,3 +101,5 @@ func _on_Hurtbox_area_entered(area):
 		hitCounter = 18
 		var enemyHitSound = EnemyHitSound.instance()
 		get_tree().current_scene.add_child(enemyHitSound)
+	if area.is_in_group("Arrow"):
+		area.owner.kill()

@@ -161,4 +161,5 @@ func _on_Area2D_area_entered(area):
 		hitCounter = 18
 		var enemyHitSound = EnemyHitSound.instance()
 		get_tree().current_scene.add_child(enemyHitSound)
-	pass # Replace with function body.
+	if area.is_in_group("Arrow"):
+		area.owner.kill()
