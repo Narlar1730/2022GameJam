@@ -34,11 +34,17 @@ var curCell      = Vector2()
 #GIMME DAT SHMONEY $$$
 var money = 0
 
+#Variable So we don't have to worry about pressing every time we want to attack
+var attackButtonDown = false
+var pressedAttacks = []
+
 enum {
 	MOVE,
 	ROLL,
 	ATTACK,
-	BOWATTACK
+	BOWATTACK,
+	BOWMOVE,
+	ATTACKMOVE
 }
 
 var state = MOVE
@@ -216,6 +222,31 @@ func getInventory():
 
 
 func _physics_process(delta):
+	if Input.is_action_just_pressed("AttackDown"):
+		if !pressedAttacks.has("s"):
+			pressedAttacks.push_back("s")
+		attackButtonDown = true
+	if Input.is_action_just_pressed("AttackUp"):
+		if !pressedAttacks.has("w"):
+			pressedAttacks.push_back("w")
+		attackButtonDown = true
+	if Input.is_action_just_pressed("AttackRight"):
+		if !pressedAttacks.has("d"):
+			pressedAttacks.push_back("d")
+		attackButtonDown = true
+	if Input.is_action_just_pressed("AttackLeft"):
+		if !pressedAttacks.has("a"):
+			pressedAttacks.push_back("a")
+		attackButtonDown = true
+	
+	if Input.is_action_just_released("AttackDown"):
+		pressedAttacks.erase("s")
+	if Input.is_action_just_released("AttackUp"):
+		pressedAttacks.erase("w")
+	if Input.is_action_just_released("AttackRight"):
+		pressedAttacks.erase("d")
+	if Input.is_action_just_released("AttackLeft"):
+		pressedAttacks.erase("a")
 	match state:
 		MOVE:
 			move_state(delta)
@@ -228,7 +259,10 @@ func _physics_process(delta):
 		BOWATTACK:
 			#print("Firing!")
 			bow_attack_state(delta)
-	
+		ATTACKMOVE:
+			attack_move_state(delta)
+		BOWMOVE:
+			bow_move_state(delta)
 	## Do hit timer
 	handleHits()
 	
@@ -245,6 +279,13 @@ func _physics_process(delta):
 		print("Game Over")
 		get_tree().quit()
 
+
+func bowMove(delta):
+	var input_vector = Vector2.ZERO
+	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	input_vector = input_vector.normalized() #Makes it move at the right speed diagonally
+	velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 
 func move_state(delta):
 	var input_vector = Vector2.ZERO
@@ -267,50 +308,143 @@ func move_state(delta):
 		velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	
 	move()
+	#input_vector.x = 0
+	#input_vector.y = 0
 	
 	if Input.is_action_just_pressed("AttackDown"):
-		input_vector.x = 0
-		input_vector.y = 1
-		input_vector = input_vector.normalized()
-		if getCurrentEquippedWeapon() == "bow":
-			animationTree.set("parameters/BowAttack/blend_position", input_vector)
-			state = BOWATTACK
+		if !pressedAttacks.has("s"):
+			pressedAttacks.push_back("s")
+		attackButtonDown = true
+	if Input.is_action_just_pressed("AttackUp"):
+		if !pressedAttacks.has("w"):
+			pressedAttacks.push_back("w")
+		attackButtonDown = true
+	if Input.is_action_just_pressed("AttackRight"):
+		if !pressedAttacks.has("d"):
+			pressedAttacks.push_back("d")
+		attackButtonDown = true
+	if Input.is_action_just_pressed("AttackLeft"):
+		if !pressedAttacks.has("a"):
+			pressedAttacks.push_back("a")
+		attackButtonDown = true
+
+
+	#print(pressedAttacks)
+	
+	if Input.is_action_just_released("AttackDown"):
+		pressedAttacks.erase("s")
+	if Input.is_action_just_released("AttackUp"):
+		pressedAttacks.erase("w")
+	if Input.is_action_just_released("AttackRight"):
+		pressedAttacks.erase("d")
+	if Input.is_action_just_released("AttackLeft"):
+		pressedAttacks.erase("a")
+	
+	#print(pressedAttacks)
+	
+	if pressedAttacks.size() == 0:
+		attackButtonDown = false
+	else:
+		var vec1 = Vector2(0, 0)
+		if pressedAttacks.has("s"):
+			vec1.y += 1
+		if pressedAttacks.has("w"):
+			vec1.y -= 1
+		if pressedAttacks.has("d"):
+			vec1.x += 1
+		if pressedAttacks.has("a"):
+			vec1.x -= 1
+		vec1 = vec1.normalized()	
+		if input_vector != Vector2.ZERO:
+			input_vector = Vector2.ZERO
+			if pressedAttacks.has("s"):
+
+				#input_vector.x += 0
+				#input_vector.y += 1
+				input_vector = input_vector.normalized()
+				if getCurrentEquippedWeapon() == "bow":
+					animationTree.set("parameters/MoveBowAttack/blend_position", vec1)
+					state = BOWMOVE
+				else:
+					animationTree.set("parameters/MoveAttack/blend_position", vec1)
+					state = ATTACKMOVE
+			elif pressedAttacks.has("w"):
+				#input_vector.x += 0
+				#input_vector.y += -1
+				input_vector = input_vector.normalized()
+				if getCurrentEquippedWeapon() == "bow":
+					animationTree.set("parameters/MoveBowAttack/blend_position", vec1)
+					state = BOWMOVE
+				else:
+					animationTree.set("parameters/MoveAttack/blend_position", vec1)
+					state = ATTACKMOVE
+			elif pressedAttacks.has("d"):
+				#input_vector.x += 1
+				#input_vector.y += 0
+				input_vector = input_vector.normalized()
+				if getCurrentEquippedWeapon() == "bow":
+					animationTree.set("parameters/MoveBowAttack/blend_position", vec1)
+					state = BOWMOVE
+				else:
+					animationTree.set("parameters/MoveAttack/blend_position", vec1)
+					state = ATTACKMOVE
+			elif pressedAttacks.has("a"):
+				#input_vector.x += -1
+				#input_vector.y += 0
+				input_vector = input_vector.normalized()
+				if getCurrentEquippedWeapon() == "bow":
+					animationTree.set("parameters/MoveBowAttack/blend_position", vec1)
+					state = BOWMOVE
+				else:
+					animationTree.set("parameters/MoveAttack/blend_position", vec1)
+					state = ATTACKMOVE
 		else:
-			animationTree.set("parameters/Attack/blend_position", input_vector)
-			state = ATTACK
-	elif Input.is_action_just_pressed("AttackUp"):
-		input_vector.x = 0
-		input_vector.y = -1
-		input_vector = input_vector.normalized()
-		if getCurrentEquippedWeapon() == "bow":
-			animationTree.set("parameters/BowAttack/blend_position", input_vector)
-			state = BOWATTACK
-		else:
-			animationTree.set("parameters/Attack/blend_position", input_vector)
-			state = ATTACK
-	elif Input.is_action_just_pressed("AttackRight"):
-		input_vector.x = 1
-		input_vector.y = 0
-		input_vector = input_vector.normalized()
-		if getCurrentEquippedWeapon() == "bow":
-			animationTree.set("parameters/BowAttack/blend_position", input_vector)
-			state = BOWATTACK
-		else:
-			animationTree.set("parameters/Attack/blend_position", input_vector)
-			state = ATTACK
-	elif Input.is_action_just_pressed("AttackLeft"):
-		input_vector.x = -1
-		input_vector.y = 0
-		input_vector = input_vector.normalized()
-		if getCurrentEquippedWeapon() == "bow":
-			animationTree.set("parameters/BowAttack/blend_position", input_vector)
-			state = BOWATTACK
-		else:
-			animationTree.set("parameters/Attack/blend_position", input_vector)
-			state = ATTACK
+			if pressedAttacks.has("s"):
+
+				input_vector.x += 0
+				input_vector.y += 1
+				input_vector = input_vector.normalized()
+				if getCurrentEquippedWeapon() == "bow":
+					animationTree.set("parameters/BowAttack/blend_position", vec1)
+					state = BOWATTACK
+				else:
+					animationTree.set("parameters/Attack/blend_position", vec1)
+					state = ATTACK
+			elif pressedAttacks.has("w"):
+				input_vector.x += 0
+				input_vector.y += -1
+				input_vector = input_vector.normalized()
+				if getCurrentEquippedWeapon() == "bow":
+					animationTree.set("parameters/BowAttack/blend_position", vec1)
+					state = BOWATTACK
+				else:
+					animationTree.set("parameters/Attack/blend_position", vec1)
+					state = ATTACK
+			elif pressedAttacks.has("d"):
+				input_vector.x += 1
+				input_vector.y += 0
+				input_vector = input_vector.normalized()
+				if getCurrentEquippedWeapon() == "bow":
+					animationTree.set("parameters/BowAttack/blend_position", vec1)
+					state = BOWATTACK
+				else:
+					animationTree.set("parameters/Attack/blend_position", vec1)
+					state = ATTACK
+			elif pressedAttacks.has("a"):
+				input_vector.x += -1
+				input_vector.y += 0
+				input_vector = input_vector.normalized()
+				if getCurrentEquippedWeapon() == "bow":
+					animationTree.set("parameters/BowAttack/blend_position", vec1)
+					state = BOWATTACK
+				else:
+					animationTree.set("parameters/Attack/blend_position", vec1)
+					state = ATTACK
 	
 	if Input.is_action_just_pressed("roll"):
 		state = ROLL
+		
+	
 	
 func roll_state(delta):
 	self.set_collision_mask_bit(5, true)
@@ -323,14 +457,26 @@ func roll_state(delta):
 	move()
 	
 func bow_attack_state(delta):
+	bowMove(delta)
 	velocity = move_and_slide(velocity)
 	animationState.travel("BowAttack")
+	
+func bow_move_state(delta):
+	bowMove(delta)
+	velocity = move_and_slide(velocity)
+	animationState.travel("MoveBowAttack")
 
 func attack_state(delta):
 	#velocity = velocity.move_toward(Vector2.ZERO, FRICTION/2 * delta)
+	bowMove(delta)
 	velocity = move_and_slide(velocity)
 	animationState.travel("Attack")
 	#move()
+	
+func attack_move_state(delta):
+	bowMove(delta)
+	velocity = move_and_slide(velocity)
+	animationState.travel("MoveAttack")
 	
 func move():
 	velocity = move_and_slide(velocity)
@@ -345,6 +491,15 @@ func roll_animation_finished():
 	self.set_collision_mask_bit(2, true)
 	
 func attack_animation_finished():
+	if attackButtonDown:
+		if getCurrentEquippedWeapon() == "bow":
+			#animationTree.set("parameters/BowAttack/blend_position", input_vector)
+			#state = BOWATTACK
+			pass
+		else:
+			#animationTree.set("parameters/Attack/blend_position", input_vector)
+			#state = ATTACK
+			pass
 	state = MOVE
 
 
