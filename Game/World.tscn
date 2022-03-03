@@ -640,4 +640,4 @@ autoplay = true
 position = Vector2( 235, 81 )
 
 [node name="QueenBat" parent="." instance=ExtResource( 17 )]
-position = Vector2( 166, -116 )
+position = Vector2( 203, 44 )
