@@ -8,8 +8,8 @@ var arrow = preload("res://Effects/Arrow.tscn")
 onready var world  = get_node("/root/World/")
 
 #Global Variables
-var intMax = 9223372036854775807
-var intMin = -9223372036854775808
+var intMax = 9223372036854775806
+var intMin = -9223372036854775807
 #Player Declarations
 export var ACCELERATION = 500
 export var MAX_SPEED    = 80
@@ -20,7 +20,7 @@ var health              = 10
 var maxHealth           = 10
 var enemies             = 0
 var immunity : float    = 60
-var damage              = 4
+var damage              = 2
 var luck                = 0
 var resistance          = 0
 var shotSpeed           = 5
@@ -89,7 +89,7 @@ func getDamage():
 	var wepDam = int(cur[4])
 	#print(wepDam)
 	out = damage + wepDam
-	
+	print(str(out))
 	return out
 
 func updateClickCursor(val):
