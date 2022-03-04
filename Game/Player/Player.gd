@@ -193,6 +193,7 @@ func swapInventory(pos1, pos2):
 	world.reloadInventory()
 
 func _ready():
+	$Cape.modulate = Color("0000FF")
 	self.set_collision_mask_bit(5, false)
 	self.set_collision_layer_bit(5, false)
 	self.set_collision_mask_bit(4, false)
@@ -230,6 +231,7 @@ func getInventory():
 
 
 func _physics_process(delta):
+	#$Cape.frame = $Sprite.frame
 	if shotcounter > 0:
 		shotcounter -= 1
 	
