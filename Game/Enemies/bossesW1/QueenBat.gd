@@ -5,9 +5,12 @@ onready var player = get_node("/root/World/YFirst/Player")
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
-var maxHealth = 90
-var health    = 90
+var maxHealth = 150
+var health    = 150
 
+
+var hitTimer = 0.0
+var damTimer = 30.0
 
 var dir    : Vector2  = Vector2()
 var speed  : int      = 70
@@ -15,6 +18,11 @@ var curState : String = ""
 var motion
 
 func _process(delta):
+	if hitTimer > 0:
+		hitTimer -= 1
+		
+	self.modulate = Color(1.0, (damTimer-hitTimer)/damTimer , (damTimer-hitTimer)/damTimer, 1.0)
+	
 	var healthWidth = int(120.0 * (float(health)/maxHealth))
 
 	$Healthbar.polygon = [Vector2(-60, 120), Vector2(-60+healthWidth, 120), Vector2(-60+healthWidth, 125), Vector2(-60, 125)]
@@ -110,6 +118,7 @@ func _ready():
 #	pass
 
 func doDamage():
+	hitTimer = damTimer
 	health = health - player.getDamage()
 
 func _on_Area2D_area_entered(area):
