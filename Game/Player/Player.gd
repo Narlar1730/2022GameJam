@@ -193,7 +193,7 @@ func swapInventory(pos1, pos2):
 	world.reloadInventory()
 
 func _ready():
-	$Cape.modulate = Color("0000FF")
+	$Cape.modulate = Color("666666")
 	self.set_collision_mask_bit(5, false)
 	self.set_collision_layer_bit(5, false)
 	self.set_collision_mask_bit(4, false)

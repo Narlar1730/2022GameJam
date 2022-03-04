@@ -524,18 +524,18 @@ func drawDLChunk():
 
 #		#                   MM
 		output += "tttttttppppptttttttt"
-		output += "ttttttpptttppttttttt"
-		output += "tttttpptttttpptttttt"
-		output += "ttttppttttttpppttttt"
-		output += "tttpppttttttttpptttt"
-		output += "ppppppttttttttpppttt"
+		output += "ttttttpppppppptttttt"
+		output += "tttttpppttttpppttttt"
+		output += "ttttppptttttpppptttt"
+		output += "tttpppptttttttpppttt"
+		output += "ppppppttttttttpppptt"
 #		#half               MM
-		output += "pppptttttttttttppttt"
-		output += "ttttttttttttttttpptt"
-		output += "tttttttttttttppppttt"
-		output += "tttttttttttppptppttt"
-		output += "ttgtttttttpppttttttg"
-		output += "teeerrtttpptttttteee"
+		output += "pppptttttttttttppptt"
+		output += "tttttttttttttttppppt"
+		output += "tttttttttttppppppptt"
+		output += "ttttttttttpppptppptt"
+		output += "ttgttttttpppptttpppg"
+		output += "teeerrttpppttttttppp"
 
 			#Enemies
 			# s = spider
