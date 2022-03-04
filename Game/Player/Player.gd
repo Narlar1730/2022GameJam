@@ -101,10 +101,11 @@ func updateCursor(val):
 		curCursor = val
 
 func doDamage(dam):
-	health = health - dam
-	hitTimer = immunity
-	var playerHurtSound = PlayerHurtSound.instance()
-	get_tree().current_scene.add_child(playerHurtSound)
+	if hitTimer == 0:
+		health = health - dam
+		hitTimer = immunity
+		var playerHurtSound = PlayerHurtSound.instance()
+		get_tree().current_scene.add_child(playerHurtSound)
 
 func handleHits():
 	if hitTimer < 0:
@@ -574,8 +575,14 @@ func attack_animation_finished():
 			pass
 	state = MOVE
 
+func addEnemy():
+	enemies += 1
+	
+func subEnemy():
+	enemies -= 1
 
 func _on_Area2D_body_entered(body):
+	print("Entered")
 	if body.is_in_group("Enemy"):
 		#hitTimer = immunity
 		enemies += 1

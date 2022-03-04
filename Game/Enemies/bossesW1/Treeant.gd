@@ -120,7 +120,7 @@ func _process(delta):
 				get_tree().get_root().get_node("/root/World/YFirst").add_child(apple1)
 			$AnimatedSprite.animation = "Attack2"
 		var healthWidth = int(40.0 * (float(health)/startHealth))
-		print(healthWidth)
+		#print(healthWidth)
 
 		#$HealthBox.position.x = player.position.x/3 - 95
 		#$HealthBox.position.y = player.position.y/3 + 45
