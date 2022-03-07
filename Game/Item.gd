@@ -34,7 +34,7 @@ func _process(delta):
 		self.position.y = 10 
 
 
-func setSprite(sprite):
+func setSprite(sprite, colour):
 	#print(sprite)
 	if sprite == "sword":
 		$Sprite.texture = load("res://items/Sword.png")
@@ -64,6 +64,12 @@ func setSprite(sprite):
 		$Sprite.texture = load("res://items/GoldHammer.png")
 	elif sprite == "HolySword":
 		$Sprite.texture = load("res://items/HolySword.png")
+	elif sprite == "Cape":
+		$Sprite.texture = load("res://items/Armour/Cape.png")
+		#var colour = player.inventory[index]
+		#var all = colour.split(".")
+		#var curColour = all[7]
+		$Sprite.modulate = Color(colour)
 # Called when the node enters the scene tree for the first time.
 
 func _ready():

@@ -32,6 +32,7 @@ var coin     = preload("res://WorldItems/Coin.tscn")
 var treeMan  = preload("res://Enemies/Tree Elemental.tscn")
 var minimap  = preload("res://UI/Minimap/Minimap.tscn")
 var treeant  = preload("res://Enemies/bossesW1/Treeant.tscn")
+var QBat     = preload("res://Enemies/bossesW1/QueenBat.tscn")
 
 var chunk = load("res://ChunkDraw.gd").new()
 var current = []
@@ -80,29 +81,29 @@ func spawnLoot(x, y):
 		var colour = ""
 		if int1 == 0:
 			itemType = "BattleAxe"
-			statsString = itemType + ".red.primary." + itemType + ".5.N/A.axe"
+			statsString = itemType + ".red.primary." + itemType + ".5.N/A.axe.AAAAAA"
 			#itemType = "sword"
 		elif int1 == 1:
 			itemType = "Bow"
-			statsString = itemType + ".red.primary.some " + itemType + ".2.N/A.bow"
+			statsString = itemType + ".red.primary.some " + itemType + ".2.N/A.bow.AAAAAA"
 		elif int1 == 2:
 			itemType = "FlamingSword"
-			statsString = itemType + ".red.primary." + itemType + ".6.N/A.sword"
+			statsString = itemType + ".red.primary." + itemType + ".6.N/A.sword.AAAAAA"
 		elif int1 == 3:
 			itemType = "GoldAxe"
-			statsString = itemType + ".red.primary." + itemType + ".4.N/A.axe"
+			statsString = itemType + ".red.primary." + itemType + ".4.N/A.axe.AAAAAA"
 		elif int1 == 4:
 			itemType = "GoldDagger"
-			statsString = itemType + ".red.primary." + itemType + ".2.N/A.sword"
+			statsString = itemType + ".red.primary." + itemType + ".2.N/A.sword.AAAAAA"
 		elif int1 == 5:
 			itemType = "GoldHammer"
-			statsString = itemType + ".red.primary." + itemType + ".6.N/A.hammer"
+			statsString = itemType + ".red.primary." + itemType + ".6.N/A.hammer.AAAAAA"
 		elif int1 == 6:
 			itemType = "HolySword"
-			statsString = itemType + ".red.primary." + itemType + ".8.N/A.sword"
+			statsString = itemType + ".red.primary." + itemType + ".8.N/A.sword.AAAAAA"
 		else:
 			itemType = "Mace"
-			statsString = itemType + ".red.primary." + itemType + ".6.N/A.hammer"
+			statsString = itemType + ".red.primary." + itemType + ".6.N/A.hammer.AAAAAA"
 			#itemType = "bow"
 		
 		var int2 = rng.randi_range(0, 6)
@@ -396,7 +397,6 @@ func drawChunk(x, y, tileNo, MazeSize):
 func drawBossBattle(x, y):
 	for i in 6:
 		if x < 0:
-			print("HERE!")
 			if i == 2 or 3 == 6:
 				pass
 			else:
@@ -404,7 +404,6 @@ func drawBossBattle(x, y):
 			castle.set_cell(x*chunkX/2, y*chunkY/2+i, 0)
 
 		else:
-			print("HERE2!")
 			if i == 2 or 3 == 6:
 				pass
 			else:
@@ -413,10 +412,21 @@ func drawBossBattle(x, y):
 
 			
 	castle.update_bitmask_region(Vector2(x*chunkX/2-1, y*chunkY/2-1), Vector2(x*chunkX/2+chunkX/2+1, y*chunkY/2+chunkY/2+1))
-	var boss = treeant.instance()
-	boss.position.x = x*chunkX*tileSize + 8*tileSize+8
-	boss.position.y = y*chunkY*tileSize + 4*tileSize+8
-	self.add_child(boss)
+
+	var rng = RandomNumberGenerator.new()
+	rng.randomize()
+	var int1 = rng.randi_range(0, 1)
+	
+	if int1 == 0:
+		var boss = QBat.instance()
+		boss.position.x = x*chunkX*tileSize + 8*tileSize+8
+		boss.position.y = y*chunkY*tileSize + 4*tileSize+8
+		self.add_child(boss)
+	else:
+		var boss = treeant.instance()
+		boss.position.x = x*chunkX*tileSize + 8*tileSize+8
+		boss.position.y = y*chunkY*tileSize + 4*tileSize+8
+		self.add_child(boss)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

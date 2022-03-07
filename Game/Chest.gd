@@ -9,6 +9,7 @@ var health = 1
 # var a = 2
 # var b = "text"
 
+
 func _process(delta):
 	if health < 0:
 		var howMany = RandomNumberGenerator.new()
@@ -20,37 +21,48 @@ func _process(delta):
 			wort.position.y = self.position.y + i*6
 			var rng = RandomNumberGenerator.new()
 			rng.randomize()
-			var int1 = rng.randi_range(0, 6)
+			var int1 = rng.randi_range(0, 20)
 			var itemType = ""
 			#var itemString = ""
 			var statsString = ""
 			var colour = ""
+			# "ITEM.RAR.TYPE.NAME.DAM/PROT.MAG.TYPE.COLOUR"
+
 			if int1 == 0:
 				itemType = "BattleAxe"
-				statsString = itemType + ".red.primary." + itemType + ".5.N/A.axe"
+				statsString = itemType + ".red.primary." + itemType + ".5.N/A.axe.CC1111"
 			#itemType = "sword"
 			elif int1 == 1:
 				itemType = "Bow"
-				statsString = itemType + ".red.primary.some " + itemType + ".2.N/A.bow"
+				statsString = itemType + ".red.primary.some " + itemType + ".2.N/A.bow.CC1111"
 			elif int1 == 2:
 				itemType = "FlamingSword"
-				statsString = itemType + ".red.primary." + itemType + ".6.N/A.sword"
+				statsString = itemType + ".red.primary." + itemType + ".6.N/A.sword.CC1111"
 			elif int1 == 3:
 				itemType = "GoldAxe"
-				statsString = itemType + ".red.primary." + itemType + ".4.N/A.axe"
+				statsString = itemType + ".red.primary." + itemType + ".4.N/A.axe.CC1111"
 			elif int1 == 4:
 				itemType = "GoldDagger"
-				statsString = itemType + ".red.primary." + itemType + ".2.N/A.sword"
+				statsString = itemType + ".red.primary." + itemType + ".2.N/A.sword.CC1111"
 			elif int1 == 5:
 				itemType = "GoldHammer"
-				statsString = itemType + ".red.primary." + itemType + ".6.N/A.hammer"
+				statsString = itemType + ".red.primary." + itemType + ".6.N/A.hammer.CC1111"
 			elif int1 == 6:
 				itemType = "HolySword"
-				statsString = itemType + ".red.primary." + itemType + ".8.N/A.sword"
-			else:
+				statsString = itemType + ".red.primary." + itemType + ".8.N/A.sword.CC1111"
+			elif int1 == 7:
 				itemType = "Mace"
-				statsString = itemType + ".red.primary." + itemType + ".6.N/A.hammer"
+				statsString = itemType + ".red.primary." + itemType + ".6.N/A.hammer.CC1111"
 				#itemType = "bow"
+			else:
+				var r = float(rng.randi_range(0, 255))/255
+				var g = float(rng.randi_range(0, 255))/255
+				var b = float(rng.randi_range(0, 255))/255
+				var c = Color(r, g, b)
+				print(c.to_html())
+				itemType = "Cape"
+				statsString = itemType + ".red.cape.some " + itemType + ".2.N/A.Cape." + c.to_html()
+				print(statsString)
 		
 			var int2 = rng.randi_range(0, 6)
 			colour = wort.rarSwitch(int2)

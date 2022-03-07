@@ -725,7 +725,7 @@ invert_enable = true
 invert_border = 3.0
 polygon = PoolVector2Array( -60, 120, 60, 120, 60, 125, -60, 125 )
 
-[node name="Healthbar" type="Polygon2D" parent="."]
+[node name="Healthbar" type="Polygon2D" parent="Outline"]
 color = Color( 1, 0, 0, 1 )
 polygon = PoolVector2Array( -60, 120, 60, 120, 60, 125, -60, 125 )
 

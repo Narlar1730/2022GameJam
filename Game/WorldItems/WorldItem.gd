@@ -38,6 +38,11 @@ func setRarity(rar):
 	elif rar == "rainbow":
 		$Blur.modulate = Color("0000FF")	
 
+func getColour():
+	var all = stats.split(".")
+	var out = all[7]
+	return out
+
 func getItem():
 	var all = stats.split(".")
 	var out = all[0]
@@ -72,6 +77,9 @@ func setSprite(sprite):
 		$Item.texture = load("res://items/GoldHammer.png")
 	elif sprite == "HolySword":
 		$Item.texture = load("res://items/HolySword.png")
+	elif sprite == "Cape":
+		$Item.texture = load("res://items/Armour/Cape.png")
+		$Item.modulate = Color(getColour())
 
 func rarSwitch(inc):
 	var out = ""

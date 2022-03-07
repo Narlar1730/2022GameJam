@@ -74,7 +74,7 @@ func updateVistedCells():
 	#print(visitedCells)
 
 func getCurrentEquippedWeapon():
-	var curWeapon = inventory[46]
+	var curWeapon = inventory[50]
 	#print(curWeapon)
 	var splitList = curWeapon.split(".")
 
@@ -84,7 +84,7 @@ func getCurrentEquippedWeapon():
 
 func getDamage():
 	var out = 0
-	var cur = inventory[46].split(".")
+	var cur = inventory[50].split(".")
 	#print(cur)
 	var wepDam = int(cur[4])
 	#print(wepDam)
@@ -136,7 +136,9 @@ func getItemType(itemToType):
 	return curItem	
 	
 func swapInventory(pos1, pos2):
+	var equipped = false
 	if pos1 == 40 or pos2 == 40:
+		equipped = true
 		var curType = ""
 		if pos1 != 40:
 			curType = getItemType(inventory[pos1])
@@ -149,8 +151,23 @@ func swapInventory(pos1, pos2):
 			inventory[pos1] = cur2
 			inventory[pos2] = cur1
 	elif pos1 == 42 or pos2 == 42:
+		equipped = true
 		var curType = ""
 		if pos1 != 42:
+			curType = getItemType(inventory[pos1])
+		else:
+			curType = getItemType(inventory[pos2])
+		if curType == "cape":
+			var cur1 = inventory[pos1]
+			var cur2 = inventory[pos2]
+	
+			inventory[pos1] = cur2
+			inventory[pos2] = cur1	
+		
+	elif pos1 == 44 or pos2 == 44:
+		equipped = true
+		var curType = ""
+		if pos1 != 44:
 			curType = getItemType(inventory[pos1])
 		else:
 			curType = getItemType(inventory[pos2])
@@ -159,10 +176,24 @@ func swapInventory(pos1, pos2):
 			var cur2 = inventory[pos2]
 	
 			inventory[pos1] = cur2
-			inventory[pos2] = cur1	
-	elif pos1 == 44 or pos2 == 44:
+			inventory[pos2] = cur1
+	elif pos1 == 46 or pos2 == 46:
+		equipped = true
 		var curType = ""
-		if pos1 != 44:
+		if pos1 != 42:
+			curType = getItemType(inventory[pos1])
+		else:
+			curType = getItemType(inventory[pos2])
+		if curType == "pants":
+			var cur1 = inventory[pos1]
+			var cur2 = inventory[pos2]
+	
+			inventory[pos1] = cur2
+			inventory[pos2] = cur1	
+	elif pos1 == 48 or pos2 == 48:
+		equipped = true
+		var curType = ""
+		if pos1 != 48:
 			curType = getItemType(inventory[pos1])
 		else:
 			curType = getItemType(inventory[pos2])
@@ -172,9 +203,10 @@ func swapInventory(pos1, pos2):
 	
 			inventory[pos1] = cur2
 			inventory[pos2] = cur1
-	elif pos1 == 46 or pos2 == 46:
+	elif pos1 == 50 or pos2 == 50:
+		equipped = true
 		var curType = ""
-		if pos1 != 46:
+		if pos1 != 50:
 			curType = getItemType(inventory[pos1])
 		else:
 			curType = getItemType(inventory[pos2])
@@ -190,10 +222,19 @@ func swapInventory(pos1, pos2):
 	
 		inventory[pos1] = cur2
 		inventory[pos2] = cur1
+		
+	if equipped:
+		var colour = inventory[42]
+		var all = colour.split(".")
+		var curColour = all[7]
+		$Cape.modulate = Color(curColour)
+		#$Cape.modulate = 
 	world.reloadInventory()
 
 func _ready():
-	$Cape.modulate = Color("666666")
+	#$Cape.visible = false
+	#$Cape.modulate = Color("FFC0CB")
+	$Cape.modulate = Color("444444")
 	self.set_collision_mask_bit(5, false)
 	self.set_collision_layer_bit(5, false)
 	self.set_collision_mask_bit(4, false)
@@ -201,15 +242,21 @@ func _ready():
 	self.set_collision_mask_bit(2, true)
 	for i in 56:
 		if i == 0:
-			inventory.push_back("bow.red.primary.Bad Bow.1.N/A.bow")
+			inventory.push_back("bow.red.primary.Bad Bow.1.N/A.bow.AAAAAA")
 		elif i == 40:
-			inventory.push_back("IronHead.orange.head.Iron Head.1.N/A.iron")
-		elif i == 46:
-			inventory.push_back("sword.indigo.primary.Bad Sword.1.N/A.sword")
+			inventory.push_back("IronHead.orange.head.Iron Head.1.N/A.iron.AAAAAA")
 		elif i == 42:
-			inventory.push_back("IronChest.violet.chest.Iron Chest.1.N/A.iron")
+			inventory.push_back("Cape.red.cape.A cape.1.N/A.cloth.AAAAAA")
+			var colour = inventory[42]
+			var all = colour.split(".")
+			var curColour = all[7]
+			$Cape.modulate = Color(curColour)
+		elif i == 50:
+			inventory.push_back("sword.indigo.primary.Bad Sword.1.N/A.sword.AAAAAA")
 		elif i == 44:
-			inventory.push_back("IronBoots.blue.boots.Iron Boots.1.N/A.iron")
+			inventory.push_back("IronChest.violet.chest.Iron Chest.1.N/A.iron.AAAAAA")
+		elif i == 48:
+			inventory.push_back("IronBoots.blue.boots.Iron Boots.1.N/A.iron.AAAAAA")
 		else:
 			inventory.push_back("")
 	animationTree.active = true

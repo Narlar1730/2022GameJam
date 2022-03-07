@@ -118,6 +118,22 @@ func _process(delta):
 				apple1.xp1.x = x1
 				apple1.xp1.y = y1
 				get_tree().get_root().get_node("/root/World/YFirst").add_child(apple1)
+				var apple2 = apple.instance()
+				var x2 = areWeSpawning.randi_range(-50, 50)
+				var y2 = areWeSpawning.randi_range(-50, 50)
+				apple2.xp1.x = x2
+				apple2.xp1.y = y2
+				apple2.position.x = self.position.x
+				apple2.position.y = self.position.y
+				get_tree().get_root().get_node("/root/World/YFirst").add_child(apple2)
+				var apple3 = apple.instance()
+				var x3 = areWeSpawning.randi_range(-50, 50)
+				var y3 = areWeSpawning.randi_range(-50, 50)
+				apple3.position.x = self.position.x
+				apple3.position.y = self.position.y
+				apple3.xp1.x = x3
+				apple3.xp1.y = y3
+				get_tree().get_root().get_node("/root/World/YFirst").add_child(apple3)
 			$AnimatedSprite.animation = "Attack2"
 		var healthWidth = int(40.0 * (float(health)/startHealth))
 		#print(healthWidth)
@@ -137,7 +153,7 @@ func _process(delta):
 		world.add_child(star)
 		var chest1 = chest.instance()
 		chest1.position.x = self.position.x
-		chest1.position.y = self.position.y
+		chest1.position.y = self.position.y+10
 		world.add_child(chest1)
 		self.queue_free()
 	

@@ -82,7 +82,11 @@ func _process(delta):
 	
 func setItems(itemName):
 	var curItem = item.instance()
-	curItem.setSprite(itemName)
+	var colour = player.inventory[index]
+	var all = colour.split(".")
+	var curColour = all[7]
+	#		$Cape.modulate = Color(curColour)
+	curItem.setSprite(itemName, curColour)
 	curItem.position.x += 0
 	curItem.position.y += 0
 	curItem.z_index = 12
