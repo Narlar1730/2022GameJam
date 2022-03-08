@@ -59,10 +59,10 @@ func _process(delta):
 				var g = float(rng.randi_range(0, 255))/255
 				var b = float(rng.randi_range(0, 255))/255
 				var c = Color(r, g, b)
-				print(c.to_html())
+				#print(c.to_html())
 				itemType = "Cape"
 				statsString = itemType + ".red.cape.some " + itemType + ".2.N/A.Cape." + c.to_html()
-				print(statsString)
+				#print(statsString)
 		
 			var int2 = rng.randi_range(0, 6)
 			colour = wort.rarSwitch(int2)
