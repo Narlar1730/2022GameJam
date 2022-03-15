@@ -180,7 +180,7 @@ func swapInventory(pos1, pos2):
 	elif pos1 == 46 or pos2 == 46:
 		equipped = true
 		var curType = ""
-		if pos1 != 42:
+		if pos1 != 46:
 			curType = getItemType(inventory[pos1])
 		else:
 			curType = getItemType(inventory[pos2])
@@ -246,7 +246,7 @@ func _ready():
 		elif i == 40:
 			inventory.push_back("IronHead.orange.head.Iron Head.1.N/A.iron.AAAAAA")
 		elif i == 42:
-			inventory.push_back("Cape.red.cape.A cape.1.N/A.cloth.AAAAAA")
+			inventory.push_back("Cape.red.cape.A cape.1.N/A.cloth.4444BB")
 			var colour = inventory[42]
 			var all = colour.split(".")
 			var curColour = all[7]
@@ -255,6 +255,8 @@ func _ready():
 			inventory.push_back("sword.indigo.primary.Bad Sword.1.N/A.sword.AAAAAA")
 		elif i == 44:
 			inventory.push_back("IronChest.violet.chest.Iron Chest.1.N/A.iron.AAAAAA")
+		elif i == 46:
+			inventory.push_back("IronPants.green.pants.Iron Pants.1.N/A.iron.AAAAAA")
 		elif i == 48:
 			inventory.push_back("IronBoots.blue.boots.Iron Boots.1.N/A.iron.AAAAAA")
 		else:

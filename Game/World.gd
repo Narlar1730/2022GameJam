@@ -88,7 +88,7 @@ func spawnLoot(x, y):
 			#itemType = "sword"
 		elif int1 == 1:
 			itemType = "Bow"
-			statsString = itemType + ".red.primary.some " + itemType + ".2.N/A.bow.AAAAAA"
+			statsString = "bow" + ".red.primary.some " + itemType + ".2.N/A.bow.AAAAAA"
 		elif int1 == 2:
 			itemType = "FlamingSword"
 			statsString = itemType + ".red.primary." + itemType + ".6.N/A.sword.AAAAAA"

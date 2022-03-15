@@ -57,6 +57,8 @@ func setSprite(sprite):
 		$Item.texture = load("res://items/Armour/IronChest.png")
 	elif sprite == "IronBoots":
 		$Item.texture = load("res://items/Armour/IronBoots.png")
+	elif sprite == "IronPants":
+		$Item.texture = load("res://items/ArmourIronPants.png")
 	elif sprite == "GoldHead":
 		$Item.texture = load("res://items/Armour/GoldHead.png")
 	elif sprite == "GoldChest":
@@ -80,6 +82,8 @@ func setSprite(sprite):
 	elif sprite == "Cape":
 		$Item.texture = load("res://items/Armour/Cape.png")
 		$Item.modulate = Color(getColour())
+	elif sprite == "BattleAxe":
+		$Item.texture = load("res://items/BattleAxe.png")
 
 func rarSwitch(inc):
 	var out = ""

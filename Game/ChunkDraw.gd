@@ -874,9 +874,9 @@ func drawDLChunk():
 		output += "wpppppppwwwwwwwwwwwp"
 		output += "wwwppwwwwwwwwwpppppp"
 		output += "wwwwwwwwwwpppppppppp"
-		output += "wwwwpppppppppppppppp"
+		output += "bbbbpppppppppppppppp"
 		#half               MM
-		output += "wwwppppppppppppppppp"
+		output += "bbbppppppppppppppppp"
 		output += "wwppppwwwwwppppppppp"
 		output += "wwppppwwwwwwwwwwwppp"
 		output += "wwppppwwwwwwwwwwwwww"
