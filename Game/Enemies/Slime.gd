@@ -64,7 +64,7 @@ func getNext():
 		
 	var distance = self.position.distance_to(player.position)
 	if distance > 10*16:
-		print("not chasing")
+		#print("not chasing")
 		speed = 0
 	
 func jumpNormal():

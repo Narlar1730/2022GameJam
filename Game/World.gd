@@ -21,6 +21,7 @@ var maze     = preload("res://MazeGenerator.gd")
 var batEnemy = preload("res://Enemies/Bat.tscn")
 var spider   = preload("res://Enemies/Spider.tscn")
 var grass    = preload("res://World/Grass.tscn")
+var wolf     = preload("res://Enemies/Wolf.tscn")
 var rock     = preload("res://World/Rock.tscn")
 var bush     = preload("res://World/Bush.tscn")
 var heartF   = preload("res://UI/FullHeart.tscn")
@@ -33,6 +34,8 @@ var treeMan  = preload("res://Enemies/Tree Elemental.tscn")
 var minimap  = preload("res://UI/Minimap/Minimap.tscn")
 var treeant  = preload("res://Enemies/bossesW1/Treeant.tscn")
 var QBat     = preload("res://Enemies/bossesW1/QueenBat.tscn")
+var slime    = preload("res://Enemies/Slime.tscn")
+var chest    = preload("res://WorldItems/Chest.tscn")
 
 var chunk = load("res://ChunkDraw.gd").new()
 var current = []
@@ -351,6 +354,21 @@ func drawWorldString(string, x, y):
 				curSpider.position.x = x*chunkX*tileSize + i*tileSize+8
 				curSpider.position.y = y*chunkY*tileSize + j*tileSize+8
 				self.add_child(curSpider)
+			elif curEnem == "S":
+				var curSlime = slime.instance()
+				curSlime.position.x = x*chunkX*tileSize + i*tileSize+8
+				curSlime.position.y = y*chunkY*tileSize + j*tileSize+8
+				self.add_child(curSlime)
+			elif curEnem == "c":
+				var curChest = chest.instance()
+				curChest.position.x = x*chunkX*tileSize + i*tileSize+8
+				curChest.position.y = y*chunkY*tileSize + j*tileSize+8
+				get_tree().get_root().get_node("/root/World/YFirst/YBush").add_child(curChest)
+			elif curEnem == "w":
+				var curWolf = wolf.instance()
+				curWolf.position.x = x*chunkX*tileSize + i*tileSize+8
+				curWolf.position.y = y*chunkY*tileSize + j*tileSize+8
+				self.add_child(curWolf)
 	pass
 
 func drawChunk(x, y, tileNo, MazeSize):
