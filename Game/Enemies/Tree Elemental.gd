@@ -44,6 +44,7 @@ func _physics_process(delta):
 		if deathCounter > 0:
 			deathCounter -= 1
 		else:
+			player.addXP(3)
 			self.queue_free()
 	elif hitCounter > 0:
 		hitCounter -= 1

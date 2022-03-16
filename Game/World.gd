@@ -17,25 +17,26 @@ onready var water  = get_node("/root/World/WaterTileSet")
 onready var bridge = get_node("/root/World/BridgeTilemap")
 onready var castle = get_node("/root/World/CastleTileMap")
 #var chunk    = preload("res://ChunkDraw.gd")
-var maze     = preload("res://MazeGenerator.gd")
-var batEnemy = preload("res://Enemies/Bat.tscn")
-var spider   = preload("res://Enemies/Spider.tscn")
-var grass    = preload("res://World/Grass.tscn")
-var wolf     = preload("res://Enemies/Wolf.tscn")
-var rock     = preload("res://World/Rock.tscn")
-var bush     = preload("res://World/Bush.tscn")
-var heartF   = preload("res://UI/FullHeart.tscn")
-var heartH   = preload("res://UI/HalfHeart.tscn")
-var heartB   = preload("res://UI/blankheart.tscn")
-var invent   = preload("res://UI/Inventory.tscn")
-var item     = preload("res://WorldItems/WorldItem.tscn")
-var coin     = preload("res://WorldItems/Coin.tscn")
-var treeMan  = preload("res://Enemies/Tree Elemental.tscn")
-var minimap  = preload("res://UI/Minimap/Minimap.tscn")
-var treeant  = preload("res://Enemies/bossesW1/Treeant.tscn")
-var QBat     = preload("res://Enemies/bossesW1/QueenBat.tscn")
-var slime    = preload("res://Enemies/Slime.tscn")
-var chest    = preload("res://WorldItems/Chest.tscn")
+var maze       = preload("res://MazeGenerator.gd")
+var batEnemy   = preload("res://Enemies/Bat.tscn")
+var spider     = preload("res://Enemies/Spider.tscn")
+var grass      = preload("res://World/Grass.tscn")
+var wolf       = preload("res://Enemies/Wolf.tscn")
+var rock       = preload("res://World/Rock.tscn")
+var bush       = preload("res://World/Bush.tscn")
+var heartF     = preload("res://UI/FullHeart.tscn")
+var heartH     = preload("res://UI/HalfHeart.tscn")
+var heartB     = preload("res://UI/blankheart.tscn")
+var invent     = preload("res://UI/Inventory.tscn")
+var item       = preload("res://WorldItems/WorldItem.tscn")
+var coin       = preload("res://WorldItems/Coin.tscn")
+var treeMan    = preload("res://Enemies/Tree Elemental.tscn")
+var minimap    = preload("res://UI/Minimap/Minimap.tscn")
+var treeant    = preload("res://Enemies/bossesW1/Treeant.tscn")
+var QBat       = preload("res://Enemies/bossesW1/QueenBat.tscn")
+var slime      = preload("res://Enemies/Slime.tscn")
+var chest      = preload("res://WorldItems/Chest.tscn")
+var worldHeart = preload("res://WorldItems/WorldHeart.tscn")
 
 var chunk = load("res://ChunkDraw.gd").new()
 var current = []
@@ -70,14 +71,14 @@ func updateClocks():
 func spawnLoot(x, y):
 	var areWeSpawning = RandomNumberGenerator.new()
 	areWeSpawning.randomize()
-	var spawn = areWeSpawning.randi_range(0, 10)
+	var spawn = areWeSpawning.randi_range(0, 30)
 	if spawn == 0:
 		var wort = item.instance()
 		wort.position.x = x
 		wort.position.y = y
 		var rng = RandomNumberGenerator.new()
 		rng.randomize()
-		var int1 = rng.randi_range(0, 6)
+		var int1 = rng.randi_range(0, 7)
 		var itemType = ""
 		#var itemString = ""
 		var statsString = ""
@@ -104,7 +105,7 @@ func spawnLoot(x, y):
 		elif int1 == 6:
 			itemType = "HolySword"
 			statsString = itemType + ".red.primary." + itemType + ".8.N/A.sword.AAAAAA"
-		else:
+		elif int1 == 7:
 			itemType = "Mace"
 			statsString = itemType + ".red.primary." + itemType + ".6.N/A.hammer.AAAAAA"
 			#itemType = "bow"
@@ -114,19 +115,24 @@ func spawnLoot(x, y):
 		var stats = str(itemType, ".", colour)
 		wort.stats = statsString
 		self.add_child(wort)
-	elif spawn < 4:
+	elif spawn < 7:
 		var curCoin = coin.instance()
 		curCoin.position.x = x
 		curCoin.position.y = y
 		self.add_child(curCoin)
-	elif spawn < 5:
+	elif spawn < 8:
 		var curCoin = coin.instance()
 		curCoin.value = "silver"
 		curCoin.position.x = x
 		curCoin.position.y = y
 		self.add_child(curCoin)
 		#print("SPAWNING LOOT")
-	
+	elif spawn < 10:
+		var cHeart = worldHeart.instance()
+		cHeart.position.x = x
+		cHeart.position.y = y
+		get_tree().get_root().get_node("/root/World/YFirst/YGrass").add_child(cHeart)
+		#self.add_child(cHeart)	
 	
 
 	

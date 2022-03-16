@@ -49,12 +49,13 @@ func _on_Hurtbox_area_entered(area):
 		hitCounter = 12
 		var enemyHitSound = EnemyHitSound.instance()
 		get_tree().current_scene.add_child(enemyHitSound)
-		
+
 	if area.is_in_group("Arrow"):
 		area.owner.kill()
 	
 
 func _on_Stats_no_health():
+	player.addXP(2)
 	queue_free()
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)

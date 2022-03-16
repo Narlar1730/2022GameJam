@@ -33,6 +33,7 @@ func getNext():
 	#	print("dirt")
 	speed = 40
 	if health <= 0:
+		player.addXP(2)
 		$AnimationPlayer.play("Die")
 	elif world.water.get_cellv(curCell) != -1:
 		if firstTime:

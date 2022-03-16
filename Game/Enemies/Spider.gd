@@ -25,10 +25,11 @@ func _ready():
 func _process(delta):
 	lifeClock += 1
 	if health <= 0:
+		player.addXP(3)
 		var enemyDeathEffect = EnemyDeathEffect.instance()
 		get_parent().add_child(enemyDeathEffect)
 		enemyDeathEffect.global_position = global_position
-		world.spawnLoot(global_position.x, global_position.y)
+		world.spawnLoot(self.position.x, self.position.y)
 		self.queue_free()
 	if hitCounter < 0:
 		hitCounter = 0

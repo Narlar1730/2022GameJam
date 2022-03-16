@@ -155,6 +155,7 @@ func _process(delta):
 		chest1.position.x = self.position.x
 		chest1.position.y = self.position.y+10
 		world.add_child(chest1)
+		player.addXP(25)
 		self.queue_free()
 	
 

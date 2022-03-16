@@ -58,7 +58,7 @@ func setSprite(sprite):
 	elif sprite == "IronBoots":
 		$Item.texture = load("res://items/Armour/IronBoots.png")
 	elif sprite == "IronPants":
-		$Item.texture = load("res://items/ArmourIronPants.png")
+		$Item.texture = load("res://items/Armour/IronPants.png")
 	elif sprite == "GoldHead":
 		$Item.texture = load("res://items/Armour/GoldHead.png")
 	elif sprite == "GoldChest":

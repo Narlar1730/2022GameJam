@@ -25,6 +25,10 @@ var luck                = 0
 var resistance          = 0
 var shotSpeed           = 5
 var shotcounter         = 0
+var xp                  = 0
+var nextLevel           = 10
+var levelupTimer        = 0
+var xpFlag              = false
 
 #Handle Iventory
 var inventory = []
@@ -81,6 +85,20 @@ func getCurrentEquippedWeapon():
 	var curType = splitList[6]
 	return curType
 	
+
+func addXP(value):
+	xp = xp + value
+	if xp > nextLevel:
+		xp = xp - nextLevel
+		nextLevel = nextLevel*1.5
+		levelupTimer = 60
+
+func addHealth(h):
+	var tmp = health + h
+	if tmp > maxHealth:
+		health = maxHealth
+	else:
+		health = tmp
 
 func getDamage():
 	var out = 0
@@ -280,6 +298,21 @@ func getInventory():
 
 
 func _physics_process(delta):
+	
+	var xpWidth = int(120.0 * (float(xp)/nextLevel))
+
+	$XPBar.polygon = [Vector2(-60, 70), Vector2(-60+xpWidth, 70), Vector2(-60+xpWidth, 72), Vector2(-60, 72)]
+
+	if levelupTimer > 0:
+		levelupTimer -= 1
+		if levelupTimer % 10 == 0 and xpFlag:
+			xpFlag = false
+			$XPBar.color = Color("7dFF33")
+		elif levelupTimer % 10 == 0:
+			xpFlag = true
+			$XPBar.color = Color("FFFFFF")
+	
+
 	#$Cape.frame = $Sprite.frame
 	if shotcounter > 0:
 		shotcounter -= 1

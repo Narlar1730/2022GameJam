@@ -16,6 +16,7 @@ var speed  : int     = 90
 var runningCounter = 0
 
 func die():
+	player.addXP(5)
 	queue_free()
 
 func playNext():
