@@ -4,6 +4,8 @@ const EnemyHitSound = preload("res://Enemies/EnemyHitSound.tscn")
 onready var player = get_node("/root/World/YFirst/Player")
 onready var world  = get_node("/root/World")
 
+var item       = preload("res://WorldItems/WorldItem.tscn")
+var coin       = preload("res://WorldItems/Coin.tscn")
 var attack         = preload("res://Enemies/Plant attack.tscn")
 
 var health = 20
@@ -30,6 +32,39 @@ func setAnimation():
 	elif curState == "dying":
 		$AnimatedSprite.animation = "Dead"
 
+func spawnLoot():
+	var areWeSpawning = RandomNumberGenerator.new()
+	areWeSpawning.randomize()
+	var spawn = areWeSpawning.randi_range(0, 100)
+	if spawn < 10:
+		var wort = item.instance()
+		wort.position.x = self.position.x
+		wort.position.y = self.position.y
+		var itemType = "Stick"
+		var statsString = itemType + ".red.crafting." + itemType + ".1.10.crafting.AAAAAA"
+		wort.stats = statsString
+		world.add_child(wort)
+	elif spawn < 30:
+		var curCoin = coin.instance()
+		#curCoin.value = "silver"
+		curCoin.position.x = self.position.x
+		curCoin.position.y = self.position.y
+		world.add_child(curCoin)
+	elif spawn < 35:
+		var curCoin = coin.instance()
+		curCoin.value = "silver"
+		curCoin.position.x = self.position.x
+		curCoin.position.y = self.position.y
+		world.add_child(curCoin)
+	elif spawn == 35:
+		var wort = item.instance()
+		wort.position.x = self.position.x
+		wort.position.y = self.position.y
+		var itemType = "HeartOfWood"
+		var statsString = itemType + ".yellow.crafting." + itemType + ".1.10.crafting.AAAAAA"
+		wort.stats = statsString
+		world.add_child(wort)
+
 func _physics_process(delta):
 	self.dir.x = 0
 	self.dir.y = 0	
@@ -44,6 +79,7 @@ func _physics_process(delta):
 		if deathCounter > 0:
 			deathCounter -= 1
 		else:
+			spawnLoot()
 			player.addXP(3)
 			self.queue_free()
 	elif hitCounter > 0:

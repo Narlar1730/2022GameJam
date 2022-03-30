@@ -4,7 +4,7 @@ onready var player = get_node("/root/World/YFirst/Player")
 onready var world  = get_node("/root/World")
 
 var index = -1
-var mod   = false
+var mod   = 0
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -50,17 +50,19 @@ func _process(delta):
 			var yDif = curCell.y - vY
 			if curY == yDif and curX == xDif:
 				if vX == bossx-5 and vY == bossy-5:
-					mod = true
+					mod = 1
 				else:
-					mod = false
+					mod = 0
 				draw = 1
 	
 	if index == 24:
 		self.visible = true
 	elif draw == 1:
-		if mod:
+		if mod == 2:
+			self.modulate = Color("88FF88")
+		elif mod == 1:
 			self.modulate = Color("FF8888")
-		else:
+		elif mod == 0:
 			self.modulate = Color("888888")
 		self.visible = true
 	else:
