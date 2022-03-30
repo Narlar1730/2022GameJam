@@ -477,6 +477,10 @@ func _ready():
 				bossx = i
 				bossy = j
 				$BigMini.addBossCell()
+				var pos = Vector2(i-5, j-5)
+				print("Boss Cell: ", pos)
+				player.visitedCells.push_back(pos)
+				
 				drawBossBattle(i-5, j-5)
 			curIndex = curIndex + 1
 			

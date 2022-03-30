@@ -1,6 +1,7 @@
 extends Polygon2D
 
 onready var player = get_node("/root/World/YFirst/Player")
+onready var world  = get_node("/root/World")
 
 var index = -1
 var mod   = false
@@ -38,6 +39,9 @@ func _process(delta):
 	
 	var draw = 0
 	
+	var bossx = world.bossx
+	var bossy = world.bossy
+	
 	for i in allCells:
 		var vX = i.x
 		var vY = i.y
@@ -45,12 +49,19 @@ func _process(delta):
 			var xDif = curCell.x - vX
 			var yDif = curCell.y - vY
 			if curY == yDif and curX == xDif:
+				if vX == bossx-5 and vY == bossy-5:
+					mod = true
+				else:
+					mod = false
 				draw = 1
 	
 	if index == 24:
 		self.visible = true
 	elif draw == 1:
-		self.modulate = Color("888888")
+		if mod:
+			self.modulate = Color("FF8888")
+		else:
+			self.modulate = Color("888888")
 		self.visible = true
 	else:
 		self.visible = false

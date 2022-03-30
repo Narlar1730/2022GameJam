@@ -1,7 +1,7 @@
 extends Polygon2D
 
 onready var player = get_node("/root/World/YFirst/Player")
-
+onready var world  = get_node("/root/World")
 var minimapCell = preload("res://UI/Minimap/MinimapCell.tscn")
 
 var vis = true
@@ -9,6 +9,7 @@ var vis = true
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
+
 func _process(delta):
 	
 	#### index = 3 

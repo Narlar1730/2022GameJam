@@ -73,6 +73,7 @@ func updateVistedCells():
 	pos.y = floor(((self.position.y)/16)/12)
 	curCell = pos
 	if !visitedCells.has(pos):
+		print("UPDATING POS: ", curCell)
 		visitedCells.push_back(pos)
 	
 	#print(visitedCells)
