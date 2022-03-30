@@ -120,6 +120,10 @@ func updateCursor(val):
 		curCursor = val
 
 func doDamage(dam):
+	var arm = getArmour()
+	dam = dam - arm
+	if dam < 1:
+		dam = 1
 	if hitTimer == 0:
 		health = health - dam
 		hitTimer = immunity
