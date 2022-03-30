@@ -147,6 +147,33 @@ func isStackableItem(item):
 	
 	return out
 		
+func getArmour():
+	var head = inventory[40]
+	var chest = inventory[44]
+	var pants = inventory[46]
+	var boots = inventory[48]
+	
+	var headVal  = 0
+	var chestVal = 0
+	var pantsVal = 0
+	var bootsVal = 0
+	
+	var headSplit  = head.split(".")
+	if headSplit.size() > 4:
+		headVal    = int(headSplit[4])
+	var chestSplit = chest.split(".")
+	if chestSplit.size() > 4:
+		chestVal   = int(chestSplit[4])
+	var pantsSplit = pants.split(".")
+	if pantsSplit.size() > 4:
+		pantsVal   = int(pantsSplit[4])
+	var bootsSplit = boots.split(".")
+	if bootsSplit.size() > 4:
+		bootsVal   = int(bootsSplit[4])
+	
+	var out = headVal + chestVal + pantsVal + bootsVal
+	
+	return out
 
 func insertInventory(item):
 	var out = false

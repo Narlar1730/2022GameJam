@@ -48,6 +48,15 @@ func _process(delta):
 	if Input.is_action_just_released("MouseClick"):
 		var healthTxt = "Health: " + str(player.health) + "/" + str(player.maxHealth)
 		var damageTxt = "Damage: " + str(player.getDamage())
+		var luckTxt   = "Luck:   " + str(player.luck)
+		var speedTxt  = "Speed:  " + str(player.ACCELERATION/100)
+		var armourTxt = "Armour: " + str(player.getArmour())
+	
+		get_node("HealthText").text = healthTxt
+		get_node("HealthText2").text = damageTxt
+		get_node("HealthText3").text = luckTxt
+		get_node("HealthText4").text = speedTxt
+		get_node("HealthText5").text = armourTxt
 	
 
 	if world.coinPickup:
@@ -103,13 +112,15 @@ func _ready():
 	
 	var healthTxt = "Health: " + str(player.health) + "/" + str(player.maxHealth)
 	var damageTxt = "Damage: " + str(player.getDamage())
-	var luckTxt   = "Luck: "   + str(player.luck)
-	var speedTxt  = "Speed: "  + str(player.ACCELERATION/100)
+	var luckTxt   = "Luck:   " + str(player.luck)
+	var speedTxt  = "Speed:  " + str(player.ACCELERATION/100)
+	var armourTxt = "Armour: " + str(player.getArmour())
 	
 	get_node("HealthText").text = healthTxt
 	get_node("HealthText2").text = damageTxt
 	get_node("HealthText3").text = luckTxt
 	get_node("HealthText4").text = speedTxt
+	get_node("HealthText5").text = armourTxt
 	
 	var playerMoney = player.money
 	var p = 0
