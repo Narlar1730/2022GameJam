@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
 const EnemyHitSound = preload("res://Enemies/EnemyHitSound.tscn")
+var item       = preload("res://WorldItems/WorldItem.tscn")
+var coin       = preload("res://WorldItems/Coin.tscn")
 onready var player = get_node("/root/World/YFirst/Player")
 onready var world  = get_node("/root/World")
 # Declare member variables here. Examples:
@@ -22,6 +24,39 @@ var damage : int     = 1
 func _ready():
 	pass # Replace with function body.
 
+func spawnLoot():
+	var areWeSpawning = RandomNumberGenerator.new()
+	areWeSpawning.randomize()
+	var spawn = areWeSpawning.randi_range(0, 100)
+	if spawn < 10:
+		var wort = item.instance()
+		wort.position.x = self.position.x
+		wort.position.y = self.position.y
+		var itemType = "SpiderEye"
+		var statsString = itemType + ".red.crafting." + itemType + ".1.10.crafting.AAAAAA"
+		wort.stats = statsString
+		world.add_child(wort)
+	elif spawn < 30:
+		var curCoin = coin.instance()
+		#curCoin.value = "silver"
+		curCoin.position.x = self.position.x
+		curCoin.position.y = self.position.y
+		world.add_child(curCoin)
+	elif spawn < 35:
+		var curCoin = coin.instance()
+		curCoin.value = "silver"
+		curCoin.position.x = self.position.x
+		curCoin.position.y = self.position.y
+		world.add_child(curCoin)
+	elif spawn == 35:
+		var wort = item.instance()
+		wort.position.x = self.position.x
+		wort.position.y = self.position.y
+		var itemType = "SpiderSilk"
+		var statsString = itemType + ".yellow.crafting." + itemType + ".1.10.crafting.AAAAAA"
+		wort.stats = statsString
+		world.add_child(wort)
+
 func _process(delta):
 	lifeClock += 1
 	if health <= 0:
@@ -29,7 +64,8 @@ func _process(delta):
 		var enemyDeathEffect = EnemyDeathEffect.instance()
 		get_parent().add_child(enemyDeathEffect)
 		enemyDeathEffect.global_position = global_position
-		world.spawnLoot(self.position.x, self.position.y)
+		spawnLoot()
+		#world.spawnLoot(self.position.x, self.position.y)
 		self.queue_free()
 	if hitCounter < 0:
 		hitCounter = 0

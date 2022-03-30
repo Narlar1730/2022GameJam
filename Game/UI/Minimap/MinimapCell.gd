@@ -3,6 +3,7 @@ extends Polygon2D
 onready var player = get_node("/root/World/YFirst/Player")
 
 var index = -1
+var mod   = false
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"

@@ -74,6 +74,18 @@ func setSprite(sprite, colour):
 		$Sprite.modulate = Color(colour)
 	elif sprite == "BattleAxe":
 		$Sprite.texture = load("res://items/BattleAxe.png")
+	elif sprite == "BatWing":
+		$Sprite.texture = load("res://items/Crafting/BatWing.png")
+	elif sprite == "BatFang":
+		$Sprite.texture = load("res://items/Crafting/BatTooth.png")
+	elif sprite == "SpiderEye":
+		$Sprite.texture = load("res://items/Crafting/SpiderEye.png")
+	elif sprite == "SpiderSilk":
+		$Sprite.texture = load("res://items/Crafting/SpiderSilk.png")
+	elif sprite == "Slime":
+		$Sprite.texture = load("res://items/Crafting/Slime.png")
+	elif sprite == "StringOfSlime":
+		$Sprite.texture = load("res://items/Crafting/StringOfSlime.png")
 # Called when the node enters the scene tree for the first time.
 
 func _ready():

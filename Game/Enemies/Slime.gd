@@ -3,7 +3,8 @@ extends KinematicBody2D
 onready var player = get_node("/root/World/YFirst/Player")
 onready var world  = get_node("/root/World")
 const EnemyHitSound = preload("res://Enemies/EnemyHitSound.tscn")
-
+var item       = preload("res://WorldItems/WorldItem.tscn")
+var coin       = preload("res://WorldItems/Coin.tscn")
 
 var health = 5
 var hitCounter = 12
@@ -22,6 +23,39 @@ func fast():
 
 func slow():
 	speed = 20
+	
+func spawnLoot():
+	var areWeSpawning = RandomNumberGenerator.new()
+	areWeSpawning.randomize()
+	var spawn = areWeSpawning.randi_range(0, 100)
+	if spawn < 10:
+		var wort = item.instance()
+		wort.position.x = self.position.x
+		wort.position.y = self.position.y
+		var itemType = "Slime"
+		var statsString = itemType + ".red.crafting." + itemType + ".1.10.crafting.AAAAAA"
+		wort.stats = statsString
+		world.add_child(wort)
+	elif spawn < 30:
+		var curCoin = coin.instance()
+		#curCoin.value = "silver"
+		curCoin.position.x = self.position.x
+		curCoin.position.y = self.position.y
+		world.add_child(curCoin)
+	elif spawn < 35:
+		var curCoin = coin.instance()
+		curCoin.value = "silver"
+		curCoin.position.x = self.position.x
+		curCoin.position.y = self.position.y
+		world.add_child(curCoin)
+	elif spawn == 35:
+		var wort = item.instance()
+		wort.position.x = self.position.x
+		wort.position.y = self.position.y
+		var itemType = "StringOfSlime"
+		var statsString = itemType + ".yellow.crafting." + itemType + ".1.10.crafting.AAAAAA"
+		wort.stats = statsString
+		world.add_child(wort)
 
 func getNext():
 	var curCell = world.water.world_to_map(self.position)
@@ -75,6 +109,7 @@ func jumpWater():
 	pass
 	
 func die():
+	spawnLoot()
 	self.queue_free()
 	
 func _process(delta):

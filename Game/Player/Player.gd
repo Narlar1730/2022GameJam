@@ -134,16 +134,46 @@ func handleHits():
 			var curColour = self.modulate
 			doDamage(1)
 		hitTimer = hitTimer - 1
+
+func isStackableItem(item):
+	var out = false
+	var all = item.split(".")
+	var itemType = all[2]
+	if itemType == "crafting":
+		var maxSize = int(all[5])
+		if maxSize > 1:
+			out = true
+	
+	return out
 		
+
 func insertInventory(item):
 	var out = false
 	var counter = 0
+	var itemStackAble = isStackableItem(item)
 	for i in inventory:
-		if i == "" and !out:
+		if i == "" and !out and counter < 40:
 			inventory[counter] = item
 			out = true
+		elif counter < 40 and !out and itemStackAble:
+			var itemAll = item.split(".")
+			var itemType = itemAll[0]
+			var curItem = inventory[counter]
+			var curItemList = curItem.split(".")
+			var curBelow  = curItemList[0]
+			var curAmount = int(curItemList[4])
+			var curMax    = int(curItemList[5])
+			if curAmount < curMax and curBelow == itemType:
+				curItemList[4] = str(curAmount+1)
+				var setString = ""
+				for j in curItemList:
+					setString = setString + j
+					setString = setString + "."
+				setString.erase(setString.length() - 1, 1)
+				inventory[counter] = setString
+				print(setString)
+				out = true
 		counter += 1
-		
 	return out
 
 func getItemType(itemToType):
@@ -261,7 +291,7 @@ func _ready():
 	for i in 56:
 		if i == 0:
 			inventory.push_back("bow.red.primary.Bad Bow.1.N/A.bow.AAAAAA")
-		elif i == 40:
+		elif i == 1:
 			inventory.push_back("IronHead.orange.head.Iron Head.1.N/A.iron.AAAAAA")
 		elif i == 42:
 			inventory.push_back("Cape.red.cape.A cape.1.N/A.cloth.4444BB")
@@ -271,11 +301,11 @@ func _ready():
 			$Cape.modulate = Color(curColour)
 		elif i == 50:
 			inventory.push_back("sword.indigo.primary.Bad Sword.1.N/A.sword.AAAAAA")
-		elif i == 44:
+		elif i == 3:
 			inventory.push_back("IronChest.violet.chest.Iron Chest.1.N/A.iron.AAAAAA")
-		elif i == 46:
+		elif i == 4:
 			inventory.push_back("IronPants.green.pants.Iron Pants.1.N/A.iron.AAAAAA")
-		elif i == 48:
+		elif i == 5:
 			inventory.push_back("IronBoots.blue.boots.Iron Boots.1.N/A.iron.AAAAAA")
 		else:
 			inventory.push_back("")

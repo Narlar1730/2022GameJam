@@ -5,6 +5,8 @@ var tileSize : int = 16
 var chunkX : int   = 20
 var chunkY : int   = 12
 #var HUD    : bool  = true
+var bossx = -1
+var bossy = -1
 
 var pauseGame     : bool = false
 var unpause       : bool = false
@@ -72,6 +74,7 @@ func spawnLoot(x, y):
 	var areWeSpawning = RandomNumberGenerator.new()
 	areWeSpawning.randomize()
 	var spawn = areWeSpawning.randi_range(0, 30)
+
 	if spawn == 0:
 		var wort = item.instance()
 		wort.position.x = x
@@ -112,7 +115,7 @@ func spawnLoot(x, y):
 		
 		var int2 = rng.randi_range(0, 6)
 		colour = wort.rarSwitch(int2)
-		var stats = str(itemType, ".", colour)
+		#var stats = str(itemType, ".", colour)
 		wort.stats = statsString
 		self.add_child(wort)
 	elif spawn < 7:
@@ -471,6 +474,9 @@ func _ready():
 			elif(curTile == 2):
 				drawDeadEnd(i-5, j-5)
 			elif(curTile == 3):
+				bossx = i
+				bossy = j
+				$BigMini.addBossCell()
 				drawBossBattle(i-5, j-5)
 			curIndex = curIndex + 1
 			

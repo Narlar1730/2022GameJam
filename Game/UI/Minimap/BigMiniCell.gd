@@ -29,14 +29,22 @@ func _process(delta):
 			
 	if index == adjX*10 + adjY-11:
 		draw = 1
+	
+	if index == -3:
+		draw = 3
 			
 	if draw == 1:
 		self.visible = true
 	elif draw == 2:
 		self.modulate = Color("888888")
 		self.visible = true
+	elif draw == 3:
+		self.modulate = Color("FF8888")
+		self.visible = true
+		
 	else:
 		self.visible = false
+	
 #	var curX = 3 - index / 7 
 #	var curY = 3 - index % 7 
 #
