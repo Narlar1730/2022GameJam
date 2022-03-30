@@ -73,7 +73,7 @@ func updateVistedCells():
 	pos.y = floor(((self.position.y)/16)/12)
 	curCell = pos
 	if !visitedCells.has(pos):
-		print("UPDATING POS: ", curCell)
+		#print("UPDATING POS: ", curCell)
 		visitedCells.push_back(pos)
 	
 	#print(visitedCells)
@@ -108,7 +108,7 @@ func getDamage():
 	var wepDam = int(cur[4])
 	#print(wepDam)
 	out = damage + wepDam
-	print(str(out))
+	#print(str(out))
 	return out
 
 func updateClickCursor(val):
@@ -172,7 +172,7 @@ func insertInventory(item):
 					setString = setString + "."
 				setString.erase(setString.length() - 1, 1)
 				inventory[counter] = setString
-				print(setString)
+				#print(setString)
 				out = true
 		counter += 1
 	return out
@@ -697,7 +697,7 @@ func subEnemy():
 	enemies -= 1
 
 func _on_Area2D_body_entered(body):
-	print("Entered")
+	#print("Entered")
 	if body.is_in_group("Enemy"):
 		#hitTimer = immunity
 		enemies += 1

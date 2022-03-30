@@ -48,6 +48,42 @@ func _process(delta):
 	if Input.is_action_just_released("MouseClick"):
 		var healthTxt = "Health: " + str(player.health) + "/" + str(player.maxHealth)
 		var damageTxt = "Damage: " + str(player.getDamage())
+	
+
+	if world.coinPickup:
+		var playerMoney = player.money
+		var p = 0
+		var g = 0
+		var s = 0
+		var b = 0
+
+		while playerMoney >= 1000000:
+			p += 1
+			playerMoney -= 1000000
+		
+		while playerMoney >= 10000:
+			g += 1
+			playerMoney -= 10000
+		
+		while playerMoney >= 100:
+			s += 1
+			playerMoney -= 100
+		
+		b = playerMoney
+		
+		#print(b)
+			
+		var platText = "P: " + str(p)
+		var goldText = "G: " + str(g)
+		var silvText = "S: " + str(s)
+		var bronText = "B: " + str(b)
+		
+		get_node("HealthText11").text = platText
+		get_node("HealthText12").text = goldText
+		get_node("HealthText13").text = silvText
+		get_node("HealthText14").text = bronText
+
+		world.coinPickup = false
 	#print(pauseTimer)
 	pass
 
@@ -74,6 +110,41 @@ func _ready():
 	get_node("HealthText2").text = damageTxt
 	get_node("HealthText3").text = luckTxt
 	get_node("HealthText4").text = speedTxt
+	
+	var playerMoney = player.money
+	var p = 0
+	var g = 0
+	var s = 0
+	var b = 0
+
+	while playerMoney >= 1000000:
+		p += 1
+		playerMoney -= 1000000
+	
+	while playerMoney >= 10000:
+		g += 1
+		playerMoney -= 10000
+	
+	while playerMoney >= 100:
+		s += 1
+		playerMoney -= 100
+	
+	b = playerMoney
+	
+	var platText = "P: " + str(p)
+	var goldText = "G: " + str(g)
+	var silvText = "S: " + str(s)
+	var bronText = "B: " + str(b)
+	
+	get_node("HealthText11").text = platText
+	$HealthText11.modulate = Color("FFFFFF")
+	get_node("HealthText12").text = goldText
+	$HealthText12.modulate = Color("FFFF00")
+	get_node("HealthText13").text = silvText
+	$HealthText13.modulate = Color("BEC2CB")
+	get_node("HealthText14").text = bronText
+	$HealthText14.modulate = Color("CD7F32")
+	
 	for i in 10:
 		for j in 4:
 			var cell1 = cell.instance()

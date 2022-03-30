@@ -176,7 +176,7 @@ func printMaze():
 		curString = ""
 		for j in mazeSize:
 			curString = str(curString, maze[i*mazeSize + j])
-		print(curString)
+		#print(curString)
 
 func _ready():
 	maze = genMaze()

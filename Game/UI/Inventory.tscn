@@ -143,3 +143,47 @@ text = "box1"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="HealthText11" type="Label" parent="."]
+margin_left = 159.0
+margin_top = 19.0
+margin_right = 202.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 2 )
+text = "box1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthText12" type="Label" parent="."]
+margin_left = 159.0
+margin_top = 27.0
+margin_right = 202.0
+margin_bottom = 33.0
+custom_fonts/font = ExtResource( 2 )
+text = "box1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthText13" type="Label" parent="."]
+margin_left = 159.0
+margin_top = 35.0
+margin_right = 202.0
+margin_bottom = 41.0
+custom_fonts/font = ExtResource( 2 )
+text = "box1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HealthText14" type="Label" parent="."]
+margin_left = 159.0
+margin_top = 43.0
+margin_right = 202.0
+margin_bottom = 49.0
+custom_fonts/font = ExtResource( 2 )
+text = "box1"
+__meta__ = {
+"_edit_use_anchors_": false
+}

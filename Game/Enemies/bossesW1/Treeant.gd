@@ -102,8 +102,8 @@ func _process(delta):
 				curAttack4.position.y = self.position.y - y4*6
 				get_tree().get_root().get_node("/root/World/YFirst").add_child(curAttack4)
 			
-			var printString = "pos1: " + str(x1) + ", " + str(y1) + " pos2: " + str(x2) + ", " + str(y2)
-			print(printString)
+			#var printString = "pos1: " + str(x1) + ", " + str(y1) + " pos2: " + str(x2) + ", " + str(y2)
+			#print(printString)
 			
 		elif whichAttack == 2:
 			if attackTimer % 80 == 0:

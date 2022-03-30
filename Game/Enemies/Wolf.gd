@@ -36,7 +36,7 @@ func playNext():
 
 func animationDone():
 	var distance = self.position.distance_to(player.position)
-	print(distance)
+	#print(distance)
 	if health <= 0:
 		curState = "Die"
 	elif distance < 6*16 and distance > 3*16 and runningCounter > 0:
@@ -103,7 +103,7 @@ func _ready():
 
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Weapon"):
-		print("Hurt")
+		#print("Hurt")
 		health = health - player.getDamage()
 		#hitCounter = 18
 		var enemyHitSound = EnemyHitSound.instance()

@@ -168,7 +168,7 @@ func doDamage():
 
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Player"):
-		print("playah")
+		#print("playah")
 		#player.doDamage(1)
 		player.addEnemy()
 	if area.is_in_group("Weapon"):
@@ -181,5 +181,5 @@ func _on_Area2D_area_entered(area):
 func _on_Area2D_area_exited(area):
 	if area.is_in_group("Player"):
 		player.subEnemy()
-		print("bye Playah")
+		#print("bye Playah")
 	pass # Replace with function body.

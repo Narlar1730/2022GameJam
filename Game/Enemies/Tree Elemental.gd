@@ -115,7 +115,7 @@ func _ready():
 
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Weapon"):
-		print("Here")
+		#print("Here")
 		health -= player.getDamage()
 		hitCounter = immunity
 		var enemyHitSound = EnemyHitSound.instance()

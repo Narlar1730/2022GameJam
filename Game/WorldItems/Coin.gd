@@ -3,6 +3,7 @@ extends KinematicBody2D
 var value : String = "bronze"
 
 onready var player = get_node("/root/World/YFirst/Player")
+onready var world  = get_node("/root/World/")
 
 # Declare member variables here. Examples:
 # var a = 2
@@ -38,6 +39,6 @@ func _on_Area2D_body_entered(body):
 		elif value == "platinum":
 			money = 1000000
 		player.money = player.money+money
-		print(player.money)
+		world.coinPickup = true
 		self.queue_free()
 	pass # Replace with function body.
