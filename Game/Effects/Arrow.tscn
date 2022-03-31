@@ -7,7 +7,7 @@
 extents = Vector2( 4.5, 0.5 )
 
 [node name="Arrow" type="KinematicBody2D" groups=["Arrow", "Weapon"]]
-collision_layer = 64
+collision_layer = 0
 collision_mask = 64
 script = ExtResource( 1 )
 

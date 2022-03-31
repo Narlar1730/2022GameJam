@@ -322,7 +322,7 @@ func _ready():
 	self.set_collision_mask_bit(2, true)
 	for i in 56:
 		if i == 0:
-			inventory.push_back("bow.red.primary.Bad Bow.1.N/A.bow.AAAAAA")
+			inventory.push_back("bow.red.primary.Bad Bow.1.DS.bow.AAAAAA")
 		elif i == 1:
 			inventory.push_back("IronHead.orange.head.Iron Head.1.N/A.iron.AAAAAA")
 		elif i == 42:
@@ -647,50 +647,138 @@ func roll_animation_finished():
 	self.set_collision_mask_bit(3, true)
 	self.set_collision_mask_bit(2, true)
 
-func shoot(xBul, yBul):
+func shoot(xBul, yBul, enchant):
 	if shotcounter == 0:
-		shotcounter = 4
-		var b = arrow.instance()
+		if enchant == "DS":
+			shotcounter = 4
+			var b  = arrow.instance()
+			var b2 = arrow.instance()
 
-		var vel = Vector2.ZERO
-		vel.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-		vel.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-		vel = vel.normalized()
-		
+			var vel = Vector2.ZERO
+			vel.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+			vel.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+			vel = vel.normalized()
+			
 
-		var tempX : float = xBul*shotSpeed
-		var tempY : float = yBul*shotSpeed
-		var theta : float = 0
-		
-		if tempX != 0 and tempY != 0:
-			tempX = tempX / sqrt(2)
-			tempY = tempY / sqrt(2)
+			var tempX : float = xBul*shotSpeed
+			var tempY : float = yBul*shotSpeed
+			var theta : float = 0
 			
-		tempX = tempX + vel.x
-		tempY = tempY + vel.y
-		
-		if tempX != 0:
-			if tempX > 0:
-				theta = atan(tempY/tempX)
-			else:
-				theta = PI + atan(tempY/tempX)
-		elif tempY > 0:
-			theta = atan(intMax)
-		elif tempY < 0:
-			theta = atan(-intMax)
+			if tempX != 0 and tempY != 0:
+				tempX = tempX / sqrt(2)
+				tempY = tempY / sqrt(2)
+				
+			tempX = tempX + vel.x
+			tempY = tempY + vel.y
 			
-		#theta = (theta*PI/180)
-		
-		#print(theta)
-		b.rotate(theta)
+			if tempX != 0:
+				if tempX > 0:
+					theta = atan(tempY/tempX)
+				else:
+					theta = PI + atan(tempY/tempX)
+			elif tempY > 0:
+				theta = atan(intMax)
+			elif tempY < 0:
+				theta = atan(-intMax)
+				
+			#theta = (theta*PI/180)
 			
-		b.xVel = tempX*30
-		b.yVel = tempY*30
-		b.position.x = self.position.x
-		b.position.y = self.position.y-5
-		owner.add_child(b)
+			#print(theta)
+			b.rotate(theta)
+				
+			b.xVel  = tempX*30
+			b.yVel  = tempY*30
+			b.position.x  = self.position.x
+			b.position.y  = self.position.y-5
+			owner.add_child(b)
+			###b2
+			var vel2 = Vector2.ZERO
+			vel2.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+			vel2.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+			vel2 = vel2.normalized()
+			
+			tempX = xBul*shotSpeed
+			tempY = yBul*shotSpeed
+			theta = 0
+
+			if tempX != 0 and tempY != 0:
+				tempX = tempX / sqrt(2)
+				tempY = tempY / sqrt(2)
+				
+			tempX = tempX + vel2.x
+			tempY = tempY + vel2.y
+			
+			if tempX != 0:
+				if tempX > 0:
+					theta = atan(tempY/tempX)
+				else:
+					theta = PI + atan(tempY/tempX)
+			elif tempY > 0:
+				theta = atan(intMax)
+			elif tempY < 0:
+				theta = atan(-intMax)
+				
+			#theta = (theta*PI/180)
+			
+			#print(theta)
+			b2.rotate(theta)
+				
+			b2.xVel  = tempX*30
+			b2.yVel  = tempY*30
+			b2.position.x  = self.position.x-1
+			b2.position.y  = self.position.y-5-1
+			owner.add_child(b2)
+
+		else:
+			shotcounter = 4
+			var b = arrow.instance()
+
+			var vel = Vector2.ZERO
+			vel.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+			vel.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+			vel = vel.normalized()
+			
+
+			var tempX : float = xBul*shotSpeed
+			var tempY : float = yBul*shotSpeed
+			var theta : float = 0
+			
+			if tempX != 0 and tempY != 0:
+				tempX = tempX / sqrt(2)
+				tempY = tempY / sqrt(2)
+				
+			tempX = tempX + vel.x
+			tempY = tempY + vel.y
+			
+			if tempX != 0:
+				if tempX > 0:
+					theta = atan(tempY/tempX)
+				else:
+					theta = PI + atan(tempY/tempX)
+			elif tempY > 0:
+				theta = atan(intMax)
+			elif tempY < 0:
+				theta = atan(-intMax)
+				
+			#theta = (theta*PI/180)
+			
+			#print(theta)
+			b.rotate(theta)
+				
+			b.xVel = tempX*30
+			b.yVel = tempY*30
+			b.position.x = self.position.x
+			b.position.y = self.position.y-5
+			owner.add_child(b)
 	
 	#shootTimer = firerate
+
+func getCurEnchant():
+	var curWep   = inventory[50]
+	var wepSplit = curWep.split(".")
+	var curEnch  = wepSplit[5] 
+	
+	return curEnch
 
 func attack_animation_finished():
 	if attackButtonDown:
@@ -698,6 +786,7 @@ func attack_animation_finished():
 			var shooting : bool = false
 			var xBul : int = 0
 			var yBul : int = 0
+			var enchant = getCurEnchant()
 	
 			if pressedAttacks.has("s"):
 				shooting = true
@@ -713,7 +802,11 @@ func attack_animation_finished():
 				shooting = true
 	
 			if shooting:
-				shoot(xBul, yBul)
+				if enchant == "DS":
+					print("DOUBLE SHOT")
+					shoot(xBul, yBul, enchant)
+				else:
+					shoot(xBul, yBul, enchant)
 
 			pass
 		else:
