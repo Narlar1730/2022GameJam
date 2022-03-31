@@ -3,6 +3,7 @@ extends KinematicBody2D
 var xVel : int = 0
 var yVel : int = 0
 var life : int = 75
+var effect = "fire"
 
 var vel : Vector2 = Vector2()
 
@@ -29,6 +30,10 @@ func _physics_process(delta):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	if effect == "fire":
+		$Effect.visible = true
+	else:
+		$Effect.visible = false
 	pass 
 
 
