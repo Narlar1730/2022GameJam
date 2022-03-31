@@ -323,7 +323,7 @@ func _ready():
 	self.set_collision_mask_bit(2, true)
 	for i in 56:
 		if i == 0:
-			inventory.push_back("bow.red.primary.Bad Bow.1.TS.bow.AAAAAA")
+			inventory.push_back("bow.red.primary.Bow.1.N/A.bow.AAAAAA")
 		elif i == 1:
 			inventory.push_back("IronHead.orange.head.Iron Head.1.N/A.iron.AAAAAA")
 		elif i == 42:
@@ -332,6 +332,14 @@ func _ready():
 			var all = colour.split(".")
 			var curColour = all[7]
 			$Cape.modulate = Color(curColour)
+		elif i == 10:
+			inventory.push_back("bow.red.primary.DoubleShot.1.DS.bow.AAAAAA")
+		elif i == 11:
+			inventory.push_back("bow.red.primary.TripleShot.1.TS.bow.AAAAAA")
+		elif i == 12:
+			inventory.push_back("bow.red.primary.DoubleShotFire.1.DSF.bow.AAAAAA")
+		elif i == 13:
+			inventory.push_back("bow.red.primary.TSFire.1.TSF.bow.AAAAAA")
 		elif i == 50:
 			inventory.push_back("sword.indigo.primary.Bad Sword.1.N/A.sword.AAAAAA")
 		elif i == 3:
@@ -729,6 +737,87 @@ func shoot(xBul, yBul, enchant):
 			b2.position.x  = self.position.x-1
 			b2.position.y  = self.position.y-5-1
 			owner.add_child(b2)
+		elif enchant == "DSF":
+			shotcounter = 4
+			var b  = arrow.instance()
+			var b2 = arrow.instance()
+			b.effect = "fire"
+			b2.effect = "fire"
+
+			var vel = Vector2.ZERO
+			vel.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+			vel.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+			vel = vel.normalized()
+			
+
+			var tempX : float = xBul*shotSpeed
+			var tempY : float = yBul*shotSpeed
+			var theta : float = 0
+			
+			if tempX != 0 and tempY != 0:
+				tempX = tempX / sqrt(2)
+				tempY = tempY / sqrt(2)
+				
+			tempX = tempX + vel.x
+			tempY = tempY + vel.y
+			
+			if tempX != 0:
+				if tempX > 0:
+					theta = atan(tempY/tempX)
+				else:
+					theta = PI + atan(tempY/tempX)
+			elif tempY > 0:
+				theta = atan(intMax)
+			elif tempY < 0:
+				theta = atan(-intMax)
+				
+			#theta = (theta*PI/180)
+			
+			#print(theta)
+			b.rotate(theta)
+				
+			b.xVel  = tempX*30
+			b.yVel  = tempY*30
+			b.position.x  = self.position.x
+			b.position.y  = self.position.y-5
+			owner.add_child(b)
+			###b2
+			var vel2 = Vector2.ZERO
+			vel2.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+			vel2.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+			vel2 = vel2.normalized()
+			
+			tempX = xBul*shotSpeed
+			tempY = yBul*shotSpeed
+			theta = 0
+
+			if tempX != 0 and tempY != 0:
+				tempX = tempX / sqrt(2)
+				tempY = tempY / sqrt(2)
+				
+			tempX = tempX + vel2.x
+			tempY = tempY + vel2.y
+			
+			if tempX != 0:
+				if tempX > 0:
+					theta = atan(tempY/tempX)
+				else:
+					theta = PI + atan(tempY/tempX)
+			elif tempY > 0:
+				theta = atan(intMax)
+			elif tempY < 0:
+				theta = atan(-intMax)
+				
+			#theta = (theta*PI/180)
+			
+			#print(theta)
+			b2.rotate(theta)
+				
+			b2.xVel  = tempX*30
+			b2.yVel  = tempY*30
+			b2.position.x  = self.position.x-1
+			b2.position.y  = self.position.y-5-1
+			owner.add_child(b2)
 		elif enchant == "TS":
 			shotcounter = 4
 			var b  = arrow.instance()
@@ -904,7 +993,184 @@ func shoot(xBul, yBul, enchant):
 			b3.position.x  = self.position.x
 			b3.position.y  = self.position.y-5
 			owner.add_child(b3)
+		elif enchant == "TSF":
+			shotcounter = 4
+			var b  = arrow.instance()
+			var b2 = arrow.instance()
+			var b3 = arrow.instance()
+			b.effect = "fire"
+			b2.effect = "fire"
+			b3.effect = "fire"
+			
+			var vel = Vector2.ZERO
+			vel.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+			vel.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+			vel = vel.normalized()
 
+			var tempX : float = xBul*shotSpeed
+			var tempY : float = yBul*shotSpeed
+			var theta : float = 0
+			
+			if tempX != 0 and tempY != 0:
+				tempX = tempX / sqrt(2)
+				tempY = tempY / sqrt(2)
+				
+			tempX = tempX + vel.x
+			tempY = tempY + vel.y
+			
+			if tempX != 0:
+				if tempX > 0:
+					theta = atan(tempY/tempX)
+				else:
+					theta = PI + atan(tempY/tempX)
+			elif tempY > 0:
+				theta = atan(intMax)
+			elif tempY < 0:
+				theta = atan(-intMax)
+				
+			#theta = (theta*PI/180)
+			
+			#print(theta)
+			b.rotate(theta)
+				
+			b.xVel  = tempX*30
+			b.yVel  = tempY*30
+			b.position.x  = self.position.x
+			b.position.y  = self.position.y-5
+			owner.add_child(b)
+			###b2
+			var vel2 = Vector2.ZERO
+			vel2.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+			vel2.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+			vel2 = vel2.normalized()
+			
+			tempX = xBul*shotSpeed
+			tempY = yBul*shotSpeed
+			theta = 0
+			
+			if xBul > 0 and yBul > 0:
+				tempX += 1
+				tempY -= 1
+			if xBul > 0 and yBul < 0:
+				tempX += 1
+				tempY += 1
+			if xBul < 0 and yBul > 0:
+				tempY += 1
+				tempX += 1
+			if xBul < 0 and yBul < 0:
+				tempX += 1
+				tempY -= 1
+			if xBul > 0 and yBul == 0:
+				tempY += 1
+				tempX += 1
+			if xBul < 0 and yBul == 0:
+				tempY += 1
+				tempX -= 1
+			if xBul == 0 and yBul < 0:
+				tempX += 1
+				tempY -= 1
+			if xBul == 0 and yBul > 0:
+				tempX += 1
+				tempY += 1
+			
+			
+#			if xBul != 0:
+#				tempY += 1
+#
+#			if yBul != 0:
+#				tempX += 1
+			
+			
+
+			if tempX != 0 and tempY != 0:
+				tempX = tempX / sqrt(2)
+				tempY = tempY / sqrt(2)
+				
+			tempX = tempX + vel2.x
+			tempY = tempY + vel2.y
+			
+			if tempX != 0:
+				if tempX > 0:
+					theta = atan(tempY/tempX)
+				else:
+					theta = PI + atan(tempY/tempX)
+			elif tempY > 0:
+				theta = atan(intMax)
+			elif tempY < 0:
+				theta = atan(-intMax)
+				
+			#theta = (theta*PI/180)
+			
+			#print(theta)
+			b2.rotate(theta)
+				
+			b2.xVel  = tempX*30
+			b2.yVel  = tempY*30
+			b2.position.x  = self.position.x
+			b2.position.y  = self.position.y-5
+			owner.add_child(b2)
+			#B3
+			var vel3 = Vector2.ZERO
+			vel3.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+			vel3.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+			vel3 = vel3.normalized()
+			
+			tempX = xBul*shotSpeed
+			tempY = yBul*shotSpeed
+			theta = 0
+
+			if xBul > 0 and yBul > 0:
+				tempX -= 1
+				tempY += 1
+			if xBul > 0 and yBul < 0:
+				tempX -= 1
+				tempY -= 1
+			if xBul < 0 and yBul > 0:
+				tempY -= 1
+				tempX -= 1
+			if xBul < 0 and yBul < 0:
+				tempX -= 1
+				tempY += 1
+			if xBul > 0 and yBul == 0:
+				tempY -= 1
+				tempX += 1
+			if xBul < 0 and yBul == 0:
+				tempY -= 1
+				tempX -= 1
+			if xBul == 0 and yBul < 0:
+				tempY -= 1
+				tempX -= 1
+			if xBul == 0 and yBul > 0:
+				tempY += 1
+				tempX -= 1
+
+			if tempX != 0 and tempY != 0:
+				tempX = tempX / sqrt(2)
+				tempY = tempY / sqrt(2)
+				
+			tempX = tempX + vel3.x
+			tempY = tempY + vel3.y
+			
+			if tempX != 0:
+				if tempX > 0:
+					theta = atan(tempY/tempX)
+				else:
+					theta = PI + atan(tempY/tempX)
+			elif tempY > 0:
+				theta = atan(intMax)
+			elif tempY < 0:
+				theta = atan(-intMax)
+				
+			#theta = (theta*PI/180)
+			
+			#print(theta)
+			b3.rotate(theta)
+				
+			b3.xVel  = tempX*30
+			b3.yVel  = tempY*30
+			b3.position.x  = self.position.x
+			b3.position.y  = self.position.y-5
+			owner.add_child(b3)
 		else:
 			shotcounter = 4
 			var b = arrow.instance()

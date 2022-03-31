@@ -3,7 +3,7 @@ extends KinematicBody2D
 var xVel : int = 0
 var yVel : int = 0
 var life : int = 75
-var effect = "fire"
+var effect = "none"
 
 var vel : Vector2 = Vector2()
 
