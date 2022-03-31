@@ -48,6 +48,7 @@ var money = 0
 #Variable So we don't have to worry about pressing every time we want to attack
 var attackButtonDown = false
 var pressedAttacks = []
+var effect = "none"
 
 enum {
 	MOVE,

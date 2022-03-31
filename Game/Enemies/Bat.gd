@@ -11,6 +11,8 @@ var knockback = Vector2.ZERO
 var dir    : Vector2 = Vector2()
 var speed  : int     = 40
 var damage : int     = 1
+var effect = "none"
+var effectCounter : int = 0
 
 var hitCounter : int = 0
 
@@ -38,6 +40,24 @@ func _physics_process(delta):
 	else:
 		hitCounter -= 1
 	
+	if effect == "fire":
+		$Effect.visible = true
+		if effectCounter == 0:
+			effectCounter = 12
+			
+			var rng = RandomNumberGenerator.new()
+			rng.randomize()
+			var randNum = rng.randi_range(0, 3)
+			if randNum == 0:
+				stats.health -= 1
+				var enemyHitSound = EnemyHitSound.instance()
+				get_tree().current_scene.add_child(enemyHitSound)
+			elif randNum == 1:
+				effect = "none"
+		else:
+			effectCounter -= 1
+	else:
+		$Effect.visible = false
 	#knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
 	#knockback = move_and_slide(knockback)
 	
@@ -45,12 +65,17 @@ func _physics_process(delta):
 	if distance < 5*16:
 		self.move_and_slide(motion)
 
+func addEffect(eff):
+	if eff != "none" and effect == "none":
+		effect = eff
+
 func _on_Hurtbox_area_entered(area):
 	if area.is_in_group("Weapon"):
 		stats.health -= player.getDamage()
 		hitCounter = 12
 		var enemyHitSound = EnemyHitSound.instance()
 		get_tree().current_scene.add_child(enemyHitSound)
+		addEffect(area.owner.effect)
 
 	if area.is_in_group("Arrow"):
 		area.owner.kill()
