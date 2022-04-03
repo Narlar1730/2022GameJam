@@ -215,7 +215,16 @@ func getItemType(itemToType):
 	if all.size() > 1:
 		curItem = all[2]
 	return curItem	
-	
+
+func setEffect():
+	var curWep = inventory[50]
+	var all = curWep.split(".")
+	var curEffect = all[5]
+	if curEffect == "F":
+		effect = "fire"
+	else:
+		effect = "none"
+
 func swapInventory(pos1, pos2):
 	var equipped = false
 	if pos1 == 40 or pos2 == 40:
@@ -309,6 +318,8 @@ func swapInventory(pos1, pos2):
 		var all = colour.split(".")
 		var curColour = all[7]
 		$Cape.modulate = Color(curColour)
+		
+		setEffect()
 		#$Cape.modulate = 
 	world.reloadInventory()
 
@@ -340,6 +351,10 @@ func _ready():
 			inventory.push_back("bow.red.primary.DoubleShotFire.1.DSF.bow.AAAAAA")
 		elif i == 13:
 			inventory.push_back("bow.red.primary.TSFire.1.TSF.bow.AAAAAA")
+		elif i == 14:
+			inventory.push_back("bow.red.primary.FireBow.1.F.bow.AAAAAA")
+		elif i == 15:
+			inventory.push_back("FlamingSword.red.primary.FlamingSword.6.F.sword.AAAAAA")
 		elif i == 50:
 			inventory.push_back("sword.indigo.primary.Bad Sword.1.N/A.sword.AAAAAA")
 		elif i == 3:
@@ -1171,6 +1186,48 @@ func shoot(xBul, yBul, enchant):
 			b3.position.x  = self.position.x
 			b3.position.y  = self.position.y-5
 			owner.add_child(b3)
+		elif enchant == "F":
+			shotcounter = 4
+			var b = arrow.instance()
+			b.effect = "fire"
+
+			var vel = Vector2.ZERO
+			vel.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+			vel.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+			vel = vel.normalized()
+			
+
+			var tempX : float = xBul*shotSpeed
+			var tempY : float = yBul*shotSpeed
+			var theta : float = 0
+			
+			if tempX != 0 and tempY != 0:
+				tempX = tempX / sqrt(2)
+				tempY = tempY / sqrt(2)
+				
+			tempX = tempX + vel.x
+			tempY = tempY + vel.y
+			
+			if tempX != 0:
+				if tempX > 0:
+					theta = atan(tempY/tempX)
+				else:
+					theta = PI + atan(tempY/tempX)
+			elif tempY > 0:
+				theta = atan(intMax)
+			elif tempY < 0:
+				theta = atan(-intMax)
+				
+			#theta = (theta*PI/180)
+			
+			#print(theta)
+			b.rotate(theta)
+				
+			b.xVel = tempX*30
+			b.yVel = tempY*30
+			b.position.x = self.position.x
+			b.position.y = self.position.y-5
+			owner.add_child(b)
 		else:
 			shotcounter = 4
 			var b = arrow.instance()

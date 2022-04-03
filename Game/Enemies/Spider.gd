@@ -13,6 +13,8 @@ var health     = 10
 var hitCounter = 0
 var moveTimer  = 0
 var lifeClock : int = 0
+var effect          = "none"
+var effectCounter   = 0
 
 
 var dir    : Vector2 = Vector2()
@@ -67,6 +69,26 @@ func _process(delta):
 		spawnLoot()
 		#world.spawnLoot(self.position.x, self.position.y)
 		self.queue_free()
+
+	if effect == "fire":
+		$Effect.visible = true
+		if effectCounter == 0:
+			effectCounter = 12
+			
+			var rng = RandomNumberGenerator.new()
+			rng.randomize()
+			var randNum = rng.randi_range(0, 6)
+			if randNum <= 1:
+				health -= 1
+				var enemyHitSound = EnemyHitSound.instance()
+				get_tree().current_scene.add_child(enemyHitSound)
+			elif randNum == 2:
+				effect = "none"
+		else:
+			effectCounter -= 1
+	else:
+		$Effect.visible = false	
+	
 	if hitCounter < 0:
 		hitCounter = 0
 	elif hitCounter > 0:
@@ -130,13 +152,16 @@ func _process(delta):
 #	health = health - area.damage
 #	hitCounter = 12 
 #	pass # Replace with function body.
-
+func addEffect(eff):
+	if eff != "none" and effect == "none":
+		effect = eff
 
 func _on_Hurtbox_area_entered(area):
 	if area.is_in_group("Weapon"):
 		health = health - player.getDamage()
 		hitCounter = 18
 		var enemyHitSound = EnemyHitSound.instance()
+		addEffect(area.owner.effect)
 		get_tree().current_scene.add_child(enemyHitSound)
 	if area.is_in_group("Arrow"):
 		area.owner.kill()

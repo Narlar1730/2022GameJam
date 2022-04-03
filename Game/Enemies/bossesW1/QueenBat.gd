@@ -9,7 +9,8 @@ var chest          = preload("res://WorldItems/Chest.tscn")
 # var b = "text"
 var maxHealth = 150
 var health    = 150
-
+var effect = "none"
+var effectCounter = 0
 
 var hitTimer = 0.0
 var damTimer = 30.0
@@ -23,6 +24,22 @@ var curCell      = Vector2()
 var battleMode = false
 
 func _process(delta):
+	if effect == "fire":
+		$Effect.visible = true
+		if effectCounter == 0:
+			effectCounter = 12
+			
+			var rng = RandomNumberGenerator.new()
+			rng.randomize()
+			var randNum = rng.randi_range(0, 6)
+			if randNum <= 1:
+				health -= 1
+			elif randNum == 2:
+				effect = "none"
+		else:
+			effectCounter -= 1
+	else:
+		$Effect.visible = false
 	var pos = Vector2()
 	pos.x = floor(((self.position.x)/16)/20)
 	pos.y = floor(((self.position.y)/16)/12)
@@ -166,12 +183,19 @@ func doDamage():
 	hitTimer = damTimer
 	health = health - player.getDamage()
 
+
+func addEffect(eff):
+	if eff != "none" and effect == "none":
+		effect = eff
+
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Player"):
 		#print("playah")
 		#player.doDamage(1)
 		player.addEnemy()
+		player.addEnemy()
 	if area.is_in_group("Weapon"):
+		addEffect(area.owner.effect)
 		if area.is_in_group("Arrow"):
 			area.owner.kill()
 		doDamage()
@@ -180,6 +204,7 @@ func _on_Area2D_area_entered(area):
 
 func _on_Area2D_area_exited(area):
 	if area.is_in_group("Player"):
+		player.subEnemy()
 		player.subEnemy()
 		#print("bye Playah")
 	pass # Replace with function body.

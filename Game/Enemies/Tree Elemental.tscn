@@ -1,7 +1,8 @@
-[gd_scene load_steps=25 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://Enemies/RampartSpriteSheet.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/Tree Elemental.gd" type="Script" id=2]
+[ext_resource path="res://Enemies/TreeElemental.png" type="Texture" id=3]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.5
@@ -115,6 +116,38 @@ animations = [ {
 "speed": 8.0
 } ]
 
+[sub_resource type="AtlasTexture" id=23]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=24]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=25]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=26]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=27]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 32, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=28]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 32, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=29]
+animations = [ {
+"frames": [ SubResource( 23 ), SubResource( 24 ), SubResource( 25 ), SubResource( 26 ), SubResource( 27 ), SubResource( 28 ) ],
+"loop": true,
+"name": "Fire",
+"speed": 8.0
+} ]
+
 [node name="Tree Elemental" type="KinematicBody2D"]
 scale = Vector2( 2, 2 )
 script = ExtResource( 2 )
@@ -126,10 +159,15 @@ shape = SubResource( 1 )
 position = Vector2( 0.5, -0.5 )
 frames = SubResource( 22 )
 animation = "Idle"
-frame = 1
+frame = 2
 playing = true
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="Effect" type="AnimatedSprite" parent="."]
+frames = SubResource( 29 )
+animation = "Fire"
+playing = true
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 8

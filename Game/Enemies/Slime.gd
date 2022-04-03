@@ -9,6 +9,8 @@ var coin       = preload("res://WorldItems/Coin.tscn")
 var health = 5
 var hitCounter = 12
 var firstTime = true
+var effect = "none"
+var effectCounter = 0
 
 var dir    : Vector2       = Vector2()
 var speed  : int           = 20
@@ -113,6 +115,25 @@ func die():
 	self.queue_free()
 	
 func _process(delta):
+	if effect == "fire":
+		$Effect.visible = true
+		if effectCounter == 0:
+			effectCounter = 12
+			
+			var rng = RandomNumberGenerator.new()
+			rng.randomize()
+			var randNum = rng.randi_range(0, 6)
+			if randNum <= 1:
+				health -= 1
+				var enemyHitSound = EnemyHitSound.instance()
+				get_tree().current_scene.add_child(enemyHitSound)
+			elif randNum == 2:
+				effect = "none"
+		else:
+			effectCounter -= 1
+	else:
+		$Effect.visible = false
+		
 	var distance = self.position.distance_to(player.position)
 	if distance < 10*16:
 		prevPosition = self.position
@@ -141,13 +162,16 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
-
+func addEffect(eff):
+	if eff != "none" and effect == "none":
+		effect = eff
 
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Weapon"):
 		health -= player.getDamage()
 		hitCounter = 12
 		var enemyHitSound = EnemyHitSound.instance()
+		addEffect(area.owner.effect)
 		get_tree().current_scene.add_child(enemyHitSound)
 		#print("PAIN")
 	if area.is_in_group("Arrow"):

@@ -47,15 +47,16 @@ func _physics_process(delta):
 			
 			var rng = RandomNumberGenerator.new()
 			rng.randomize()
-			var randNum = rng.randi_range(0, 3)
-			if randNum == 0:
+			var randNum = rng.randi_range(0, 6)
+			if randNum <= 1:
 				stats.health -= 1
 				var enemyHitSound = EnemyHitSound.instance()
 				get_tree().current_scene.add_child(enemyHitSound)
-			elif randNum == 1:
+			elif randNum == 2:
 				effect = "none"
 		else:
 			effectCounter -= 1
+
 	else:
 		$Effect.visible = false
 	#knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
