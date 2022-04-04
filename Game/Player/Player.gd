@@ -343,18 +343,6 @@ func _ready():
 			var all = colour.split(".")
 			var curColour = all[7]
 			$Cape.modulate = Color(curColour)
-		elif i == 10:
-			inventory.push_back("bow.red.primary.DoubleShot.1.DS.bow.AAAAAA")
-		elif i == 11:
-			inventory.push_back("bow.red.primary.TripleShot.1.TS.bow.AAAAAA")
-		elif i == 12:
-			inventory.push_back("bow.red.primary.DoubleShotFire.1.DSF.bow.AAAAAA")
-		elif i == 13:
-			inventory.push_back("bow.red.primary.TSFire.1.TSF.bow.AAAAAA")
-		elif i == 14:
-			inventory.push_back("bow.red.primary.FireBow.1.F.bow.AAAAAA")
-		elif i == 15:
-			inventory.push_back("FlamingSword.red.primary.FlamingSword.6.F.sword.AAAAAA")
 		elif i == 50:
 			inventory.push_back("sword.indigo.primary.Bad Sword.1.N/A.sword.AAAAAA")
 		elif i == 3:

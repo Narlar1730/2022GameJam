@@ -4,6 +4,7 @@ const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
 const EnemyHitSound = preload("res://Enemies/EnemyHitSound.tscn")
 var item       = preload("res://WorldItems/WorldItem.tscn")
 var coin       = preload("res://WorldItems/Coin.tscn")
+var worldHeart = preload("res://WorldItems/WorldHeart.tscn")
 onready var player = get_node("/root/World/YFirst/Player")
 onready var world  = get_node("/root/World")
 # Declare member variables here. Examples:
@@ -58,6 +59,11 @@ func spawnLoot():
 		var statsString = itemType + ".yellow.crafting." + itemType + ".1.10.crafting.AAAAAA"
 		wort.stats = statsString
 		world.add_child(wort)
+	elif spawn < 40:
+		var cHeart = worldHeart.instance()
+		cHeart.position.x = self.position.x
+		cHeart.position.y = self.position.y
+		get_tree().get_root().get_node("/root/World/YFirst/YGrass").add_child(cHeart)
 
 func _process(delta):
 	lifeClock += 1

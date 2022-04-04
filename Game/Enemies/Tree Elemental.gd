@@ -7,6 +7,7 @@ onready var world  = get_node("/root/World")
 var item       = preload("res://WorldItems/WorldItem.tscn")
 var coin       = preload("res://WorldItems/Coin.tscn")
 var attack         = preload("res://Enemies/Plant attack.tscn")
+var worldHeart = preload("res://WorldItems/WorldHeart.tscn")
 
 var health = 20
 var speed  = 50
@@ -66,6 +67,11 @@ func spawnLoot():
 		var statsString = itemType + ".yellow.crafting." + itemType + ".1.10.crafting.AAAAAA"
 		wort.stats = statsString
 		world.add_child(wort)
+	elif spawn < 40:
+		var cHeart = worldHeart.instance()
+		cHeart.position.x = self.position.x
+		cHeart.position.y = self.position.y
+		get_tree().get_root().get_node("/root/World/YFirst/YGrass").add_child(cHeart)
 
 func _physics_process(delta):
 	if effect == "fire":

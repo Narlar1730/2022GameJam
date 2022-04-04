@@ -4,6 +4,11 @@ const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
 const EnemyHitSound = preload("res://Enemies/EnemyHitSound.tscn")
 onready var player = get_node("/root/World/YFirst/Player")
 onready var world  = get_node("/root/World")
+
+var item       = preload("res://WorldItems/WorldItem.tscn")
+var coin       = preload("res://WorldItems/Coin.tscn")
+var attack         = preload("res://Enemies/Plant attack.tscn")
+var worldHeart = preload("res://WorldItems/WorldHeart.tscn")
 # Declare member variables here. Examples:
 # var a = 2
 # var b = "text"
@@ -18,6 +23,7 @@ var effect = "none"
 var effectCounter = 0
 
 func die():
+	spawnLoot()
 	player.addXP(5)
 	queue_free()
 
@@ -35,6 +41,36 @@ func playNext():
 	elif curState == "Leap":
 		moving = true
 		$AnimationPlayer.play("Leap")
+
+func spawnLoot():
+	var areWeSpawning = RandomNumberGenerator.new()
+	areWeSpawning.randomize()
+	var spawn = areWeSpawning.randi_range(0, 100)
+	if spawn < 10:
+		var wort = item.instance()
+		wort.position.x = self.position.x
+		wort.position.y = self.position.y
+		var itemType = "WolfSkin"
+		var statsString = itemType + ".red.crafting." + itemType + ".1.10.crafting.AAAAAA"
+		wort.stats = statsString
+		world.add_child(wort)
+	elif spawn < 30:
+		var curCoin = coin.instance()
+		#curCoin.value = "silver"
+		curCoin.position.x = self.position.x
+		curCoin.position.y = self.position.y
+		world.add_child(curCoin)
+	elif spawn < 35:
+		var curCoin = coin.instance()
+		curCoin.value = "silver"
+		curCoin.position.x = self.position.x
+		curCoin.position.y = self.position.y
+		world.add_child(curCoin)
+	elif spawn < 40:
+		var cHeart = worldHeart.instance()
+		cHeart.position.x = self.position.x
+		cHeart.position.y = self.position.y
+		get_tree().get_root().get_node("/root/World/YFirst/YGrass").add_child(cHeart)
 
 func animationDone():
 	var distance = self.position.distance_to(player.position)

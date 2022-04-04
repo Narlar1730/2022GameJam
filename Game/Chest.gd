@@ -21,7 +21,7 @@ func _process(delta):
 			wort.position.y = self.position.y + i*6
 			var rng = RandomNumberGenerator.new()
 			rng.randomize()
-			var int1 = rng.randi_range(0, 12)
+			var int1 = rng.randi_range(0, 17)
 			var itemType = ""
 			#var itemString = ""
 			var statsString = ""
@@ -37,7 +37,7 @@ func _process(delta):
 				statsString = "bow" + ".red.primary.some " + itemType + ".2.N/A.bow.CC1111"
 			elif int1 == 2:
 				itemType = "FlamingSword"
-				statsString = itemType + ".red.primary." + itemType + ".6.N/A.sword.CC1111"
+				statsString = itemType + ".red.primary." + itemType + ".6.F.sword.CC1111"
 			elif int1 == 3:
 				itemType = "GoldAxe"
 				statsString = itemType + ".red.primary." + itemType + ".4.N/A.axe.CC1111"
@@ -66,6 +66,21 @@ func _process(delta):
 			elif int1 == 11:
 				itemType = "IronBoots"
 				statsString = itemType + ".red.boots." + itemType + ".1.N/A.boots.CC1111"
+			elif int1 == 12:
+				itemType = "FireBow"
+				statsString = "bow" + ".orange.primary." + itemType + ".1.F.bow.CC1111"
+			elif int1 == 13:
+				itemType = "DoubleShot Bow"
+				statsString = "bow" + ".orange.primary." + itemType + ".1.DS.bow.CC1111"
+			elif int1 == 14:
+				itemType = "TripleShot Bow"
+				statsString = "bow" + ".yellow.primary." + itemType + ".1.TS.bow.CC1111"
+			elif int1 == 15:
+				itemType = "DoubleShot Fire Bow"
+				statsString = "bow" + ".yellow.primary." + itemType + ".1.DSF.bow.CC1111"
+			elif int1 == 16:
+				itemType = "TripleShot Fire Bow"
+				statsString = "bow" + ".green.primary." + itemType + ".1.TSF.bow.CC1111"
 			else:
 				var r = float(rng.randi_range(0, 255))/255
 				var g = float(rng.randi_range(0, 255))/255
