@@ -6,7 +6,6 @@ const EnemyHitSound = preload("res://Enemies/EnemyHitSound.tscn")
 var item       = preload("res://WorldItems/WorldItem.tscn")
 var coin       = preload("res://WorldItems/Coin.tscn")
 var worldHeart = preload("res://WorldItems/WorldHeart.tscn")
-
 var health = 5
 var hitCounter = 12
 var firstTime = true

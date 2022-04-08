@@ -102,6 +102,8 @@ func setSprite(sprite):
 		$Item.texture = load("res://items/Crafting/HeartOfWood.png")
 	elif sprite == "WolfSkin":
 		$Item.texture = load("res://items/Crafting/WolfSkin.png")
+	elif sprite == "Tragger":
+		$Item.texture = load("res://items/Tragger.png")
 
 func rarSwitch(inc):
 	var out = ""

@@ -7,6 +7,8 @@ var arrow = preload("res://Effects/Arrow.tscn")
 
 onready var world  = get_node("/root/World/")
 
+const secondScript1 = preload("res://Player/Secondary.gd")
+var secondScript = secondScript1.new()
 #Global Variables
 var intMax = 9223372036854775806
 var intMin = -9223372036854775807
@@ -28,6 +30,7 @@ var shotcounter         = 0
 var xp                  = 0
 var nextLevel           = 10
 var levelupTimer        = 0
+var secondaryTimer      = 0
 var xpFlag              = false
 
 #Handle Iventory
@@ -306,6 +309,19 @@ func swapInventory(pos1, pos2):
 	
 			inventory[pos1] = cur2
 			inventory[pos2] = cur1	
+	elif pos1 == 51 or pos2 == 51:
+		equipped = true
+		var curType = ""
+		if pos1 != 51:
+			curType = getItemType(inventory[pos1])
+		else:
+			curType = getItemType(inventory[pos2])
+		if curType == "secondary":
+			var cur1 = inventory[pos1]
+			var cur2 = inventory[pos2]
+	
+			inventory[pos1] = cur2
+			inventory[pos2] = cur1	
 	else:
 		var cur1 = inventory[pos1]
 		var cur2 = inventory[pos2]
@@ -336,6 +352,8 @@ func _ready():
 		if i == 0:
 			inventory.push_back("bow.red.primary.Bow.1.N/A.bow.AAAAAA")
 		elif i == 1:
+			inventory.push_back("Tragger.red.secondary.Tragger.30.N/A.iron.AAAAAA")
+		elif i == 40:
 			inventory.push_back("IronHead.orange.head.Iron Head.1.N/A.iron.AAAAAA")
 		elif i == 42:
 			inventory.push_back("Cape.red.cape.A cape.1.N/A.cloth.4444BB")
@@ -345,11 +363,11 @@ func _ready():
 			$Cape.modulate = Color(curColour)
 		elif i == 50:
 			inventory.push_back("sword.indigo.primary.Bad Sword.1.N/A.sword.AAAAAA")
-		elif i == 3:
+		elif i == 44:
 			inventory.push_back("IronChest.violet.chest.Iron Chest.1.N/A.iron.AAAAAA")
-		elif i == 4:
+		elif i == 46:
 			inventory.push_back("IronPants.green.pants.Iron Pants.1.N/A.iron.AAAAAA")
-		elif i == 5:
+		elif i == 48:
 			inventory.push_back("IronBoots.blue.boots.Iron Boots.1.N/A.iron.AAAAAA")
 		else:
 			inventory.push_back("")
@@ -370,6 +388,38 @@ func getInventory():
 	
 	return out
 
+func attackSecondary():
+	var secondary = inventory[51]
+	var splitList = secondary.split(".")
+	var timer = int(splitList[4])
+	var curItem = splitList[0]
+	if secondaryTimer == 0:
+		secondaryTimer = timer
+		if curItem == "Tragger":
+			var xBul : int = 0
+			var yBul : int = 0
+			if pressedAttacks.has("s"):
+				yBul += 1
+			if pressedAttacks.has("w"):
+				yBul -= 1
+			if pressedAttacks.has("a"):
+				xBul -= 1
+			if pressedAttacks.has("d"):
+				xBul += 1
+			var input_vector = Vector2.ZERO
+			if pressedAttacks.size() == 0:
+
+				input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+				input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+				xBul += input_vector.x
+				yBul += input_vector.y
+				#yBul += 1
+			if xBul == 0 and yBul == 0:
+				yBul += 1
+
+			secondScript.tragger(xBul, yBul, self.position.x, self.position.y, owner, input_vector)
+		
+	pass
 
 func _physics_process(delta):
 	
@@ -386,6 +436,8 @@ func _physics_process(delta):
 			xpFlag = true
 			$XPBar.color = Color("FFFFFF")
 	
+	if secondaryTimer > 0:
+		secondaryTimer -= 1
 
 	#$Cape.frame = $Sprite.frame
 	if shotcounter > 0:
@@ -407,6 +459,11 @@ func _physics_process(delta):
 		if !pressedAttacks.has("a"):
 			pressedAttacks.push_back("a")
 		attackButtonDown = true
+	
+	if Input.is_action_just_pressed("SecondaryPressed"):
+		var secondary = inventory[51]
+		if secondary.length() > 0:
+			attackSecondary()
 	
 	if Input.is_action_just_released("AttackDown"):
 		pressedAttacks.erase("s")
