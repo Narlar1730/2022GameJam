@@ -181,7 +181,8 @@ func _process(delta):
 		#player.inventory = player.backUpInv
 		#inventory.doInventory()
 	elif Input.is_action_pressed("OpenInventory") and !pauseGame and pauseTimer == 0:
-		pauseTimer = 20
+		
+		pauseTimer = 80
 
 		#print(player.inventory)
 		#print("here")
