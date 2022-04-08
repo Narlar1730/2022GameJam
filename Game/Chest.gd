@@ -21,7 +21,7 @@ func _process(delta):
 			wort.position.y = self.position.y + i*6
 			var rng = RandomNumberGenerator.new()
 			rng.randomize()
-			var int1 = rng.randi_range(0, 17)
+			var int1 = rng.randi_range(0, 19)
 			var itemType = ""
 			#var itemString = ""
 			var statsString = ""
@@ -81,6 +81,10 @@ func _process(delta):
 			elif int1 == 16:
 				itemType = "TripleShot Fire Bow"
 				statsString = "bow" + ".green.primary." + itemType + ".1.TSF.bow.CC1111"
+			elif int1 == 17:
+				statsString = "Bomb.orange.secondary.Bomb.30.N/A.iron.AAAAAA"
+			elif int1 == 18:
+				statsString = "Tragger.orange.secondary.Tragger.30.N/A.iron.AAAAAA"
 			else:
 				var r = float(rng.randi_range(0, 255))/255
 				var g = float(rng.randi_range(0, 255))/255
