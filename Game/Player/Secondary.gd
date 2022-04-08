@@ -1,6 +1,7 @@
 extends Node
 
 var arrow = preload("res://Effects/Arrow.tscn") 
+var bomb  = preload("res://Effects/WorldBomb.tscn")
 onready var player = get_node("/root/World/YFirst/Player")
 #onready var world  = get_node("/root/World")
 # Declare member variables here. Examples:
@@ -9,9 +10,14 @@ onready var player = get_node("/root/World/YFirst/Player")
 var shotSpeed = 5
 var intMax = 9223372036854775807
 
+func bomb(xpos, ypos, world):
+	var b = bomb.instance()
+	b.position.x = xpos
+	b.position.y = ypos
+	world.add_child(b)
+
 func tragger(xBul, yBul, xPos, yPos, world, pressVec):
 	var life = 20
-	print("STOP... TRAGGER TIME")
 	var b  = arrow.instance()
 	b.spec = "tragger"
 	b.life = life

@@ -73,12 +73,14 @@ func addEffect(eff):
 
 func _on_Hurtbox_area_entered(area):
 	if area.is_in_group("Weapon"):
-		stats.health -= player.getDamage()
+		if area.is_in_group("Bomb"):
+			stats.health -= player.getDamage()*10
+		else:
+			stats.health -= player.getDamage()
 		hitCounter = 12
 		var enemyHitSound = EnemyHitSound.instance()
 		get_tree().current_scene.add_child(enemyHitSound)
 		addEffect(area.owner.effect)
-
 	if area.is_in_group("Arrow"):
 		area.owner.kill()
 	

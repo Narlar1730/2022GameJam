@@ -94,6 +94,8 @@ func setSprite(sprite, colour):
 		$Sprite.texture = load("res://items/Crafting/WolfSkin.png")
 	elif sprite == "Tragger":
 		$Sprite.texture = load("res://items/Tragger.png")
+	elif sprite == "Bomb":
+		$Sprite.texture = load("res://items/Bomb.png")
 # Called when the node enters the scene tree for the first time.
 
 func _ready():

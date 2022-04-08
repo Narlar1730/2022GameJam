@@ -167,6 +167,7 @@ playing = true
 [node name="Effect" type="AnimatedSprite" parent="."]
 frames = SubResource( 29 )
 animation = "Fire"
+frame = 2
 playing = true
 
 [node name="Area2D" type="Area2D" parent="."]

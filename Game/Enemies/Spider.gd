@@ -164,7 +164,10 @@ func addEffect(eff):
 
 func _on_Hurtbox_area_entered(area):
 	if area.is_in_group("Weapon"):
-		health = health - player.getDamage()
+		if area.is_in_group("Bomb"):
+			health -= player.getDamage()*10
+		else:
+			health -= player.getDamage()
 		hitCounter = 18
 		var enemyHitSound = EnemyHitSound.instance()
 		addEffect(area.owner.effect)

@@ -78,7 +78,7 @@ script = ExtResource( 4 )
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 6 )
 animation = "Fly"
-frame = 3
+frame = 1
 playing = true
 offset = Vector2( 0, -12 )
 
@@ -104,6 +104,7 @@ max_health = 10
 position = Vector2( 0, -12 )
 frames = SubResource( 14 )
 animation = "Fire"
+frame = 3
 playing = true
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]

@@ -163,8 +163,10 @@ func addEffect(eff):
 
 func _on_Area2D_area_entered(area):
 	if area.is_in_group("Weapon"):
-		#print("Hurt")
-		health = health - player.getDamage()
+		if area.is_in_group("Bomb"):
+			health -= player.getDamage()*10
+		else:
+			health -= player.getDamage()
 		#hitCounter = 18
 		addEffect(area.owner.effect)
 		var enemyHitSound = EnemyHitSound.instance()

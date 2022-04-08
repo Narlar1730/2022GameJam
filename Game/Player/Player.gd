@@ -354,7 +354,7 @@ func _ready():
 		if i == 0:
 			inventory.push_back("bow.red.primary.Bow.1.N/A.bow.AAAAAA")
 		elif i == 1:
-			inventory.push_back("Tragger.red.secondary.Tragger.30.N/A.iron.AAAAAA")
+			inventory.push_back("Bomb.red.secondary.Bomb.30.N/A.iron.AAAAAA")
 		elif i == 40:
 			inventory.push_back("IronHead.orange.head.Iron Head.1.N/A.iron.AAAAAA")
 		elif i == 42:
@@ -397,6 +397,8 @@ func attackSecondary():
 	var curItem = splitList[0]
 	if secondaryTimer == 0:
 		secondaryTimer = timer
+		if curItem == "Bomb":
+			secondScript.bomb(self.position.x, self.position.y, owner)
 		if curItem == "Tragger":
 			var xBul : int = 0
 			var yBul : int = 0
@@ -757,7 +759,6 @@ func attack_animation_finished():
 	
 			if shooting:
 				if enchant == "DS":
-					print("DOUBLE SHOT")
 					shoot(xBul, yBul, enchant)
 				else:
 					shoot(xBul, yBul, enchant)
