@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=2]
+[gd_scene load_steps=68 format=2]
 
 [ext_resource path="res://World/Bush.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://World/CastleTileMap.tscn" type="PackedScene" id=14]
 [ext_resource path="res://WorldItems/Chest.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Music and Sounds/Wistful_Woods_Version_01_LOOP.ogg" type="AudioStream" id=16]
+[ext_resource path="res://Enemies/PlantyBoi.tscn" type="PackedScene" id=17]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -525,6 +526,9 @@ position = Vector2( 44, 130 )
 texture = ExtResource( 3 )
 region_enabled = true
 region_rect = Rect2( 0, 0, 6400, 6400 )
+
+[node name="PlantyBoi" parent="Background" instance=ExtResource( 17 )]
+position = Vector2( 192, -56 )
 
 [node name="DirtPathTileMap" type="TileMap" parent="."]
 tile_set = SubResource( 1 )
