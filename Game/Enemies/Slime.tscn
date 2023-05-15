@@ -187,6 +187,7 @@ shape = SubResource( 5 )
 [node name="Effect" type="AnimatedSprite" parent="."]
 frames = SubResource( 12 )
 animation = "Fire"
+frame = 5
 playing = true
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_Area2D_area_entered"]

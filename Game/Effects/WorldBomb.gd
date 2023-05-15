@@ -7,6 +7,20 @@ var burn1Fuse = fuseTimer
 var burn2Fuse = fuseTimer
 var burn3Fuse = fuseTimer
 var burn4Fuse = fuseTimer
+var dir    : Vector2 = Vector2()
+var speed  : int     = 40
+
+func _physics_process(delta):
+	print(self.speed)
+	if self.speed > 0:
+		self.speed -= 1
+	if self.speed < 0:
+		self.speed += 1
+
+		
+	var motion = self.dir * self.speed
+	self.move_and_slide(motion)
+
 
 func burn1Done():
 	if burn1Fuse == 0:

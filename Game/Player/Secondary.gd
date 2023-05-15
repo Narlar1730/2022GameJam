@@ -10,10 +10,12 @@ onready var player = get_node("/root/World/YFirst/Player")
 var shotSpeed = 5
 var intMax = 9223372036854775807
 
-func bomb(xpos, ypos, world):
+func bomb(xpos, ypos, xvel, yvel, world):
 	var b = bomb.instance()
 	b.position.x = xpos
 	b.position.y = ypos
+	b.dir.x = xvel
+	b.dir.y = yvel
 	world.add_child(b)
 
 func tragger(xBul, yBul, xPos, yPos, world, pressVec):

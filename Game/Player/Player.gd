@@ -352,8 +352,9 @@ func _ready():
 	self.set_collision_mask_bit(2, true)
 	for i in 56:
 		if i == 0:
-			inventory.push_back("")
+			#inventory.push_back("")
 			#inventory.push_back("bow.red.primary.Bow.1.N/A.bow.AAAAAA")
+			inventory.push_back("Bomb.orange.secondary.Bomb.30.N/A.iron.AAAAAA")
 		elif i == 40:
 			inventory.push_back("IronHead.orange.head.Iron Head.1.N/A.iron.AAAAAA")
 		elif i == 42:
@@ -397,7 +398,9 @@ func attackSecondary():
 	if secondaryTimer == 0:
 		secondaryTimer = timer
 		if curItem == "Bomb":
-			secondScript.bomb(self.position.x, self.position.y, owner)
+			var xvel = velocity.x/20
+			var yvel = velocity.y/20
+			secondScript.bomb(self.position.x, self.position.y, xvel, yvel, owner)
 		if curItem == "Tragger":
 			var xBul : int = 0
 			var yBul : int = 0
