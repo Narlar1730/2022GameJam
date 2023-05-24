@@ -2,7 +2,7 @@ extends Node2D
 
 var mazeSize : int = 10
 var maze = []
-
+var rng = RandomNumberGenerator.new()
 # Size of minimap
 # Declare member variables here. Examples:
 # var a = 2
@@ -69,6 +69,17 @@ func genMazeHelper(moves, walls):
 	
 	return moves
 
+func shuffleList(toShuffle):
+	var shuffled = []
+	var indexList = range(toShuffle.size())
+	for i in range(toShuffle.size()):
+		randomize()
+		var x = randi()%indexList.size()
+		shuffled.append(toShuffle[x])
+		indexList.remove(x)
+		toShuffle.remove(x)
+	return shuffled
+
 func genMaze():
 	var total = mazeSize*mazeSize
 	# Setup maze
@@ -92,8 +103,23 @@ func genMaze():
 	moves.push_front(mazeSize*mazeSize/2 + mazeSize/2 - 1)
 	moves.push_front(mazeSize*mazeSize/2 + mazeSize/2 + mazeSize)
 	moves.push_front(mazeSize*mazeSize/2 + mazeSize/2 - mazeSize)
+	#adding extra length to entrance of maze
+	var randCoinFlip = rng.randi_range(0, 1)
+	if(randCoinFlip == 1):
+		moves.push_front(mazeSize*mazeSize/2 + mazeSize/2 + 2)
+	randCoinFlip = rng.randi_range(0, 1)
+	if(randCoinFlip == 1):
+		moves.push_front(mazeSize*mazeSize/2 + mazeSize/2 - 2)
+		randCoinFlip = rng.randi_range(0, 1)
+	if(randCoinFlip == 1):
+		moves.push_front(mazeSize*mazeSize/2 + mazeSize/2 + 2*mazeSize)
+	randCoinFlip = rng.randi_range(0, 1)
+	if(randCoinFlip == 1):
+		moves.push_front(mazeSize*mazeSize/2 + mazeSize/2 - 2*mazeSize)
 	
-	#print(moves)
+	print(moves)
+	moves = shuffleList(moves)
+	print(moves)
 	
 	moves = genMazeHelper(moves, walls)
 
@@ -130,7 +156,7 @@ func genMaze():
 			
 	out = maze
 	#Set Exit
-	var rng = RandomNumberGenerator.new()
+
 	rng.randomize()
 	var randNum = rng.randi_range(0, validExits.size()-1)
 	if(validExits[randNum] > mazeSize*3):
